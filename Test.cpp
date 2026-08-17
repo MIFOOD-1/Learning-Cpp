@@ -207,3 +207,203 @@
 // }
 
 
+// //Листинг 3.1 Использование переменных для хранения чисел и результата их умножения
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "This program will help you multiply two numbers"
+//     <<endl;
+
+//     cout << "Enter the fisrst number: ";
+//     int FirstNumber = 0;
+//     cin >> FirstNumber;
+
+//     cout << "Enter the second number: ";
+//     int SecondNumber;
+//     cin >> SecondNumber;
+
+//     //Умножение двух числе,сохранение резлуьтата в переменной
+//     int MultiplicationResult = FirstNumber * SecondNumber;
+
+//     //Отображение результата
+//     cout << FirstNumber << " x " << SecondNumber++;
+//     cout << " = " << MultiplicationResult << endl;
+
+//     //альтернатива 
+//     cout <<FirstNumber << " * "<< SecondNumber<< " = " << FirstNumber * SecondNumber;
+
+//     return 0;
+// }
+
+// //Листинг 3.2 Демонстрация области видимости перменных
+// #include <iostream>
+// using namespace std;
+
+// int MultiplyNumbers()
+// {
+//     cout << "Enter the first number: ";
+//     int FirstNumber = 0;
+//     cin >> FirstNumber;
+
+//     cout << "Enter the second number: ";
+//     int SecondNumber = 0;
+//     cin >> SecondNumber;
+
+//     //Умножение двух числе, и сохранение резултата переменной
+//     int MultilicationResult = FirstNumber * SecondNumber;
+
+//     //отображние результата
+//     cout << FirstNumber << " x " << SecondNumber;
+//     cout << " = " << MultilicationResult << endl;
+
+//     return 0;
+// }
+
+// int main()
+// {
+//     cout << "This programm will help you multiply two numbers"
+//         << endl;
+
+//     //вызов функции, выполняющей всю работу
+//     MultiplyNumbers();
+    
+//     //cout << First Number << " x " << SecondNumber;
+//     //cout << " = " << MultiplicationResult << endl;
+
+//     cout <<"kuku eou: " << MultiplyNumbers();
+
+//     return 0;
+// }
+
+// //Листинг 3.3 Использование глобальных переменных
+// #include <iostream>
+// using namespace std;
+
+// //три глобальных целых числа
+// int FirstNumber = 0;
+// int SecondNumber = 0;
+// int MultiplicationResult = 0;
+
+// void MultiplyNumbers()
+// {
+//     cout << "Enter the fisrst number: ";
+//     cin >> FirstNumber;
+
+//     cout << "Enter the secon nubmer: ";
+//     cin >> SecondNumber;
+
+//     //Умнлжение
+//     MultiplicationResult = FirstNumber * SecondNumber;
+
+//     //отображение
+//     cout << "Displaying from MultiplyNumbers(): ";
+//     cout << FirstNumber << " x " << SecondNumber;
+//     cout << " = " << MultiplicationResult << endl;
+// }
+
+// int main()
+// {
+//     cout << "This program will help you multiply two numbers"
+//         <<endl;
+
+//     //Вызов функции, выполняющий всю работу
+//     MultiplyNumbers();
+
+//     cout << "Displaying from main(): ";
+//     //Теперь эта строка компилириуется и работает!
+//     cout << FirstNumber << " x " << SecondNumber;
+//     cout << " = " << MultiplicationResult << endl;
+
+//     return 0;
+// }
+
+// //Листинг 3.4 Поиск размера стандартных типов переменных яызка С++
+// #include <iostream>
+
+// int main()
+// {
+//     using namespace std;
+//     cout << "Computing the size of some C++ inbuilt variable types"
+//         <<endl;
+//     cout << "Size of bool: " << sizeof(bool) << endl;
+//     cout << "Size of char: " << sizeof(char) << endl;
+//     cout << "Size of unsigned short int: " << sizeof(unsigned short)
+//         <<endl;
+//     cout << "Size of short int: " << sizeof(short) << endl;
+//     cout << "Size of unsigned long int: " << sizeof(unsigned long)
+//         <<endl;
+//     cout << "Size of long: " << sizeof(long) << endl;
+//     cout << "Size of int: " << sizeof(int) << endl;
+//     cout << "Size of unsigned long long: "
+//         <<sizeof(unsigned long long) << endl;
+//     cout << "Size of long long: " << sizeof(long long) << endl;
+//     cout << "Size of unsigned int: " << sizeof(unsigned long) << endl;
+//     cout << "Size of double: " << sizeof(double) << endl;
+//     cout << "Size of float: " << sizeof(float) << endl;
+
+//     cout << "The output changes with compiler, hardware and OS"
+//                 <<endl;
+
+//     return 0;
+// }
+
+// //Листинг 3.5 Использвание ключевого слова auto для выведения типов компилятором
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     auto Flag = true; 
+//     auto Number = 25000000000;
+
+//     cout << "Flag = " << Flag;
+//     cout << " , sizeof(Flag) = " << sizeof(Flag) << endl;
+//     cout << "Number = " << Number;
+//     cout << " , sizeof(Number) = " << sizeof(Number) << endl;
+
+//     return 0;
+// }
+
+// //Листинг 3.6 Объявление константы по име ни PI
+// #include <iostream>
+
+// int main()
+// {
+//     using namespace std;
+
+//     const double Pi = 22.0 / 7;
+//     cout << "Value of constant Pi is: " << Pi << endl;
+
+//     //Снятие комментария со следующей строки приведет к ошибке
+//     //Pi = 345;
+
+//     return 0;
+// }
+
+//Листинг 3.7 Использование перечисляемых знаений для указания направлений ветра
+#include <iostream>
+using namespace std;
+
+enum CardinalDirections
+{
+    North = 25,
+    South,
+    East,
+    West
+};
+
+int main()
+{
+    cout << "Displaying directions and their symbolic values" << endl;
+    cout << "North: " << North << endl;
+    cout << "South: " << South << endl;
+    cout << "East: " << East << endl;
+    cout << "West: " << West << endl;
+
+    CardinalDirections WindDirection = South;
+    cout << "Variable WindDirection = " << WindDirection << endl;
+
+    return 0;
+}
