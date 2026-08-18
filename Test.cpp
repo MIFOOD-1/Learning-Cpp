@@ -382,28 +382,119 @@
 //     return 0;
 // }
 
-//Листинг 3.7 Использование перечисляемых знаений для указания направлений ветра
-#include <iostream>
-using namespace std;
+// //Листинг 3.7 Использование перечисляемых знаений для указания направлений ветра
+// #include <iostream>
+// using namespace std;
 
-enum CardinalDirections
-{
-    North = 25,
-    South,
-    East,
-    West
-};
+// enum CardinalDirections
+// {
+//     North = 25,
+//     South,
+//     East,
+//     West
+// };
 
-int main()
-{
-    cout << "Displaying directions and their symbolic values" << endl;
-    cout << "North: " << North << endl;
-    cout << "South: " << South << endl;
-    cout << "East: " << East << endl;
-    cout << "West: " << West << endl;
+// int main()
+// {
+//     cout << "Displaying directions and their symbolic values" << endl;
+//     cout << "North: " << North << endl;
+//     cout << "South: " << South << endl;
+//     cout << "East: " << East << endl;
+//     cout << "West: " << West << endl;
 
-    CardinalDirections WindDirection = South;
-    cout << "Variable WindDirection = " << WindDirection << endl;
+//     CardinalDirections WindDirection = South;
+//     cout << "Variable WindDirection = " << WindDirection << endl;
 
-    return 0;
-}
+//     return 0;
+// }
+
+// // 1. Измените перечисление YOURCARDS контрольного вопроса 4 так, чтоб<л значением 
+// // константы QUEEN стало 45.
+
+// #include <iostream>
+
+// enum YOURCARDS{ACE = 43, JACK, QUEEN, KING};
+
+// using namespace std;
+
+// int main(void)
+// {
+//     for(int index = ACE; index <= KING; index++)
+//     {
+//         cout << index << endl;
+//     }
+
+//     cout << "QUEEN = "<< QUEEN;
+//     return 0;
+// }
+
+
+// /*2. Напишите программу, демонстрирующую, что размер беззнакового целого числа 
+// и обычного целого числа одинаков и что размер обоих их меньше, чем у длинного 
+// целого числа.*/
+
+//не правильно понял задачу
+// #include <iostream>
+
+// using namespace std;
+// int main(void)
+// {
+
+//     int num1 = 100;
+//     long long num2 = 100;
+
+//     if(num1 == num2)
+//         cout << num1 << " == " << num2 << " = true "<< endl;
+//     if(sizeof(num1) != sizeof(num2))
+//         cout << "sizeof(num1) = "<< sizeof(num1) << " == "<< "sizeof(num2) = " << sizeof(num2) 
+//             << " = false "<< endl;
+
+//     return 0;
+// }
+
+
+// /*2. Напишите программу, демонстрирующую, что размер беззнакового целого числа 
+// и обычного целого числа одинаков и что размер обоих их меньше, чем у длинного 
+// целого числа.*/
+
+// #include <iostream>
+
+// using namespace std;
+
+// int main()
+// {
+//     cout << "sizeof(int) = " << sizeof(int) << endl;
+//     cout << "sizeof(unsigned int) = " << sizeof(unsigned int) << endl;
+//     cout << "sizeof(long long) = " << sizeof(long long) << endl;
+
+//     if(sizeof(int) == sizeof(unsigned int))
+//         cout <<"int and unsigned int imeut odinakoviy razmer" << endl;
+
+//     if(sizeof(int) < sizeof(long long) && sizeof(unsigned int) < sizeof(long long))
+//         cout << "oba menche long long";
+
+//     return 0;
+// }
+
+
+// // 3. Напишите программу для вычисления площади и периметра круга, радиус которого 
+// // вводится пользователем.
+
+// #include <iostream>
+// using namespace std;
+// const double PI = 3.1415;
+
+// int main()
+// {
+//     double radius;
+//     cout << "VVedite radius: ";
+//     cin >> radius;
+
+//     double ploshad = PI * radius * radius;
+//     double perimetr = 2 * PI * radius;
+
+//     cout << "ploshad kruga radiusom: " <<radius<< " ravna = " << ploshad<< endl;
+//     cout << "perimetr kruga radiusom: " <<radius<< " ravna = " << perimetr << endl;
+
+//     return 0;
+// }
