@@ -498,3 +498,174 @@
 
 //     return 0;
 // }
+
+// //Листинг 4.1 Объявление массива целых чисел и доступ к его элементам
+// #include <iostream>
+
+// using namespace std;
+
+// int main()
+// {
+//     int MyNumbers [5] = {34, 56, -21, 5002, 365};
+
+//     cout << "First elemnt at index 0: " << MyNumbers [0] << endl;
+//     cout << "Second element at index 1: " << MyNumbers [1] << endl;
+//     cout << "Third element at  index 2: " << MyNumbers [2] << endl;
+//     cout << "Fourth element at index 3: " << MyNumbers [3] << endl;
+//     cout << "Fifth element at index 4: " << MyNumbers[4] << endl;
+
+//     return 0;
+// }
+
+// //Листинг 4.2. Присвоение значений элементами массива
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     const int ARRAY_LENGHT = 5;
+
+//     //Массив из целых 5 чисел, инициализированных нулями
+//     int MyNumbers[ARRAY_LENGHT] = {0};
+
+//     cout << "Enter index of the element to be changed: ";
+//     int nElementIndex = 0;
+//     cin >> nElementIndex;
+//     cout << "Enter new value: ";
+//     cin >> MyNumbers[nElementIndex];
+
+//         cout << "First elemnt at index 0: " << MyNumbers [0] << endl;
+//     cout << "Second element at index 1: " << MyNumbers [1] << endl;
+//     cout << "Third element at  index 2: " << MyNumbers [2] << endl;
+//     cout << "Fourth element at index 3: " << MyNumbers [3] << endl;
+//     cout << "Fifth element at index 4: " << MyNumbers[4] << endl;
+
+//     return 0;
+// }
+
+// //Листинг 4.3 Доступ к элементам в многомерном массиве
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     int ThreeRowsThreeColumns[3][3] = \
+//         {{-501, 206, 2011}, {989, 101, 206}, {303, 456, 596}};
+
+//         cout << "Row 0: " <<ThreeRowsThreeColumns[0][0] << " " \
+//                           <<ThreeRowsThreeColumns[0][1] << " " \
+//                           <<ThreeRowsThreeColumns[0][2] << endl;
+
+//         cout << "Row 1: " <<ThreeRowsThreeColumns[1][0] << " " \
+//                           <<ThreeRowsThreeColumns[1][1] << " " \
+//                           <<ThreeRowsThreeColumns[1][2] << endl;
+
+//         cout << "Row 2: " <<ThreeRowsThreeColumns[2][0] << " " \
+//                           <<ThreeRowsThreeColumns[2][1] << " " \
+//                           <<ThreeRowsThreeColumns[2][2] << endl;
+
+//     return 0;           
+// }
+
+// //Листинг 4.4 Создание динамического массива целых и заполнение его знаениями
+// #include <iostream>
+// #include <vector>
+
+// using namespace std;
+
+// int main()
+// {
+//     vector<int> DynArrNums (3);
+    
+//     DynArrNums[0] = 356;
+//     DynArrNums[1] = -421;
+//     DynArrNums[2] = 789;
+
+//     cout << "Number of integers in array: " << DynArrNums.size() << endl;
+//     int AnotherNum = 0;
+//     cin >> AnotherNum;
+//     DynArrNums.push_back(AnotherNum);
+
+//     cout << "Number of integers in array: " << DynArrNums.size() << endl;
+//     cout << "Last element in array: ";
+//     cout << DynArrNums[DynArrNums.size() -1] << endl;
+//     //cout << DynArrNums[3] << endl;
+
+//     return 0;
+// }
+
+// //Листинг 4.5 Анализ завершабющейся нулем строки в стиле С
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     char SayHello[] = {'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd', '\0'};
+
+//     cout << SayHello << endl;
+//     cout << "Size of array: " << sizeof(SayHello) << endl;
+
+//     cout << "Replacing space with null" << endl;
+//     SayHello[5] = '\0';
+//     cout << SayHello << endl;
+//     cout << "Size of array: " << sizeof(SayHello) << endl;
+//     cout << SayHello[7];
+
+//     return 0;
+// }
+
+// //Листинг 4.6 Риск использования строк в стиле С и пользовательского ввода
+// #include <iostream>
+// #include <string.h>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Enter a word NOT longer than 20 characters: " << endl;
+
+//     char UserInput [21] = {'\0'};
+//     cin >> UserInput;
+
+//     cout << "Length of your input was: " << strlen(UserInput) << endl;
+//     // cout << UserInput;
+
+//     return 0;
+// }
+
+//Листинг 4.7 Использование типа std::string для инициализации храенения 
+//пользовательного ввода,  а также копирование, конкатенация и определение длины строки
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    string Greetings ("Hellow std::string!");
+    cout << Greetings << endl;
+
+    string Greetings1 = "Hellow std::string!";
+    cout << Greetings1 << endl;
+
+    cout << "Enter a line of text: " << endl;
+    string FirstLine;
+    getline(cin, FirstLine);
+
+    cout << "Enter another: " <<endl;
+    string SecLine;
+    getline(cin, SecLine);
+
+    cout << "Result of concatenation: " << endl;
+    string Concat = FirstLine + " " + SecLine;
+    cout << Concat << endl;
+
+    cout << "Copy of concatenated string: " << endl;
+    string Copy;
+    Copy = Concat;
+
+    cout << Copy << endl;
+
+    cout << "Length of concat string: " << Concat.length() << endl;
+
+    return 0;
+}
