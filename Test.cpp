@@ -719,36 +719,348 @@
 // }
 
 
-// 1. Объявите массив, представляющий клетки на шахматной доске; типом массива мо
-// // жет быть перечисление, определяющее характер фигур на доске.
-#include <iostream>
+// // 1. Объявите массив, представляющий клетки на шахматной доске; типом массива мо
+// // // жет быть перечисление, определяющее характер фигур на доске.
+// #include <iostream>
 
-using namespace std;
+// using namespace std;
 
-enum Figure
-{
-    EMPTY,
-    PAWN,
-    ROOK,
-    KNIGHT,
-    BISHOP,
-    QUEEN,
-    KING
-};
+// enum Figure
+// {
+//     EMPTY,
+//     PAWN,
+//     ROOK,
+//     KNIGHT,
+//     BISHOP,
+//     QUEEN,
+//     KING
+// };
 
-int main()
-{
-    Figure board[8][8] =
-    {
-        {ROOK, KNIGHT, BISHOP, QUEEN, KING, BISHOP, KNIGHT, ROOK},
-        {PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN},
-        {EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY},
-        {EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY},
-        {EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY},
-        {EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY},
-        {PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN},
-        {ROOK, KNIGHT, BISHOP, QUEEN, KING, BISHOP, KNIGHT, ROOK},
-    };
+// int main()
+// {
+//     Figure board[8][8] =
+//     {
+//         {ROOK, KNIGHT, BISHOP, QUEEN, KING, BISHOP, KNIGHT, ROOK},
+//         {PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN},
+//         {EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY},
+//         {EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY},
+//         {EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY},
+//         {EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY},
+//         {PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN},
+//         {ROOK, KNIGHT, BISHOP, QUEEN, KING, BISHOP, KNIGHT, ROOK},
+//     };
 
-    return 0;
-}
+//     return 0;
+// }
+
+// //Литсинг 5.1 демонстрация арифметических операторов с введенными пользоватлем числами
+// #include <iostream>
+
+// using namespace std;
+
+// int main(void)
+// {
+//     cout << "Enter two integers: " << endl;
+//     int Num1 = 0, Num2 = 0;
+//     cin >> Num1;
+//     cin >> Num2;
+
+//     cout << Num1 << " + " << Num2 << " = " << Num1 + Num2 << endl;
+//     cout << Num1 << " - " << Num2 << " = " << Num1 - Num2 << endl;
+//     cout << Num1 << " * " << Num2 << " = " << Num1 * Num2 << endl;
+//     cout << Num1 << " / " << Num2 << " = " << Num1 / Num2 << endl;
+//     cout << Num1 << " % " << Num2 << " = " << Num1 % Num2 << endl;
+
+//     return 0;
+// }
+
+// //Листинг 5.2 Разлиия между постфиксными и префиксными операторами
+// #include <iostream>
+// using namespace std;
+
+// int main(void)
+// {
+//     int MyInt = 101;
+//     cout << "Start value of integer being operated: " << MyInt << endl;
+
+//     int PostFixInc = MyInt++;
+//     cout << "Result of Postfix Increment = " << PostFixInc << endl;
+//     cout << "After Postix Increment, MyInt = " << MyInt << endl;
+
+//     MyInt = 101; // Переустановка
+//     int PreFixInc = ++MyInt;
+//     cout << "Result of Prefix Increment = " << PreFixInc << endl;
+//     cout << "After Ptefix Increment, MyInt = " << MyInt << endl;
+
+//     MyInt = 101;
+//     int PostFixDec = MyInt--;
+//     cout << "Result of Postfi Decrement = " << PostFixDec << endl;
+//     cout << "After Postix Decrement, MyInt = " << MyInt << endl;
+
+//     MyInt = 101; // Переустановка
+//     int PreFixDec = --MyInt;
+//     cout << "Result of Prefix Decrement = " << PreFixInc << endl;
+//     cout << "After Ptefix Decrement, MyInt = " << MyInt << endl;
+    
+//     return 0;
+// }
+
+// //Листинг 5.3 Ошибка переполнения у знаковых и безнаковых целочисленных переменных
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     unsigned short UShortValue = 65535;
+//     cout << "Increment unsigned short " << UShortValue
+//             << " gives: ";
+//     cout << ++UShortValue << endl;
+
+//     short SignedShort = 32767;
+//     cout << "Incrementing signed short " << SignedShort << " gives: ";
+//     cout << ++SignedShort << endl;
+
+//     return 0;
+// }
+
+// //Листинг 5.4 Операторы равенства и сравнения 
+// #include <iostream>
+// using namespace std;
+
+// int main(void)
+// {
+//     cout << "Enter two integers:" << endl;
+//     int Num1 = 0, Num2 = 0;
+//     cin >> Num1;
+//     cin >> Num2;
+
+//     bool Equality = (Num1 == Num2);
+//     cout << "Result of equality test: " << Equality << endl;
+
+//     bool Inequality = (Num1 != Num2);
+//     cout << "Result of inequality test: " << Inequality << endl;
+
+//     bool GreaterThan = (Num1 < Num2);
+//     cout << "Result of " << Num1 << " > " << Num2;
+//     cout << " test: " << GreaterThan << endl;
+
+//     bool LessThan = (Num1 < Num2);
+//     cout << "Result of" << Num1 << " < " << Num2 << " test: " << LessThan << endl;
+
+//     bool GreaterThanEquals = (Num1 >= Num2);
+//     cout << "Result of" << Num1 << " >= " << Num2;
+//     cout << " test: " << GreaterThanEquals << endl;
+
+//     bool LessThanEquals = (Num1 <= Num2);
+//     cout << "Result of" << Num1 << " <= " << Num2;
+//     cout << " test: " << LessThanEquals << endl;
+
+//     return 0;
+// }
+
+// //Листинг 5.5 Анализ логичесих операторов C++ && и || 
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Enter true(1) or false(0) for two operands:" << endl;
+//     bool Op1 = false, Op2 = false;
+//     cin >> Op1;
+//     cin >> Op2;
+
+//     cout << Op1 << " AND " << Op2 << " = " << (Op1 && Op2) << endl;
+//     cout << Op1 << " OR " << Op2 << " = " << (Op1 || Op2) << endl;
+
+//     return 0;
+// }
+
+//Листинг 5.6 Использование логических операторов NOT(!)
+// и AND(&&) в условынх операторах для изменения потока выделения
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Use boolean value(0 / 1) to answer the quations" << endl;
+//     cout << "Is it raining? ";
+//     bool Raining = false;
+//     cin >> Raining;
+    
+//     cout << "Do you have buses on the streets? ";
+//     bool Buses = false;
+//     cin >> Buses;
+
+//     //Условный оператор использует логические операторы AND и NOT
+//     if(Raining && !Buses)
+//         cout << "You cannot to go to work" << endl;
+//     else
+//         cout << "You can go to work" << endl;
+
+//     if(Raining && Buses)
+//         cout << "Take an umbrella" << endl;
+    
+//     if((!Raining) && Buses)
+//         cout << "Enjoy the sun and have nice day" << endl;
+
+//     return 0;
+// }
+
+// //Листинг 5.7 Использование логических операторов NOT и OR для принятия решения
+// //о том, можете ли вы купить автомобиль своей мечты
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Answer quastions with 0 or 1" << endl;
+//     cout << "Is there a deep discount on your favorite car? ";
+//     bool Discount = false;
+//     cin >> Discount;
+
+//     cout << "Did you get a fantastic bonus? ";
+//     bool FantasticBonus = false;
+//     cin >> FantasticBonus;
+
+//     if(Discount || FantasticBonus)
+//         cout << "Congratulations, you can buy that car!" << endl;
+//     else
+//         cout << "Ssory, waiting a while is a good idea" << endl;
+
+//     return 0;
+// }
+
+// //5.8 Использование побитовых операторов для выполнения операций
+//     //  NOT AND OR and XOR с отдельными битами целого числа
+// #include <iostream>
+// #include <bitset>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Enter a number (0 - 255): ";
+//     unsigned short InputNum = 0;
+//     cin >> InputNum;
+
+//     bitset<8> InputBits (InputNum);
+//     cout << InputNum << " in binary is " << InputBits << endl;
+
+//     bitset<8> BitwiseNOT = (~InputNum);
+//     cout << "Logical NOT " << endl;
+//     cout << "~" << InputBits << " = " << BitwiseNOT << endl;
+
+//     cout << "Logical AND, & with 00001111" << endl;
+//     bitset<8> BitwiseAND = (0x0F & InputNum);
+//                         //0x0F шестнадцатериная форма числа 0001111
+//     cout << "0001111 & " << InputBits << " = " << BitwiseAND << endl;
+
+//     cout << "Logical OR, | with 00001111" << endl;
+//     bitset<8> BitwiseOR = (0x0F | InputNum);
+//     cout << "00001111 | " << InputBits << " = " << BitwiseOR << endl;
+
+//     cout << "Logical XOR, ^ with 00001111" << endl;
+//     bitset<8> BitwiseXOR = (0x0F ^ InputNum);
+//     cout << "00001111 ^ " << InputBits << " = " << BitwiseXOR << endl;
+    
+//     return 0;
+// }
+
+// /*Листинг 5.9 Использование побитового оператора сдвига вправо(>>)
+// для полуения четверти и половины знаения, а также оператора сдвига
+// влевло(<<) для удвоения знаения и умножения на четыре*/
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Enter a number: ";
+//     int Input;
+//     cin >> Input;
+
+//     int Half = Input >> 1;
+//     int Quarter = Input >> 2;
+//     int Double = Input << 1;
+//     int Quardruple = Input << 2;
+
+//     cout << "Quarter: " << Quarter << endl;
+//     cout << "Half: " << Half << endl;
+//     cout << "Double: " << Double << endl;
+//     cout << "Quardruple: " << Quardruple << endl;
+    
+//     return 0;
+// }
+
+// /*Листинг 5.10 Использование составных операторов для добавления
+// вычитания, деления и деления по модулю, а также побитовых операций, OR, AND, XOR*/
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Enter a number";
+//     int Value = 0;
+//     cin >> Value;
+
+//     Value += 8;
+//     cout << "After += 8, Value = " << Value << endl;
+//     Value -= 2;
+//     cout << "After -=2, Value = " << Value << endl;
+//     Value /=4;
+//     cout << "After /=4, Value = " << Value << endl;
+//     Value *= 4;
+//     cout << "After *=4, Value = " << Value << endl;
+//     Value %= 1000;
+//     cout << "After %=1000, Value = " << Value << endl;
+
+//     //Примечание: далее присвоение просиходит в пределах cout
+//     cout << "After <<= 1, value = " << (Value <<= 1) << endl;
+//     cout << "After >>= 2, value = " << (Value >>= 2) << endl;
+//     cout << "After |= 0x55, value = " << (Value |= 0x55) << endl;
+//     cout << "After ^= 0x55, value = " << (Value ^= 0x55) << endl;
+//     cout << "After &= 0x0F, value = " << (Value &= 0x0F) << endl;
+
+//     return 0;
+// }
+
+// //Листинг 5.11 Испольщование оператора sizeof() для определения количества
+// //байтов, занятых массивом из 100 целых чисел и каждыем его элементом
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Use sizeof of detemine memory occupied by arrays"
+//         <<endl;
+//     int MyNumbers[100] = {0};
+
+//     cout << "Bytes occupied by an int: " << sizeof(int) << endl;
+//     cout << "Bytes occupied by array MyNumbers: " << sizeof(MyNumbers) << endl;
+//     cout << "Bytes occupied by each element: " << sizeof(MyNumbers[0]) << endl;
+
+//     return 0;
+// }
+
+// // 3. Напишите программу, которая запрашивает у пользователя два логических значе
+// // ния и демонстрирует результаты различных побитовых операций над ними.
+// #include <iostream>
+// using namespace std;
+
+
+// int main()
+// {
+// int num1;
+// int num2;
+
+// cout << "Enter two numbers\n";
+
+// cin >> num1;
+// cin >> num2;
+
+// cout << num1 << " | " << num2 << " = " << (num1 | num2) << endl;
+// cout << num1 << " & " << num2 << " = " << (num1 & num2) << endl;
+// cout << num1 << " ^ " << num2 << " = " << (num1 ^ num2) << endl;
+// cout << num1 << " << " << num2 << " = " << (num1 << num2) << endl;
+// cout << num1 << " >> " << num2 << " = " << (num1 >> num2) << endl;
+
+// return 0;
+// }
