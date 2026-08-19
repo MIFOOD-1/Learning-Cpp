@@ -632,40 +632,123 @@
 //     return 0;
 // }
 
-//Листинг 4.7 Использование типа std::string для инициализации храенения 
-//пользовательного ввода,  а также копирование, конкатенация и определение длины строки
+// //Листинг 4.7 Использование типа std::string для инициализации храенения 
+// //пользовательного ввода,  а также копирование, конкатенация и определение длины строки
+// #include <iostream>
+// #include <string>
+
+// using namespace std;
+
+// int main()
+// {
+//     string Greetings ("Hellow std::string!");
+//     cout << Greetings << endl;
+
+//     string Greetings1 = "Hellow std::string!";
+//     cout << Greetings1 << endl;
+
+//     cout << "Enter a line of text: " << endl;
+//     string FirstLine;
+//     getline(cin, FirstLine);
+
+//     cout << "Enter another: " <<endl;
+//     string SecLine;
+//     getline(cin, SecLine);
+
+//     cout << "Result of concatenation: " << endl;
+//     string Concat = FirstLine + " " + SecLine;
+//     cout << Concat << endl;
+
+//     cout << "Copy of concatenated string: " << endl;
+//     string Copy;
+//     Copy = Concat;
+
+//     cout << Copy << endl;
+
+//     cout << "Length of concat string: " << Concat.length() << endl;
+
+//     return 0;
+// }
+
+// // 5. Посмотрите объявление вектора в листинге 4.4 и попытайтесь создать динамиче
+// // ский массив, содержащий элементы типа char.
+
+// #include <iostream>
+// #include <vector>
+
+// using namespace std;
+
+// int main(void)
+// {
+//     vector<char> array(3);
+
+//     array[0] = 'a';
+//     array[1] = 'b';
+//     array[2] = 'c';
+
+//     char lol = '1';
+//     array.push_back(lol);
+
+//     cout << array[0] << array[1] << array[2] << array[3] << array[array.size() - 1];
+
+//     return 0;
+// }
+
+// // 1. Объявите массив, представляющий клетки на шахматной доске; типом массива мо
+// // жет быть перечисление, определяющее характер фигур на доске.
+
+// #include <iostream>
+
+// using namespace std;
+
+// int main()
+// {
+//     char array[8][8] =
+//     {
+//         {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'},
+//         {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'},
+//         {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'},
+//         {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'},
+//         {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'},
+//         {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'},
+//         {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'},
+//         {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'},
+//     };
+
+//     return 0;
+// }
+
+
+// 1. Объявите массив, представляющий клетки на шахматной доске; типом массива мо
+// // жет быть перечисление, определяющее характер фигур на доске.
 #include <iostream>
-#include <string>
 
 using namespace std;
 
+enum Figure
+{
+    EMPTY,
+    PAWN,
+    ROOK,
+    KNIGHT,
+    BISHOP,
+    QUEEN,
+    KING
+};
+
 int main()
 {
-    string Greetings ("Hellow std::string!");
-    cout << Greetings << endl;
-
-    string Greetings1 = "Hellow std::string!";
-    cout << Greetings1 << endl;
-
-    cout << "Enter a line of text: " << endl;
-    string FirstLine;
-    getline(cin, FirstLine);
-
-    cout << "Enter another: " <<endl;
-    string SecLine;
-    getline(cin, SecLine);
-
-    cout << "Result of concatenation: " << endl;
-    string Concat = FirstLine + " " + SecLine;
-    cout << Concat << endl;
-
-    cout << "Copy of concatenated string: " << endl;
-    string Copy;
-    Copy = Concat;
-
-    cout << Copy << endl;
-
-    cout << "Length of concat string: " << Concat.length() << endl;
+    Figure board[8][8] =
+    {
+        {ROOK, KNIGHT, BISHOP, QUEEN, KING, BISHOP, KNIGHT, ROOK},
+        {PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN},
+        {EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY},
+        {EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY},
+        {EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY},
+        {EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY},
+        {PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN},
+        {ROOK, KNIGHT, BISHOP, QUEEN, KING, BISHOP, KNIGHT, ROOK},
+    };
 
     return 0;
 }
