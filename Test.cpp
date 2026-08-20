@@ -1064,3 +1064,472 @@
 
 // return 0;
 // }
+
+// //Листинг 6.1 Умножение или сложение двух целых чисел на основе пользовательского ввода
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Enter two integers: " << endl;
+//     int Num1 = 0, Num2 = 0;
+//     cin >> Num1;
+//     cin >> Num2;
+
+//     cout << "Enter \'m\' to mitliply, anything else to add: ";
+//     char UserSelection = '\0';
+//     cin >> UserSelection;
+
+//     int Result = 0;
+//     if(UserSelection == 'm')
+//         Result = Num1 * Num2;
+//     else
+//         Result = Num1 + Num2;
+//     cout << "Result is: "<< Result << endl;
+    
+//     return 0;
+// }
+
+// //Листинг 6.2 Проверка емкости перед копированем строки в символьный массив
+// #include <iostream>
+// #include <cstring>
+// #include <string>
+// using namespace std;
+
+// int main(void)
+// {
+//     char Buffer[20] = {'\0'};
+//     char Buffer1[20] = {"dwdwdwdd"};
+
+
+//     cout << "Enter a line of text: " << endl;
+//     string LineEtered;
+//     getline(cin, LineEtered);
+//     // cin >> LineEtered;
+
+//     if(LineEtered.length() < 20)
+//     {
+//         strcpy(Buffer, LineEtered.c_str());
+//         // strcpy(Buffer, Buffer1);
+
+//         cout << "Buffer contains: " << Buffer << endl;
+//     }
+
+//     return 0;
+// }
+
+// //Листинг 6.3 Использование вложеннхы операторов if
+// // в  приложении умножения или деления чисел
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Enter two numbers: " << endl;
+//     float Num1 = 0, Num2 = 0;
+//     cin >> Num1;
+//     cin >> Num2;
+
+//     cout << "Enter 'd' to divide, anything else to mutiply: ";
+//     char UserSelection = '\0';
+//     cin >> UserSelection;
+
+//     if(UserSelection == 'd')
+//     {
+//         cout << "You want division!" << endl;
+//         if(Num2 != 0)
+//         {
+//             cout << "No div-by-zero, proceeding to calculate" << endl;
+//             cout << Num1 << " / " << Num2 << " = " << Num1 / Num2 << endl;
+//         }
+
+//         else cout << "Division by zero iz not allowed" << endl;
+//     }
+//     else
+//     {
+//             cout << "You want multi[lication!" << endl;
+//             cout << Num1 << " x " << Num2 << " = " << Num1 * Num2 << endl;
+//     }
+// }
+
+// //Листинг 6.4 Узнайте в честь его назван день недели
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     enum DaysOfWeek
+//     {
+//         Sunday = 0,
+//         Monday,
+//         Tuesday,
+//         Wednesdey,
+//         Thursday,
+//         Friday,
+//         Saturday
+//     };
+
+//     cout << "Find what days of the week are named after!" << endl;
+//     cout << "Enter a number for a day (Sunday = 0): ";
+
+//     int Day = Sunday; //инициализация днем Sunday
+//     cin >> Day;
+    
+//     if(Day == Sunday)
+//         cout << "Sunday was named after the Sun" << endl;
+//     else if(Day == Monday)
+//         cout << "Monday was named after the Moon" << endl;
+//     else if(Day == Tuesday)
+//         cout << "Tuesday was named after the Mars" << endl;
+//     else if(Day == Wednesdey)
+//         cout << "Wednesdey was named after the Mercury" << endl;
+//     else if(Day == Thursday)
+//         cout << "Thursday was named after the Jupiter" << endl;
+//     else if(Day == Friday)
+//         cout << "Friday was named after the Venus" << endl;
+//     else if(Day == Saturday)
+//         cout << "Saturday was named after the Saturn" << endl;
+//     else
+//         cout << "Wrong input, execute again" << endl;
+    
+//     return 0;
+// }
+
+// //Листинг 6.5 Узнайте в есть его назван день недели, с помощью конструкции swith-case
+// #include <iostream>
+// using namespace std;
+
+// int main(void)
+// {
+//     enum DaysOfWeek
+//     {
+//         Sunday = 0,
+//         Monday,
+//         Tuesday,
+//         Wednesdey,
+//         Thursday,
+//         Friday,
+//         Saturday
+//     };
+
+//     cout << "Find what days of week are named after!" << endl;
+//     cout << "Enter a number for a day (Sunday = 0): ";
+
+//     int Day = Sunday;
+//     cin >> Day;
+
+//     switch (Day)
+//     {
+//     case Sunday:
+//         cout << "Sunday was named after the Sun" << endl;
+//         break;
+    
+//     case Monday:
+//         cout << "Monday was named after the Moon" << endl;
+//         break;
+
+//     case Tuesday:
+//         cout << "Tuesday was named after the Mars" << endl;
+//         break;
+
+//     case Wednesdey:
+//         cout << "Wednesdey  was named after the Mercury" << endl;
+//         break;
+
+//     case Thursday:
+//         cout << "Thursday  was named after the Jupiter" << endl;
+//         break;
+
+//     case Friday:
+//         cout << "Friday  was named after the Venus" << endl;
+//         break;
+        
+
+//     case Saturday:
+//         cout << "Saturday  was named after the Saturn" << endl;
+//         break;
+    
+//     default:
+//         cout << "wrong input, execute again" << endl; 
+//         break;
+//     }
+
+//     return 0;
+
+// }
+
+// //Литсинг 6.6 Использование условного оператора (?:) для поиска большего из двух чисел
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Enter two numbers" << endl;
+//     int Num1 = 0, Num2 = 0;
+//     cin >> Num1;
+//     cin >> Num2;
+
+//     int Max = (Num1 > Num2)? Num1 : Num2;
+//     cout << "The greater of "  << Num1 << " And " << Num2 << " is: " << Max << endl;
+
+//     return 0;
+// }
+
+// //Листинг 6.7 Запрос пользователю, не хочет ли он повторить вычисления, использузя оператор goto
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     JumpToPoint:
+//     int Num1 = 0, Num2 = 0;
+    
+//     cout << "Enter two integers: " << endl;
+//     cin >> Num1;
+//     cin >> Num2;
+
+//     cout << Num1 << " x " << Num2 << " = " << Num1 * Num2 << endl;
+//     cout << Num1 << " + " << Num2 << " = " << Num1 + Num2 << endl;
+
+//     cout << "Do you wish to perform another operation (y/n)?" << endl;
+
+//     char Reapeat = 'y';
+//     cin >> Reapeat;
+
+//     if(Reapeat == 'y')
+//         goto JumpToPoint;
+//     cout << "Goodbye!" << endl;
+
+//     return  0;
+// }
+
+////Листинг 6.8 Использование цикла while позволяет пользователю повторно выпонлять вычисления
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     char UserSelection = 'm'; //Исходное значение
+
+//     while(UserSelection != 'x')
+//     {
+//         cout << "Enter two integers: " << endl;
+//         int Num1 = 0, Num2 = 0;
+//         cin >> Num1;
+//         cin >> Num2;
+
+//         cout << Num1 << " x " << Num2 << " = " << Num1 * Num2 << endl;
+//         cout << Num1 << " + " << Num2 << " = " << Num1 + Num2 << endl;
+
+//         cout << "Press x to exit(x) or any other key to recalculate" <<endl;
+
+//         cin >> UserSelection;
+//     }
+
+//     cout << "Goodbye!" << endl;
+    
+//     return  0;
+// }
+
+// //Листинг 6.9 Использование цикла do ... while для повторного выполнения блока кода
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     char UserSelection = 'x'; //Исходное значение
+
+//     do
+//     {
+//         cout << "Enter two integers: " << endl;
+//         int Num1 = 0, Num2 = 0;
+//         cin >> Num1;
+//         cin >> Num2;
+
+//         cout << Num1 << " x " << Num2 << " = " << Num1 * Num2 << endl;
+//         cout << Num1 << " + " << Num2 << " = " << Num1 + Num2 << endl;
+
+//         cout << "Press x to exit(x) or any other key to recalculate" <<endl;
+
+//         cin >> UserSelection;
+//     } while(UserSelection != 'x');
+    
+//     cout << "Goodbye!" << endl;
+
+//     return  0;
+// }
+
+// //Листинг 6.10 Использование цикла for для ввода отображения статиеского массива
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     const int ARRAY_LENGHT = 5;
+//     int MyInts[ARRAY_LENGHT] = {0};
+
+//     cout << "Populate array of " << ARRAY_LENGHT << " integers" << endl;
+
+//     for(int ArrayIndex = 0; ArrayIndex < ARRAY_LENGHT; ++ArrayIndex)
+//     {
+//         cout << "Enter an integer for element " << ArrayIndex << ": ";
+//         cin >> MyInts[ArrayIndex];
+//     }
+
+//     cout << "Dispalaying contents of the array: " << endl;
+
+//     for(int ArrayIndex = 0; ArrayIndex < ARRAY_LENGHT; ++ArrayIndex)
+//         cout << "Element " << ArrayIndex << " = "
+//         << MyInts[ArrayIndex] << endl;
+    
+//     return 0;
+// }
+
+// //Листинг 6.11 Использование цикла for без выражения цикладля повторения выиселний до просбьы пользователя
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     //Без выражения цикла (тертье выражение пропущено)
+//     for(char UserSelection = 'm'; (UserSelection != 'x'); )
+//     {
+//         cout << "Enter the two integers: " << endl;
+//         int Num1 = 0, Num2 = 0;
+//         cin >> Num1;
+//         cin >> Num2;
+
+//         cout << Num1 << " x " << Num2 << " = " << Num1 * Num2 << endl;
+//         cout << Num1 << " + " << Num2 << " = " << Num1 + Num2 << endl;
+
+//         cout << "Press x to exit(x) or any other key to recalculate" <<endl;
+
+//         cin >> UserSelection;
+//     } 
+    
+//     cout << "Goodbye!" << endl;
+
+//     return  0;
+// }
+
+// //Листинг 6.12 Использование оператора continie для перезапуска 
+// //и оператора break для выхожа из бесконечного цикла for
+
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     for(;;)
+//     {
+//         cout << "Enter the two integers: " << endl;
+//         int Num1 = 0, Num2 = 0;
+//         cin >> Num1;
+//         cin >> Num2;
+
+//         cout << "Do you wish to correct the numbers? (y/n): ";
+//         char ChangeNumbers = '\0';
+
+//         cin >> ChangeNumbers;
+
+//         if(ChangeNumbers == 'y')
+//             continue; //перезапуск цикла
+        
+//         cout << Num1 << " x " << Num2 << " = " << Num1 * Num2 << endl;
+//         cout << Num1 << " + " << Num2 << " = " << Num1 + Num2 << endl;
+
+//         cout << "Press x to exit or any other key to recalculate" <<endl;
+
+//         char UserSelection = '\0';
+//         cin >> UserSelection;
+
+//         if(UserSelection == 'x')
+//             break; // выход из бесконечнго цикла
+//     } 
+    
+//     cout << "Goodbye!" << endl;
+
+//     return  0;
+// }
+
+// //Листинг 6.13 Использование вложеннхы циклов для умножения каждого элемента одного массива на каждый элемент другого
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     const int ARRAY1_LEN = 3;
+//     const int ARRAY2_LEN = 2;
+
+//     int MyInts1[ARRAY1_LEN] = {35, -3, 0};
+//     int MyInts2[ARRAY2_LEN] = {20, -1};
+
+//     cout << "Multiplying each int in MyInts1 by each in MyInts2:" << endl;
+
+//     for(int ArrayIndex = 0; ArrayIndex < ARRAY1_LEN; ++ArrayIndex)
+//         for(int Array2Index = 0; Array2Index < ARRAY2_LEN; ++Array2Index)
+//             cout << MyInts1[ArrayIndex] << " x " << MyInts2[Array2Index] 
+//                 << " = " << MyInts1[ArrayIndex] * MyInts2[Array2Index] << endl;
+
+//     return 0;
+// }
+
+// //Листинг 6.14 Использование вложенных циклов для перебора элементов двумерного массива
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     const int MAX_ROWS = 3;
+//     const int MAX_COLS = 4;
+
+//     //Двумерный массив целых чисел
+//     int MyInts[MAX_ROWS][MAX_COLS] = { {34, -1, 879, 22},
+//                                         {24, 365, -101, -1},
+//                                         { -20, 40, 90, 97}};
+//     //перебор всех рядов массива
+//     for(int Row = 0; Row < MAX_ROWS; ++Row)
+//     {
+//         //перебор всех числе в каждом ряду(столбцов)
+//         for(int Column = 0; Column < MAX_COLS; ++Column)
+//         {
+//             cout << "Integer["<< Row << "]["<< Column \
+//                 << "] = " << MyInts[Row][Column] << endl;
+//         }
+//     }
+
+//     return 0;
+// }
+
+//Листинг 6.15 Использование вложенных циклов для вычисления чисел прогрессии Фибоначчи
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    const int NumsToCal = 5;
+    cout << "This program will calculate " << NumsToCal
+        <<" Fibonacci Numbers at a time" << endl;
+
+    int Num1 = 0, Num2 = 1;
+    char WantMore = '\0';
+    cout << Num1 << " " << Num2 << " ";
+
+    do
+    {
+        for(int Index = 0; Index < NumsToCal; ++Index)
+        {
+            cout << Num1 + Num2 << " ";
+
+            int Num2Temp = Num2;
+            Num2 = Num1 + Num2;
+            Num1 = Num2Temp;
+        }
+        cout << endl << "Do you want more numbers (y/n)? ";
+        cin >> WantMore;
+    }while(WantMore == 'y');
+    
+    cout << "Goodbye!" << endl;
+
+    return 0;
+}
