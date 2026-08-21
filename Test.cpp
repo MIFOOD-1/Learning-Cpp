@@ -1533,3 +1533,339 @@
 
 //     return 0;
 // }
+
+// //Листинг 7.1 Две функции, вычисляющеие плоащь и перемитр круга, заданного радиусом
+// #include <iostream>
+// using namespace std;
+
+// const double Pi = 3.14159;
+
+// //Объявление функции(прототипы)
+// double Area(double InputRadius);
+// double Circumference(double Inputradius);
+
+// int main()
+// {
+//     cout << "Enter radius: ";
+//     double Radius = 0;
+//     cin >> Radius;
+
+//     //ВЫзов функции "Area"
+//     cout << "Area is: " << Area(Radius) << endl;
+
+//     //ВЫзов функции "Circumference"
+//     cout << "Cirrcumference is: " << Circumference(Radius) << endl;
+
+//     return 0;
+// }
+
+// //Определение функйии реалиазции
+// double Area(double InputRadius)
+// {
+//     return Pi * InputRadius * InputRadius;
+// }
+
+// double Circumference(double InputRadius)
+// {
+//     return 2 * Pi * InputRadius;
+// }
+
+// //Листинг 7.2 Функция получающая два параметра вычисляющая площадь поверхности цилиндра
+// #include <iostream>
+// using namespace std;
+
+// const double Pi = 3.14159;
+
+// //Обяъвление содержит два параметра
+// double SurfaceArea(double Radius, double Height);
+
+// int main()
+// {
+//     cout << "Enter the radius of the cylinder: ";
+//     double InRadius = 0;
+//     cin >> InRadius;
+//     cout << "Enter the height of the cylinder: ";
+//     double InHeight = 0;
+//     cin >> InHeight;
+
+//     cout << "Surface Area: " << SurfaceArea(InRadius, InHeight) << endl;
+
+//     return 0;
+// }
+
+// double SurfaceArea(double Radius, double Height)
+// {
+//     double Area = 2 * Pi * Radius * Radius + 2 * Pi * Radius * Height;
+//     return Area;
+// }
+
+// //Листинг 7.3 Функция без параметров и возврващаемых значений
+// #include <iostream>
+// using namespace std;
+
+// void SayHello();
+
+// int main()
+// {
+//     SayHello();
+//     return 0;
+// }
+
+// void SayHello()
+// {
+//     cout << "Hello World" << endl;
+// }
+
+// /*Листинг 7.4 Функция, вычисляющая площадь круга и испоьзующая
+// число Пи как второй параметр со значением по умолчанию 3.14*/
+// #include <iostream>
+// using namespace std;
+
+// //Объявление функции(Прототип)
+// double Area(double InputRadius, double Pi = 3.14); //Pi со значением по умолчанию
+
+// int main()
+// {
+//     cout << "Enter radius: ";
+//     double Radius = 0;
+//     cin >> Radius;
+
+//     cout << "Pi is 3.14, do you wish to change this (y / n)? ";
+//     char ChangePi = 'n';
+//     cin >> ChangePi;
+
+//     double CircleArea = 0;
+//     if(ChangePi == 'y')
+//     {
+//         cout << "Enter new Pi: ";
+//         double NewPi = 3.14;
+//         cin >> NewPi;
+//         CircleArea = Area(Radius, NewPi);
+//     }
+//     else
+//         CircleArea = Area(Radius); //2-й параметр игнорируется,
+//                                 //значит, использовать значение по умолчанию
+//     //Вызов функции "Area"
+//     cout << "Area is: " << CircleArea << endl;
+
+//     return 0;
+// }
+
+// //В определении фунции щачение по умолчаниюне задается снова
+// double Area(double InputRadius, double Pi)
+// {
+//     return Pi * InputRadius * InputRadius;
+// }
+
+// //Листинг 7.5 Использование рекурисвной функции для вычисления чисел прогрессии Фибоначи
+// #include <iostream>
+// using namespace std;
+
+// int GetFibNumber(int FibIndex)
+// {
+//     if(FibIndex < 2)
+//         return FibIndex;
+//     else //рекурсия, если FibIndex >= 2
+//         return GetFibNumber(FibIndex - 1) \
+//             + GetFibNumber(FibIndex - 2);
+// }
+
+// int main()
+// {
+//     cout << "Enter 0-based index of desired Fibonacci Number: ";
+//     int Index = 0;
+//     cin >> Index;
+
+//     cout << "Fibonacci number is: " << GetFibNumber(Index) << endl;
+//     return 0;
+// }
+
+// //7.6 Использование несколких операторов rturn в одной функции
+// #include <iostream>
+// using namespace std;
+// const double Pi = 3.14159;
+
+// void QueryAndCalculate()
+// {
+//     cout << "Enter radius: ";
+//     double Radius = 0;
+//     cin >> Radius;
+
+//     cout << "Area: " << Pi * Radius * Radius << endl;
+
+//     cout << "Do you wish to calculate circumference (y / n)? ";
+//     char CalcCirum = 'n';
+//     cin >> CalcCirum;
+
+//     if(CalcCirum == 'n')
+//         return;
+
+//     cout << "Circumference: " << 2 * Pi * Radius << endl;
+//     return;      
+// }
+
+// int main()
+// {
+//     QueryAndCalculate();
+    
+//     return 0;
+// }
+
+// //Листинг 7.7 Использование перегруженной фунеции для вычисления площади круга иили цилиндра
+// #include <iostream>
+// using namespace std;
+
+// const double Pi = 3.14159;
+
+// double Area(double Radius); //для круга
+// double Area(double Radius, double Height); //перегружено для цилиндра
+
+// int main()
+// {
+//     cout << "Enter z for Cylinder, c for Circle: ";
+//     char Choice = 'z';
+//     cin >> Choice;
+
+//     cout << "Enter radius: ";
+//     double Radius = 0;
+//     cin >> Radius;
+
+//     if(Choice == 'z')
+//     {
+//         cout << "Enter height: ";
+//         double Height = 0;
+//         cin >> Height;
+
+//         //Вызов перегруженной версии Area для цилиндра
+//         cout << "Area of cylinder is: " << Area (Radius, Height) << endl;
+//     }
+//     else
+//         cout << "Area of cylinder is: " << Area (Radius) << endl;
+
+//     return 0;
+// }
+
+// //для круга
+// double Area(double Radius)
+// {
+//     return Pi * Radius * Radius;
+// }
+
+// //прегружено для цилиндра
+// double Area(double Radius, double Height)
+// {
+//     //повторное использование версии для площади круга
+//     return 2 * Area(Radius) + 2 * Pi * Radius * Height;
+// }
+
+// //Листинг 7.8 Функция, получающая массив как парметр
+// #include <iostream>
+// using namespace std;
+
+// void DisplayArray(int Numbers[], int Lenght)
+// {
+//     for(int Index = 0; Index < Lenght; ++Index)
+//         cout << Numbers[Index] << " ";
+    
+//     cout << endl;
+// }
+
+// void DisplayArray(char Characters[], int Lenght)
+// {
+//     for (int Index = 0; Index < Lenght; ++Index)
+//         cout << Characters[Index] << " ";
+    
+//     cout << endl;
+// }
+
+// int main()
+// {
+//     int MyNumbers[4] = {24, 58, -1, 245};
+//     DisplayArray(MyNumbers, 4);
+
+//     char MyStatement[7] = {'H', 'e', 'l', 'l', 'o', '!', '\0'};
+//     DisplayArray(MyStatement, 7);
+
+//     return 0;
+// }
+
+// //Листинг 7.9 Возврат площади круга по ссылке, а не в качестве возвращаемого значения
+// #include <iostream>
+// using namespace std;
+
+// const double Pi = 3.1416;
+
+// //Выходной параметр Result по ссылке
+// void Area(double Radius, double &Result)
+// {
+//     Result = Pi * Radius * Radius;
+// }
+
+// int main()
+// {
+//     cout << "Enter radius: ";
+//     double Radius = 0;
+//     cin >> Radius;
+
+//     double AreaFetched = 0;
+//     Area(Radius, AreaFetched);
+
+//     cout << "The area is: " << AreaFetched << endl;
+
+//     return 0;
+// }
+
+// //Листинг 7.10 Использование встраиваемой функции, удваивющей целое число
+// #include <iostream>
+// using namespace std;
+
+// //определение встраиваемой функции удвоение
+// inline long DoubleNum(int InputNum)
+// {
+//     return InputNum * 2;
+// }
+
+// int main()
+// {
+//     cout << "Enter an integer: ";
+//     int InputNum = 0;
+//     cin >> InputNum;
+
+//     //Вызов встраиваемой функции
+//     cout << "Double is: " << DoubleNum(InputNum) << endl;
+
+//     return 0;
+// }
+
+//Листинг 7.11 Использование лямбда-функции для сортировки отображения элементов массива
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+void DisplayNums(vector<int> &DynArray)
+{
+    for_each(DynArray.begin(), DynArray.end(), \
+            [](int Element) {cout << Element << " ";} ); //лямбда
+    cout << endl;
+}
+
+int main()
+{
+    vector<int> MyNumbers;
+    MyNumbers.push_back(501);
+    MyNumbers.push_back(-1);
+    MyNumbers.push_back(25);
+    MyNumbers.push_back(-35);
+
+    DisplayNums(MyNumbers);
+
+    cout << "Sorting them in descending order" << endl;
+
+    sort(MyNumbers.begin(), MyNumbers.end(), \
+            [](int Num1, int Num2) {return (Num2 < Num1); } );
+        
+    DisplayNums(MyNumbers);
+
+    return 0;
+}
