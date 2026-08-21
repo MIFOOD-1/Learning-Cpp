@@ -1,3 +1,4 @@
+// 1. Напишите цикл for для доступа к элементам массива в обратном порядке
 #include <iostream>
 using namespace std;
 
