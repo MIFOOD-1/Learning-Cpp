@@ -1022,8 +1022,8 @@
 //     return 0;
 // }
 
-// //Листинг 5.11 Испольщование оператора sizeof() для определения количества
-// //байтов, занятых массивом из 100 целых чисел и каждыем его элементом
+//Листинг 5.11 Испольщование оператора sizeof() для определения количества
+//байтов, занятых массивом из 100 целых чисел и каждыем его элементом
 // #include <iostream>
 // using namespace std;
 
@@ -1837,35 +1837,35 @@
 //     return 0;
 // }
 
-//Листинг 7.11 Использование лямбда-функции для сортировки отображения элементов массива
-#include <iostream>
-#include <algorithm>
-#include <vector>
-using namespace std;
+// //Листинг 7.11 Использование лямбда-функции для сортировки отображения элементов массива
+// #include <iostream>
+// #include <algorithm>
+// #include <vector>
+// using namespace std;
 
-void DisplayNums(vector<int> &DynArray)
-{
-    for_each(DynArray.begin(), DynArray.end(), \
-            [](int Element) {cout << Element << " ";} ); //лямбда
-    cout << endl;
-}
+// void DisplayNums(vector<int> &DynArray)
+// {
+//     for_each(DynArray.begin(), DynArray.end(), \
+//             [](int Element) {cout << Element << " ";} ); //лямбда
+//     cout << endl;
+// }
 
-int main()
-{
-    vector<int> MyNumbers;
-    MyNumbers.push_back(501);
-    MyNumbers.push_back(-1);
-    MyNumbers.push_back(25);
-    MyNumbers.push_back(-35);
+// int main()
+// {
+//     vector<int> MyNumbers;
+//     MyNumbers.push_back(501);
+//     MyNumbers.push_back(-1);
+//     MyNumbers.push_back(25);
+//     MyNumbers.push_back(-35);
 
-    DisplayNums(MyNumbers);
+//     DisplayNums(MyNumbers);
 
-    cout << "Sorting them in descending order" << endl;
+//     cout << "Sorting them in descending order" << endl;
 
-    sort(MyNumbers.begin(), MyNumbers.end(), \
-            [](int Num1, int Num2) {return (Num2 < Num1); } );
+//     sort(MyNumbers.begin(), MyNumbers.end(), \
+//             [](int Num1, int Num2) {return (Num2 < Num1); } );
         
-    DisplayNums(MyNumbers);
+//     DisplayNums(MyNumbers);
 
-    return 0;
-}
+//     return 0;
+// }
