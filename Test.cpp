@@ -1869,3 +1869,467 @@
 
 //     return 0;
 // }
+
+// //Листинг 8.1 Определение адресов переменных типа int и double
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     int Age = 30;
+//     const double Pi = 3.1416;
+
+//     //Использование & для поиска адреса в памяти
+//     cout << "Integer Age is at: 0x" << hex << &Age << endl;
+//     cout << "Double Pi is located at: 0x" << hex << &Pi << endl;
+
+//     return 0;
+// }
+
+// //Листинг 8.2 Объявление и инициалихация указателя
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     int Age = 30;
+//     int * pInteger = &Age;  //указатель на тип int, инициализированный результатом &Age
+    
+//     //отображение значения указателя
+//     cout << "Interger Age is at: " << pInteger << endl;
+
+//     return 0;
+// }
+
+// //Листинг 8.3 Переназначение указателя другой переменной
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     int Age = 30;
+
+//     int * pInteger = &Age;
+//     cout << "pInteger points to age now" << endl;
+
+//     cout << "pInteger = " << hex << pInteger << endl;
+
+//     int DogsAge = 9;
+//     pInteger = &DogsAge;
+//     cout << "pInteger pints to DoggsAge now" << endl;
+//     cout << "pInteger = " << hex << pInteger << endl;
+
+//     return 0;
+// }
+
+// //Листинг 8.4 Использование оператора обращения к значению
+// //(*) для доступа к целочисленному значению
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     int Age = 30;
+//     int DogsAge = 9;
+
+//     cout << "Integer Age = " << Age << endl;
+//     cout << "Integer DogsAge = " << DogsAge << endl;
+
+//     int * pInteger = &Age;
+//     cout << "pInteger points to Age" << endl;
+
+//     //Отображение значения указателя
+//     cout << "pInteger = " << hex << pInteger << endl;
+
+//     //Отображение значения в указанной области
+//     cout << "*pInteger = " << dec << *pInteger << endl;
+
+//     pInteger = &DogsAge;
+//     cout << "pInteger points to DogsAge now" << endl;
+
+//     cout << "pIntege = " << hex << pInteger << endl;
+//     cout << "*pIntege = " << dec << *pInteger << endl;
+
+//     return 0;
+// }
+
+// //Листинг 8.5 Манипурлирование данными при помощи указателя и оператора обращения к значению(*)
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     int DogsAge = 30;
+//     cout << "Initialized DogsAge = " << DogsAge<< endl;
+    
+//     int * pAge = &DogsAge;
+//     cout << "Enter an age for your dog: ";
+//     //сохранить ввод в области памяти, на которую указывает pAge
+//     cin >> *pAge;
+
+//     //Отобразить адрес, по которому хранится возраст
+//     cout << "Input stored using pAge at" << hex << pAge << endl;
+
+//     cout << "Integer DogsAge = " << dec << DogsAge << endl;
+//     return 0;
+// }
+
+// //Листинг 8.6 Указатели на различные типы имеют одинаковый размер
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     int Age = 30;
+//     double Pi = 3.1416;
+//     char SayYes = 'y';
+
+//     //инициализация указателей адресами переменных
+//     int * pInt = &Age;
+//     double * pDouble = &Pi;
+//     char * pChar = &SayYes;
+
+//     cout << "sizeof fundamental types -" << endl;
+//     cout <<"sizeof(int) = " << sizeof(int) << endl;
+//     cout <<"sizeof(double) = " << sizeof(double) << endl;
+//     cout <<"sizeof(char) = " << sizeof(char) << endl;
+
+//     cout << "sizeof pointers to fundamental types -" << endl;
+//     cout <<"sizeof(pInt) = " << sizeof(pInt) << endl;
+//     cout <<"sizeof(pDouble) = " << sizeof(pDouble) << endl;
+//     cout <<"sizeof(pChar) = " << sizeof(pChar) << endl;
+
+//     return 0;
+// }
+
+// //Листинг 8.7 Использование оператора(*) для доступа к облати памяти, 
+// //зарезервированной оператором new, и ее освобождение оператором delete
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     //Запрос области памяти int 
+//     int * pAge = new int;
+//     //Использование распределенной память для хранения числа
+//     cout << "Enter your dog`s age: ";
+//     cin >> *pAge;
+
+//     //Использование оператора косвенного доступа * для обращения к значению
+//     cout << "Age " << *pAge << " is stored at " << hex << pAge << endl;
+
+//     // int Age = 10;
+//     // pAge = &Age;
+//     cout << pAge << " "<< dec << *pAge;
+
+//     delete pAge;  //освобождение памяти
+    
+//     return 0;
+// }
+
+// //Листинг 8.8 Резервирование с использованием оператора new[...]
+// // и освобождение с использованием опретора delete[]
+// #include <iostream>
+// #include <cstring> 
+// #include <string>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Enter your name: ";
+//     string Name;
+//     cin >> Name;
+
+//     //Добавить 1 к резервируемому объему памяти для заверешающего нулевого символа
+//     int CharsToAllocate = Name.length() + 1;
+
+//     //Запрос памяти для содержания копии ввода
+//     char * CopyOfName = new char [CharsToAllocate];
+
+//     //strcpy копирует из строки с завершающим нулевым символом
+//     strcpy(CopyOfName, Name.c_str());
+
+//     //Отобразить скпоированную строку
+//     cout << "Dynamically allocated buffer contains: " << CopyOfName << endl;
+
+//     //Буфер больше не используется? удалить его
+//     delete[] CopyOfName;
+
+//     return 0;
+// }
+
+// /*Листинг 8.9 Динамическое резервирование на оснвании потребности,
+//  исследование приращения указателей при помощи значений смещения оператора ++*/
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "How many integers you wish to enter? ";
+//     int InputNums = 0;
+//     cin >> InputNums;
+
+//     int * pNumbers = new int [InputNums];   //Резервирование требуемого количества целых чисел
+//     // int * pCpy = pNumbers;
+
+//     cout << "Successfully allocated memory for " << InputNums << " integers" << endl;
+
+//     for(int Index = 0; Index < InputNums; ++Index)
+//     {
+//         cout << "Enter number " << Index << ": ";
+//         cin >> * (pNumbers + Index);
+//     }
+
+//     cout << "Displaying all numbers input: " << endl;
+//     for(int Index = 0, *pCopy = pNumbers; Index < InputNums; Index++)
+//         cout << *(pCopy++) << " ";
+
+//     cout << endl;
+
+//     //указатель больше не используется? освободить память
+//     delete[] pNumbers;
+
+//     return 0;
+// }
+
+// /*Литстинг 8.10 использование ключевого слова const при вычислении
+// площади круга, радиус и чисо Пи передаются как указатели*/
+// #include <iostream>
+// using namespace std;
+
+// void CalcArea(const double * const pPi, const double * const pRadius, //Константый указатель, константные данные
+//                                         double * const pArea) //изменяемо значение но не адрес
+// {
+//     //проверить указатели перед использованием!
+//     if(pPi && pRadius && pArea)
+//         *pArea = (*pPi) * (*pRadius) * (*pRadius);
+// }
+
+// int main()
+// {
+//     const double Pi = 3.1416;
+
+//     cout << "Enter radius of circle: ";
+//     double Radius = 0;
+//     cin >> Radius;
+
+//     double Area = 0;
+//     CalcArea(&Pi, &Radius, &Area);
+
+//     cout << "Area is = " << Area << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 8.11 Демонстрация того, что переменная типа массива 
+// - это указатеть на первый его элемент*/
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     //Cтатический массив из 5 целых чисел
+//     int MyNumbers[5];
+
+//     //Массив присваивается указателю на тип int 
+//     int * pNumbers = MyNumbers;
+
+//     //Отображение адреса содержащегося в указателе
+//     cout << "pNumbers = " << hex << pNumbers << endl;
+
+//     //Адрес первого элемента массива
+//     cout << "&MyNumbers[0] = " << hex << &MyNumbers[0] << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 8.12 Доступ к элементам массива с использованием оператора обращения 
+// к значению (*) и использование оператора массив([]) при работе с указателем*/
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     const int ARRAY_LEN = 5;
+
+//     //Инициализированный статисесчкий массив из 5 целыъ чисел
+//     int MyNumbers[ARRAY_LEN] = {24, -1, 365, -999, 2011};
+
+//     //указатель
+//     int * pNumbers = MyNumbers;
+
+//     cout << "Displaying array using pointer syntax, operator*" << endl;
+//     for(int Index = 0; Index < ARRAY_LEN; ++Index)
+//         cout << "Element " << Index << " = " << *(MyNumbers + Index) << endl;
+
+//     cout << "Displaying array using pointer with array syntax, operator[]" << endl;
+
+//     for(int Index = 0; Index < ARRAY_LEN; ++Index)
+//         cout << "Element " << Index << " = " << pNumbers[Index] << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 8.13 Пример плохого программирования 
+// с использованием недопустимых указателей*/
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     //неиницаилизрованный указатель (плохо)
+//     int * pTemperature;
+
+//     cout << "Is it sunny (y/n)?" << endl;
+
+//     char UserInput = 'y';
+//     cin >> UserInput;
+
+//     if(UserInput == 'y')
+//     {
+//         pTemperature = new int;
+//         *pTemperature = 30;
+//     }
+//     //pTemperature содердит недопустимое значение, если пользователь ввел 'n'
+
+//     cout << "Temperature is: " << *pTemperature;
+
+//     //оператор delete также может быть вызван для указателя без применения оператора new
+//     delete pTemperature;
+
+//     return 0;
+// }
+
+// //Листинг 8.14 Более безопасная программа, исправленный листинг 8.13
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Is it sunny (y/n)?";
+//     char UserInput = 'y';
+//     cin >> UserInput;
+
+//     if(UserInput == 'y')
+//     {
+//         //инициализрованный указатель(хорошо)
+//         int * pTemperature = new int;
+//         *pTemperature = 30;
+
+//         cout << "Temperature is: " << *pTemperature << endl;
+
+//         //указатель больше не используется? удалить
+//         delete pTemperature;
+//     }
+//     return 0;
+// }
+
+// //Листинг 8.15 Обработка исключения как изящный выход
+// //из ситуации при неудаче операторе new
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     try
+//     {
+//         //Запрос большой области памяти
+//         int * pAge = new int [536870911];
+
+//         //Использование предоставленной памяти
+
+//         delete[] pAge;
+//     }
+//     catch (bad_alloc)
+//     {
+//         cout << "Memory allocation failed. Ending program" << endl;
+//     }
+
+//     return 0;
+// }
+
+// //Листинг 8.16 Использование оператора new(northrow),
+// //возвращаемого при неудаче значение NULL
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     //Запрос большой области памятим с исользованием nothrow
+//     int * pAge = new(nothrow) int [0x1fffffff];
+
+//     if(pAge) // проверка pAge != Null
+//     {
+//         //использование представелнной памяти
+//         delete[] pAge;
+//     }
+//     else
+//         cout << "Memory allocation failed. Ending program" << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 8.17 Демонстрация того, чтоссылки - это 
+// псведонимы для значений переменных*/
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     int Original = 30;
+//     cout << "Original = " << Original << endl;
+//     cout << "Original is at adress: " << hex << &Original << endl;
+
+//     int & Ref = Original;
+//     cout << "Ref is at adress: " << hex << &Ref << endl;
+
+//     int & Ref2 = Ref;
+//     cout << "Ref2 is at adress: " << hex << &Ref2 << endl;
+//     cout << "Ref2 gets value, Ref2 = " << dec << Ref2 << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 8.18 Функция вычисялет квадрат числа и возвращает его в параметре по ссылке*/
+// #include <iostream>
+// using namespace std;
+
+// void ReturnSquare(int &Number)
+// {
+//     Number *= Number;
+// }
+
+// int main()
+// {
+//     cout << "Enter a number you wish to square: ";
+//     int Number = 0;
+//     cin >> Number;
+
+//     ReturnSquare(Number);
+//     cout << "Square is: " << Number << endl;
+
+//     return 0;
+// }
+
+/*Листинг 8.19 Использование константной ссылки для гарантити невозможности
+вызываемой функции изменить значение, переданное по ссылке*/
+#include <iostream>
+using namespace std;
+
+void CalculateSquare(const int &Number, int &Result)
+{
+    Result = Number*Number;
+}
+
+int main()
+{
+    cout << "Enter a number you wish to square: ";
+    int Number = 0;
+    cin >> Number;
+
+    int Square = 0;
+    CalculateSquare(Number, Square);
+    cout << Number << "^2 =" << Square << endl;
+
+    return 0;
+}
