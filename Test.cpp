@@ -2311,25 +2311,509 @@
 //     return 0;
 // }
 
-/*Листинг 8.19 Использование константной ссылки для гарантити невозможности
-вызываемой функции изменить значение, переданное по ссылке*/
+// /*Листинг 8.19 Использование константной ссылки для гарантити невозможности
+// вызываемой функции изменить значение, переданное по ссылке*/
+// #include <iostream>
+// using namespace std;
+
+// void CalculateSquare(const int &Number, int &Result)
+// {
+//     Result = Number*Number;
+// }
+
+// int main()
+// {
+//     cout << "Enter a number you wish to square: ";
+//     int Number = 0;
+//     cin >> Number;
+
+//     int Square = 0;
+//     CalculateSquare(Number, Square);
+//     cout << Number << "^2 =" << Square << endl;
+
+//     return 0;
+// }
+
+// //Листинг 9.1 Готовый для компиляции класс Human
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// class Human
+// {
+//     private:
+//         string Name;
+//         int Age;
+    
+//     public:
+//         void SetName(string HumansName)
+//         {
+//             Name = HumansName;
+//         }
+
+//         void SetAge(int HumansAge)
+//         {
+//             Age = HumansAge;
+//         }
+
+//         void IntroduceSelf()
+//         {
+//             cout << "I am " + Name << " and am ";
+//             cout << Age << " years old" << endl;
+//         }
+// };
+
+// int main()
+// {
+//     //Создание объекта класса Human со значением "Adam"
+//     //атрибута Name
+
+//     Human FirstMan;
+//     FirstMan.SetName("Adam");
+//     FirstMan.SetAge(30);
+
+//     //Создание объекта класса Human со значением "Eve"
+//     //атрибута Name
+//     Human FirstWoman;
+//     FirstWoman.SetName("Eve");
+//     FirstWoman.SetAge(28);
+
+//     FirstMan.IntroduceSelf();
+//     FirstWoman.IntroduceSelf();
+// }
+
+// /*Листинг 9.2 Модель класса Human, где истинный возраст абстрагируется
+// от пользователя и сообщается более молодой возраст*/
+// #include <iostream>
+// using namespace std;
+
+// class Human
+// {
+//     private:
+//         //закрытые данные-члены:
+//         int Age;
+    
+//     public:
+//         void SetAge(int InputAge)
+//         {
+//             Age = InputAge;
+//         }
+
+//         //Человек лжет о своем возрасте (если ему за 30)
+//         int GetAge()
+//         {
+//             if(Age > 30)
+//                 return (Age - 2);
+//             else
+//                 return Age;
+//         }
+// };
+
+// int main()
+// {
+//     Human FirstMan;
+//     // FirstMan.SetAge(35);
+
+//     Human FirstWoman;
+//     // FirstWoman.SetAge(22);
+
+//     cout << "Age of FirstMan " << FirstMan.GetAge() << endl;
+//     cout << "Age of FirstWoman " << FirstWoman.GetAge() << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 9.3 Использование конструктора для инициализации перемененных-членов класса*/
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// class Human
+// {
+//     private:
+//         //закрытые данные - члены:
+//         string Name;
+//         int Age;
+//     public:
+//         //конструктор
+//         Human()
+//         {
+//             Age = 0;    //Инициализаця гарантирует отсуствие случайного значения
+//             cout << "Constructed an instance of class Human" << endl;
+//         }
+
+//         void SetName(string HumansName)
+//         {
+//             Name = HumansName;
+//         }
+
+//         void SetAge(int HumansAge)
+//         {
+//             Age = HumansAge;
+//         }
+//         void IntroduceSelf()
+//         {
+//             cout << "I am " + Name << " and am ";
+//             cout << Age << " years old" << endl;
+//         }
+// };
+
+// int main()
+// {
+//     Human FirstMan;
+//     FirstMan.SetName("Adam");
+//     FirstMan.SetAge(30);
+
+//     Human FirstWoman;
+//     FirstWoman.SetName("Eve");
+//     FirstWoman.SetAge(28);
+
+//     FirstMan.IntroduceSelf();
+//     FirstWoman.IntroduceSelf();
+// }
+
+// /*Листинг 9.4 Класс Human с несколькими конструкторами*/
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// class Human
+// {
+//     private:
+//         //Закрытые данные-члены:
+//         string Name;
+//         int Age;
+
+//     public:
+//         //конструктор
+//         Human()
+//         {
+//             Age = 0; 
+//             cout << "Default constructur creates an instance of Human" << endl;
+//         }
+
+//         //перегруженный конструктор, получающий Name
+//         Human(string Humansname)
+//         {
+//             Name = Humansname;
+//             Age = 0;    //инициализация гарантирует отсутствие
+//                         //случайного значения
+//             cout << "Overloaded constructor creates " << Name << endl;
+//         }
+
+//         //перегруженный конструктор, получающий Name и Age
+//         Human(string HumansName, int HumansAge)
+//         {
+//             Name = HumansName;
+//             Age = HumansAge;
+//             cout << "Overloaded constructor creates ";
+//             cout << Name << " of " << Age << " years" << endl;
+//         }
+
+//         void SetName(string HumasName)
+//         {
+//             Name = HumasName;
+//         }
+
+//         void SetAge(int HumansAge)
+//         {
+//             Age = HumansAge;
+//         }
+
+//         void IntroduceSelf()
+//         {
+//             cout << "I am " + Name << " and am ";
+//             cout << Age << " years old" << endl;
+//         }
+// };
+
+// int main()
+// {
+//     Human FirstMan; //использование стандартного конструктора
+//     FirstMan.SetName("Adam");
+//     FirstMan.SetAge(30);
+
+//     Human FirstWoman("Eve");    //использование стандартного конструктора
+//     FirstWoman.SetAge(28);
+
+//     Human FirstChild("Rose", 1);
+
+//     FirstMan.IntroduceSelf();
+//     FirstWoman.IntroduceSelf();
+//     FirstChild.IntroduceSelf();
+
+//     return 0;
+// }
+
+// /*Листинг 9.5 Класс с перегруженным конструктором, но без стандартного конструктора*/
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// class Human
+// {
+//     private:
+//         //Закрытые данные-члены
+//         string Name;
+//         int Age;
+
+//     public:
+//     //перегруженный конструктор без стандратного конструктора
+//     Human(string HumansName, int HumansAge)
+//     {
+//         Name = HumansName;
+//         Age = HumansAge;
+//         cout << "Overloaded constructor creates " << Name;
+//         cout << " of age " << Age << endl;
+//     }
+
+//     void IntroduceSelf()
+//     {
+//         cout << "I am " + Name << " and am ";
+//         cout << Age << " years old" << endl;
+//     }
+// };
+
+// int main()
+// {
+//     //Закомментирована следующая строка, пытающаяся создать объект
+//     //с использованим стандартного конструктора Human FirstMan;
+
+//     Human FirstMan("Adam", 30);
+//     Human FirstWoman("Eve" , 28);
+
+//     FirstMan.IntroduceSelf();
+//     FirstWoman.IntroduceSelf();
+
+    
+//     return 0;
+// }
+
+// /*Литсинг 9.6 Стандартный конструктор, способный олучать параметры, но со значениями
+// по умолчанию и списокм инциализации для установки значений членов*/
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// class Human
+// {
+//     private:
+//         int Age;
+//         string Name;
+
+//     public:
+//         Human(string InputName = "Adam", int InputAge = 25)
+//             :Name(InputName), Age(InputAge)
+//         {
+//             cout << "Constructed a Human called " << Name;
+//             cout << ", " << Age << " years old" << endl;
+//         }
+// };
+
+// int main()
+// {
+//     Human FirstMan;
+//     Human FirstWoman("Eve" , 18);
+
+//     return 0;
+// }
+
+// /*Листинг 9.7 пример класса, инкапсулирующего буфер в стиле С
+// для гарантии его освобождения при помощи деструктора*/
+// #include <iostream>
+// #include <cstring>
+// using namespace std;
+
+// class MyString
+// {
+//     private:
+//     char * Buffer;
+
+//     public:
+//         //Конструктор
+//         MyString(const char * InitialInput)
+//         {
+//             if(InitialInput != NULL)
+//             {
+//                 Buffer = new char [strlen(InitialInput) + 1];
+//                 strcpy(Buffer, InitialInput);
+//             }
+//             else
+//                 Buffer = NULL;
+//         }
+//         //Деструктор: освобождает буфер, зарезервированный в конструткторе
+//         ~MyString()
+//         {
+//             cout << "Invoking destructor, clearing up" << endl;
+//             if(Buffer != NULL)
+//                 delete[] Buffer;
+//         }
+//         int GetLength()
+//         {
+//             return strlen(Buffer);
+//         }
+//         const char * GetString()
+//         {
+//             return Buffer;
+//         }
+// };  //Конец класса Mystring
+
+// int main()
+// {
+//     MyString SayHello("Hello from String Class");
+//     cout << "String buffer in MyString is " << SayHello.GetLength();
+//     cout << " characters long" << endl;
+
+//     cout << "Buffer contains: " << SayHello.GetString() << endl;
+
+//     return 0;
+// }
+
+
+// /*Листинг 9.8 Проблема передачи объекта класса, такого как MyString, по значению*/
+// #include <iostream>
+// #include <cstring>
+// using namespace std;
+
+// class MyString
+// {
+//     private:
+//     char * Buffer;
+
+//     public:
+//         //Конструктор
+//         MyString(const char * InitialInput)
+//         {
+//             if(InitialInput != NULL)
+//             {
+//                 Buffer = new char [strlen(InitialInput) + 1];
+//                 strcpy(Buffer, InitialInput);
+//             }
+//             else
+//                 Buffer = NULL;
+//         }
+//         //Деструктор: освобождает буфер, зарезервированный в конструткторе
+//         ~MyString()
+//         {
+//             cout << "Invoking destructor, clearing up" << endl;
+//             if(Buffer != NULL)
+//                 delete[] Buffer;
+//         }
+//         int GetLength()
+//         {
+//             return strlen(Buffer);
+//         }
+//         const char * GetString()
+//         {
+//             return Buffer;
+//         }
+// };  //Конец класса Mystring
+
+// void UseMyString(MyString Input)
+// {
+//     cout << "String buffer in MyString is " << Input.GetLength();
+//     cout << " characters long" << endl;
+
+//     cout << "Buffer contains: " << Input.GetString() << endl;
+//     return;
+// }
+
+// int main()
+// {
+//     MyString SayHello("Hello from String Class");
+  
+
+//     //Передать Say("Hellow from string Class");
+//     UseMyString(SayHello);
+//     cout << SayHello.GetString();
+
+//     return 0;
+// }
+
+/*Листинг 9.9 Определение конструктора копий, гарантирующего глубокое 
+копирование буферов в динамически распределяемой памяти*/
 #include <iostream>
+#include <cstring>
 using namespace std;
 
-void CalculateSquare(const int &Number, int &Result)
+
+class MyString
 {
-    Result = Number*Number;
+    private:
+        char * Buffer;
+    public:
+        //конструктор
+        MyString(const char * InitialInput)
+        {
+            cout << "Constructor: creating new MyString" << endl;
+            if(InitialInput != NULL)
+            {
+                Buffer = new char [strlen(InitialInput) + 1];
+                strcpy(Buffer, InitialInput);
+
+                //Отображение адреса области памяти локального буфера
+                cout << "Buffer points to: " << hex;
+                cout << (unsigned int *)Buffer << endl;
+            }
+            else
+                Buffer = NULL;
+        }
+
+    //Конструктор копий
+    MyString(const MyString &CopySource)
+    {
+        cout << "Copy constructor: copying from MyString" << endl;
+
+        if(CopySource.Buffer != NULL)
+        {
+            //гарантироать глубокое копирование, создав сначала собственный буфер
+            Buffer = new char [strlen(CopySource.Buffer) + 1];
+
+            //копирование из оригинала в локальный буфер
+            strcpy(Buffer, CopySource.Buffer);
+
+            //Отображение адреса области памяти локального буфера
+            cout << "Buffer points to: " << hex;
+            cout << (unsigned int *)Buffer << endl;
+        }
+        else
+            Buffer = NULL;
+    }
+
+    //Деструктор
+    ~MyString()
+    {
+        cout << "Invoking destructor, clearing up" << endl;
+        if(Buffer != NULL)
+            delete[] Buffer;
+    }
+    
+    int GetLenght()
+    {
+        return strlen(Buffer);
+    }
+
+    const char * GetString()
+    {
+        return Buffer;
+    }
+};
+
+void UseMyString(MyString Input)
+{
+    cout << "String buffer in MyString is " << Input.GetLenght();
+    cout << " charaters long" << endl;
+
+    cout << "Buffer contains: " << Input.GetString() << endl;
+    return;
 }
 
 int main()
 {
-    cout << "Enter a number you wish to square: ";
-    int Number = 0;
-    cin >> Number;
+    MyString SayHello("Hello from String Class");
 
-    int Square = 0;
-    CalculateSquare(Number, Square);
-    cout << Number << "^2 =" << Square << endl;
+    //Передача SayHello по значению (с копированием)
+    UseMyString(SayHello);
 
     return 0;
 }
