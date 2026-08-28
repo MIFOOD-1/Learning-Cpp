@@ -2730,90 +2730,354 @@
 //     return 0;
 // }
 
-/*Листинг 9.9 Определение конструктора копий, гарантирующего глубокое 
-копирование буферов в динамически распределяемой памяти*/
+// /*Листинг 9.9 Определение конструктора копий, гарантирующего глубокое 
+// копирование буферов в динамически распределяемой памяти*/
+// #include <iostream>
+// #include <cstring>
+// using namespace std;
+
+
+// class MyString
+// {
+//     private:
+//         char * Buffer;
+//     public:
+//         //конструктор
+//         MyString(const char * InitialInput)
+//         {
+//             cout << "Constructor: creating new MyString" << endl;
+//             if(InitialInput != NULL)
+//             {
+//                 Buffer = new char [strlen(InitialInput) + 1];
+//                 strcpy(Buffer, InitialInput);
+
+//                 //Отображение адреса области памяти локального буфера
+//                 cout << "Buffer points to: " << hex;
+//                 cout << (unsigned int *)Buffer << endl;
+//             }
+//             else
+//                 Buffer = NULL;
+//         }
+
+//     //Конструктор копий
+//     MyString(const MyString &CopySource)
+//     {
+//         cout << "Copy constructor: copying from MyString" << endl;
+
+//         if(CopySource.Buffer != NULL)
+//         {
+//             //гарантироать глубокое копирование, создав сначала собственный буфер
+//             Buffer = new char [strlen(CopySource.Buffer) + 1];
+
+//             //копирование из оригинала в локальный буфер
+//             strcpy(Buffer, CopySource.Buffer);
+
+//             //Отображение адреса области памяти локального буфера
+//             cout << "Buffer points to: " << hex;
+//             cout << (unsigned int *)Buffer << endl;
+//         }
+//         else
+//             Buffer = NULL;
+//     }
+
+//     //Деструктор
+//     ~MyString()
+//     {
+//         cout << "Invoking destructor, clearing up" << endl;
+//         if(Buffer != NULL)
+//             delete[] Buffer;
+//     }
+    
+//     int GetLenght()
+//     {
+//         return strlen(Buffer);
+//     }
+
+//     const char * GetString()
+//     {
+//         return Buffer;
+//     }
+// };
+
+// void UseMyString(MyString Input)
+// {
+//     cout << "String buffer in MyString is " << Input.GetLenght();
+//     cout << " charaters long" << endl;
+
+//     cout << "Buffer contains: " << Input.GetString() << endl;
+//     return;
+// }
+
+// int main()
+// {
+//     MyString SayHello("Hello from String Class");
+
+//     //Передача SayHello по значению (с копированием)
+//     UseMyString(SayHello);
+
+//     return 0;
+// }
+
+
+// //Саша
+// /*Листинг 9.10 Синглетонный класс President, 
+// запрещающий копирование, присвоение и создание нескольких экземпляров*/
+// #include <iostream>
+// #include <string>
+
+// using namespace std;
+
+// class President
+// {
+//     private:
+//         //Закрытый стандартный конструктор (запрет создания извне)
+//         President() {};
+
+//         //закрытый конструктор копий(запрет создания копии)
+//         President(const President&);
+
+//         //закрытый оператор присвоения (запрет присвоения)
+//         const President &operator = (const President &);
+
+//         //Данные -члены: имя прездиента
+//         string Name;
+
+//     public:
+//         //контролируемое создание экземпляра
+//         static President &GetInstance()
+//         {
+//             //статические объекты создаются только однажды
+//             static President OnlyInstance;
+
+//             return OnlyInstance;
+//         }
+
+//         //открытые методы
+//         string GetName()
+//         {
+//             return Name;
+//         }
+
+//         void SetName(string InputName)
+//         {
+//             Name = InputName;
+//         }
+// };
+
+// int main()
+// {
+//     President &OnlyPresident = President::GetInstance();
+//     OnlyPresident.SetName("Abraham Linkoln");
+
+//     //Чтобы увидеть, как отказ при компиляции запрещает
+//     //дублирование, снимите комментарии со следующих строк
+//     // President Second;                            //конструктор недоступен
+//     // President * Third = new President();         //конструктор недоступен
+//     // President Fourth = OnlyPresident;            //конструктор копий недоступен
+
+//     // OnlyPresident = President::GetInstance();        //опертаор = недоступен
+
+//     cout << "The name of the President is: ";
+//     cout << President::GetInstance().GetName() << endl;
+    
+//     return 0;
+// }
+
+// /*Листинг 9.11 Класс базы данных MonsterDB, позволяющий создавать
+// свои объйекты только в динамической памяти(используя оператор new)*/
+// #include <iostream>
+// using namespace std;
+
+// class MonsterDB
+// {
+//     private:
+//         ~MonsterDB() {}; //закрытый деструктор
+//     public:
+//         static void DestroyInstance(MonsterDB * pInstance)
+//         {
+//             //статический член класса может обратиться к закрытому декструктору
+//             delete pInstance;
+//         }
+//         // ... несколько других методов
+// };
+
+// int main()
+// {
+//     MonsterDB * pMyDatabase = new MonsterDB;
+
+//     //pMyDatabase -> member methods (...);
+
+//     //снимите кмментарий со следуюзиъ строк, чтобы получить ошибку при компиляции
+//     //delete pMyDatabase;       //закрытый декструктор не может быть вызван
+
+//     //для освобождения используйте статический метод
+//     MonsterDB::DestroyInstance(pMyDatabase);
+
+//     return 0;
+// }
+
+// //Листинг 9.12 Результат применения опертора sizeof() к классам и их экземплярам
+// #include <iostream>
+// #include <cstring> 
+// using namespace std;
+
+// class MyString
+// {
+//     private: 
+//         char * Buffer;
+//     public:
+//         //конструктор
+//         MyString(const char * InitialInput)
+//         {
+//             if(InitialInput != NULL)
+//             {
+//                 Buffer = new char[strlen(InitialInput) + 1];
+//                 strcpy(Buffer, InitialInput);
+//             }
+//             else
+//                 Buffer = NULL;
+//         }
+
+//         //конструкторк копий
+//         MyString(const MyString& CopySource)
+//         {
+//             if(CopySource.Buffer != NULL)
+//             {
+//                 Buffer = new char [strlen(CopySource.Buffer) + 1];
+//                 strcpy(Buffer, CopySource.Buffer);
+//             }
+//             else
+//                 Buffer = NULL;
+//         }
+
+//         ~MyString()
+//         {
+//             if(Buffer != NULL)
+//                 delete[] Buffer;
+//         }
+
+//         int GetLenght()
+//         {
+//             return strlen(Buffer);
+//         }
+
+//         const char * GetString()
+//         {
+//             return Buffer;
+//         }
+// };
+
+// class Human
+// {
+//     private:
+//         int Age;
+//         bool Gender;
+//         MyString Name;
+
+//     public:
+//         Human(const MyString& InputName, int InputAge, bool InputGender)
+//             : Name(InputName), Age (InputAge), Gender(InputGender){}
+
+//         int GetAge()
+//         {
+//             return Age;
+//         }
+// };
+
+// int main()
+// {
+//     MyString FirstMan("Adam");
+//     MyString FirstWoman("Eve");
+
+//     cout << "sizeof(MyString) = "  << sizeof(MyString) << endl;
+//     cout << "sizeof(FirstMan) = "  << sizeof(FirstMan) << endl;
+//     cout << "sizeof(MyString) = "  << sizeof(FirstWoman) << endl;
+
+//     Human FirstMaleHuman(FirstMan, 25, true);
+//     Human FirstFemaleHuman(FirstWoman, 18, false);
+
+//     cout << "sizeof(Human) = " << sizeof(Human) << endl;
+//     cout << "sizeof(FirstMaleHuman) = " << sizeof(FirstMaleHuman) << endl;
+//     cout << "sizeof(FirstFemaleHuman) = " << sizeof(FirstFemaleHuman) << endl;
+    
+//     return 0;
+// }
+
+// /*Листинг 9.13 Использование ключевого слова friend, позволяющее внешней
+// функции DisplayAge() обращаться к закрытым переменным-членам*/
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// class Human
+// {
+//     private:
+//         string Name;
+//         int Age;
+
+//         friend void DisplayAge(const Human& Person);
+
+//     public:
+//         Human(string InputName, int InputAge)
+//         {
+//             Name = InputName;
+//             Age = InputAge;
+//         }
+// };
+
+// void DisplayAge(const Human& Person)
+// {
+//     cout << Person.Age << endl;
+// }
+
+// int main()
+// {
+//     Human FirstMan("Adam", 25);
+//     cout << "Accessing private member Age via friend: ";
+//     DisplayAge(FirstMan);
+
+//     return 0;
+// }
+
+/*Листинг 9.14 Исользование ключевого слова friend, позволяющее внешнему
+вспомогательному классу обращаться к закрытым ппеременным-членам*/
 #include <iostream>
-#include <cstring>
+#include <string>
 using namespace std;
 
-
-class MyString
+class Human
 {
     private:
-        char * Buffer;
+        string Name;
+        int Age;
+
+        friend class Utility;
+
     public:
-        //конструктор
-        MyString(const char * InitialInput)
+        Human(string InputName, int InputAge)
         {
-            cout << "Constructor: creating new MyString" << endl;
-            if(InitialInput != NULL)
-            {
-                Buffer = new char [strlen(InitialInput) + 1];
-                strcpy(Buffer, InitialInput);
-
-                //Отображение адреса области памяти локального буфера
-                cout << "Buffer points to: " << hex;
-                cout << (unsigned int *)Buffer << endl;
-            }
-            else
-                Buffer = NULL;
+            Name = InputName;
+            Age = InputAge;
         }
 
-    //Конструктор копий
-    MyString(const MyString &CopySource)
+        
+};
+
+class Utility
+{
+    public: 
+    static void DisplayAge(const Human& Person)
     {
-        cout << "Copy constructor: copying from MyString" << endl;
-
-        if(CopySource.Buffer != NULL)
-        {
-            //гарантироать глубокое копирование, создав сначала собственный буфер
-            Buffer = new char [strlen(CopySource.Buffer) + 1];
-
-            //копирование из оригинала в локальный буфер
-            strcpy(Buffer, CopySource.Buffer);
-
-            //Отображение адреса области памяти локального буфера
-            cout << "Buffer points to: " << hex;
-            cout << (unsigned int *)Buffer << endl;
-        }
-        else
-            Buffer = NULL;
-    }
-
-    //Деструктор
-    ~MyString()
-    {
-        cout << "Invoking destructor, clearing up" << endl;
-        if(Buffer != NULL)
-            delete[] Buffer;
-    }
-    
-    int GetLenght()
-    {
-        return strlen(Buffer);
-    }
-
-    const char * GetString()
-    {
-        return Buffer;
+        cout << Person.Age << endl;
     }
 };
 
-void UseMyString(MyString Input)
-{
-    cout << "String buffer in MyString is " << Input.GetLenght();
-    cout << " charaters long" << endl;
-
-    cout << "Buffer contains: " << Input.GetString() << endl;
-    return;
-}
-
 int main()
 {
-    MyString SayHello("Hello from String Class");
-
-    //Передача SayHello по значению (с копированием)
-    UseMyString(SayHello);
+    Human FirstMan("Adam", 25);
+    cout << "Accessing privare memeber Age via friend class: ";
+    Utility::DisplayAge(FirstMan);
+    
 
     return 0;
 }
