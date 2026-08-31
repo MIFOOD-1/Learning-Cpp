@@ -2819,7 +2819,6 @@
 // }
 
 
-// //Саша
 // /*Листинг 9.10 Синглетонный класс President, 
 // запрещающий копирование, присвоение и создание нескольких экземпляров*/
 // #include <iostream>
@@ -2837,7 +2836,8 @@
 //         President(const President&);
 
 //         //закрытый оператор присвоения (запрет присвоения)
-//         const President &operator = (const President &);
+//         const President &operator = (const President &); 
+        
 
 //         //Данные -члены: имя прездиента
 //         string Name;
@@ -2872,10 +2872,10 @@
 //     //Чтобы увидеть, как отказ при компиляции запрещает
 //     //дублирование, снимите комментарии со следующих строк
 //     // President Second;                            //конструктор недоступен
-//     // President * Third = new President();         //конструктор недоступен
+//     // President * Third = new President();         //конструктор недоступен 
 //     // President Fourth = OnlyPresident;            //конструктор копий недоступен
 
-//     // OnlyPresident = President::GetInstance();        //опертаор = недоступен
+//     // OnlyPresident = President::GetInstance();        //опертаор = недоступен 
 
 //     cout << "The name of the President is: ";
 //     cout << President::GetInstance().GetName() << endl;
@@ -2925,6 +2925,7 @@
 // {
 //     private: 
 //         char * Buffer;
+
 //     public:
 //         //конструктор
 //         MyString(const char * InitialInput)
@@ -2991,7 +2992,7 @@
 
 //     cout << "sizeof(MyString) = "  << sizeof(MyString) << endl;
 //     cout << "sizeof(FirstMan) = "  << sizeof(FirstMan) << endl;
-//     cout << "sizeof(MyString) = "  << sizeof(FirstWoman) << endl;
+//     cout << "sizeof(FirstWoman) = "  << sizeof(FirstWoman) << endl;
 
 //     Human FirstMaleHuman(FirstMan, 25, true);
 //     Human FirstFemaleHuman(FirstWoman, 18, false);
@@ -3039,45 +3040,605 @@
 //     return 0;
 // }
 
-/*Листинг 9.14 Исользование ключевого слова friend, позволяющее внешнему
-вспомогательному классу обращаться к закрытым ппеременным-членам*/
-#include <iostream>
-#include <string>
-using namespace std;
+// /*Листинг 9.14 Исользование ключевого слова friend, позволяющее внешнему
+// вспомогательному классу обращаться к закрытым ппеременным-членам*/
+// #include <iostream>
+// #include <string>
+// using namespace std;
 
-class Human
-{
-    private:
-        string Name;
-        int Age;
+// class Human
+// {
+//     private:
+//         string Name;
+//         int Age;
 
-        friend class Utility;
+//         friend class Utility;
 
-    public:
-        Human(string InputName, int InputAge)
-        {
-            Name = InputName;
-            Age = InputAge;
-        }
+//     public:
+//         Human(string InputName, int InputAge)
+//         {
+//             Name = InputName;
+//             Age = InputAge;
+//         }
 
         
+// };
+
+// class Utility
+// {
+//     public: 
+//     static void DisplayAge(const Human& Person)
+//     {
+//         cout << Person.Age << endl;
+//     }
+// };
+
+// int main()
+// {
+//     Human FirstMan("Adam", 25);
+//     cout << "Accessing privare memeber Age via friend class: ";
+//     Utility::DisplayAge(FirstMan);
+    
+
+//     return 0;
+// }
+
+// /*Листинг 10.1 Пример иерархии наследования*/
+// #include <iostream>
+// using namespace std;
+
+// class Fish
+// {
+//     public:
+//     bool FreshWaterFish;
+
+//     void Swim()
+//     {
+//         if(FreshWaterFish)
+//             cout << "Swim in lake" << endl;
+//         else
+//             cout << "Swim in sea" << endl;
+//     }
+// };
+
+// class Tuna: public Fish
+// {
+//     public:
+//         Tuna()
+//         {
+//             FreshWaterFish = false;
+//         }
+// };
+
+// class Carp: public Fish
+// {
+//     public: 
+//         Carp()
+//         {
+//             FreshWaterFish = true;
+//         }
+// };
+
+// int main()
+// {
+//     Carp MyLunch;
+//     Tuna myDinner;
+
+//     cout << "Getting my food to swim" << endl;
+
+//     cout << "Lunch: ";
+//     MyLunch.Swim();
+    
+//     cout << "Dinner: ";
+//     myDinner.Swim();
+
+//     return 0;
+// }
+
+
+// /*Листинг 10.2 Улучшенный класс Fish, использующий ключевое слово protected
+// для представления о его переменных-членов только производным классам*/
+// #include <iostream>
+// using namespace std;
+
+// class Fish
+// {
+//     protected:
+//         bool FreshWaterFish;        //доступно только производным классам
+//     public:
+//         void Swim()
+//         {
+//             if(FreshWaterFish)
+//                 cout << "Swim in lake" << endl;
+//             else
+//                 cout << "Swim in sea" << endl;
+//         }
+// };
+
+// class Tuna: public Fish
+// {
+//     public:
+//         Tuna()
+//         {
+//             FreshWaterFish = false;     //установка значения защищенного члена базового класса
+//         }
+// };
+
+// class Carp: public Fish
+// {
+//     public: 
+//         Carp()
+//         {
+//             FreshWaterFish = true;
+//         }
+// };
+
+// int main()
+// {
+//     Carp myLunch;
+//     Tuna myDinner;
+
+//     cout << "Getting my food to swim" << endl;
+
+//     cout << "Lunch: ";
+//     myLunch.Swim();
+    
+//     cout << "Dinner: ";
+//     myDinner.Swim();
+
+//     //Снимите комменатрйи со строки ниже, чтобы убежится в 
+//     //недоступности защещенных данных членов извне иерарахии класса
+//     //myLunch.FreshWaterFish = false;
+
+//     return 0;
+// }
+
+//Пометка 1.
+// /*Листинг 10.3 Конструктор производного класса со списками инициализации*/
+// #include <iostream>
+// using namespace std;
+
+// class Fish
+// {
+//     protected:
+//         bool FreshWaterFish; //доступно только производным классам
+    
+//     public:
+//         //конструктор класса Fish
+//         Fish(bool IsFreshWater) : FreshWaterFish(IsFreshWater){}
+
+//     void Swim()
+//     {
+//         if(FreshWaterFish)
+//             cout << "Swim in lake" << endl;
+//         else
+//             cout << "Swims in sea" << endl;
+//     }
+// };
+
+// class Tuna: public Fish
+// {
+//     public:
+//         Tuna() : Fish(false){}
+// };
+
+// class Carp: public Fish
+// {
+//     public:
+//         Carp(): Fish(true){}
+        
+// };
+
+// int main()
+// {
+//     Carp myLunch;
+//     Tuna myDinner;
+
+//     cout << "Geting my food to swim" << endl;
+
+//     cout << "Lunch: ";
+//     myLunch.Swim();
+
+//     cout << "Dinner: ";
+//     myDinner.Swim();
+
+//     return 0;
+// }
+
+// //Листинг 10.4 Производные классы Tuna и Carp,
+// //переопредляющие меторд Swim() базового класса Fish
+// #include <iostream>
+// using namespace std;
+
+// class Fish
+// {
+//     private:
+//         bool FreshWaterFish;
+
+//     public:
+//     //конструктор класса Fish    
+//     Fish(bool IsFreshWater) : FreshWaterFish(IsFreshWater){}
+
+//     void Swim()
+//     {
+//         if(FreshWaterFish)
+//             cout << "Swims in lake" << endl;
+//         else
+//             cout << "Swims in sea" << endl;
+//     }
+// };
+
+// class Tuna: public Fish
+// {
+//     public:
+//         Tuna(): Fish(false) {}
+
+//         void Swim()
+//         {
+//                 cout << "Tuna swims real fast" << endl;
+//         }
+// };
+
+// class Carp: public Fish
+// {
+//     public:
+//         Carp() : Fish(true){}
+// };
+
+// int main()
+// {
+//     Carp myLunch;
+//     Tuna myDinner;
+
+//     cout << "Geting my food to swim" << endl;
+
+//     cout << "Lunch: ";
+//     myLunch.Swim();
+
+//     cout << "Dinner: ";
+//     myDinner.Swim();
+
+//     return 0;
+// }
+
+// /*Листинг 10.5 Использование оператора бласти видимости (::) для вызова
+// методов базового класса из методов производных классов и функции main()*/
+
+// #include <iostream>
+// using namespace std;
+
+// class Fish
+// {
+//     private:
+//         bool FreshWaterFish;
+
+//     public:
+//         //конструктор класса Fish
+//         Fish(bool IsFreshWater) : FreshWaterFish(IsFreshWater){}
+
+//         void Swim()
+//         {
+//             if(FreshWaterFish)
+//                 cout << "Swims in lake" << endl;
+//             else
+//                 cout << "Swims in sea" << endl;
+//         }
+// };
+
+// class Tuna: public Fish
+// {
+//     public:
+//         Tuna() : Fish(false) {}
+    
+//     void Swim()
+//     {
+//         cout << "Tuna swims real fast" << endl;
+//     }
+// };
+
+// class Carp: public Fish
+// {
+//     public:
+//         Carp() : Fish(true){}
+
+//         void Swim()
+//         {
+//             cout << "Carp swims real slow" << endl;
+//             Fish::Swim();
+//         }
+// };
+
+// int main()
+// {
+//     Carp myLunch;
+//     Tuna myDinner;
+
+//     cout << "Getting my food to swim" << endl;
+
+//     cout << "Lunch: ";
+//     myLunch.Swim();
+
+//     cout << "Dinner: ";
+//     myDinner.Fish::Swim();
+
+    
+
+//     return 0;
+// }
+
+// /*Листинг 10.6 Скорытие методом Tuna::Swim() перегруженного метода Fish::Swim(bool)*/
+// #include <iostream>
+// using namespace std;
+
+// class Fish
+// {
+//     public:
+//         void Swim()
+//         {
+//             cout << "Fish swims...!" << endl;
+//         }
+
+//         void Swim(bool FreshWaterFish)
+//         {
+//             if(FreshWaterFish)
+//                 cout << "Swims in lake" << endl;
+//             else
+//                 cout << "Swims in sea" << endl;
+//         }
+// };
+
+// class Tuna: public  Fish
+// {
+    
+//     public: 
+//     using Fish::Swim;           //вариант чтоб работало
+//         void Swim()
+//         {
+//             cout << "tuna swims real fast" << endl;
+//         }
+// };
+
+// int main()
+// {
+//     Tuna myDinner;
+
+//     cout << "getting my food to swim" << endl;
+
+//     //myDinner.Swim(false); //отказ компиляции: Fish::Swim(bool)
+//                             //скрыт методом Tuna::Swim()
+//     myDinner.Swim();
+//     myDinner.Swim(false);
+
+//     myDinner.Fish::Swim();
+//     myDinner.Fish::Swim(true);
+//     myDinner.Fish::Swim(false);
+
+//     return 0;
+// }
+
+// /*Листинг 10.7 Порядок создания и удаления базового
+// класса, производного класса и его членов*/
+// #include <iostream>
+// using namespace std;
+
+// class FishDummyMember
+// {
+//     public:
+//     FishDummyMember()
+//     {
+//         cout << "FishDummyMember constructor" << endl;
+//     }
+
+//     ~FishDummyMember()
+//     {
+//         cout << "FishDummyMember destructor" << endl;
+//     }
+// };
+
+// class Fish
+// {
+//     protected:
+//         FishDummyMember dummy;
+    
+//     public:
+//         //Конструкторк класса Fish
+//         Fish()
+//         {
+//             cout << "Fish constructor" << endl;
+//         }
+
+//         ~Fish()
+//         {
+//             cout << "Fish destructor" << endl;
+//         }
+// };
+
+// class TunaDummyMember
+// {
+//     public:
+//         TunaDummyMember()
+//         {
+//             cout << "TunaDummyMember constructor" << endl;
+//         }
+
+//         ~TunaDummyMember()
+//         {
+//             cout << "TunaDummyMember destructor" << endl;
+//         }
+// };
+
+// class Tuna: public Fish
+// {
+//     private:
+//         TunaDummyMember dummy;
+
+//     public:
+//         Tuna()
+//         {
+//             cout << "Tuna constructor" << endl;
+//         }
+
+//         ~Tuna()
+//         {
+//             cout << "Tuna destructor" << endl;
+//         }
+// };
+
+// int main()
+// {
+//     Tuna myDinner;
+// }
+
+// //Листинг 10.8 Класс Car, связанный с классом Motor через закрытое наследование
+// #include <iostream>
+// using namespace std;
+
+// class Motor
+// {
+//     public:
+//         void SwitchIgnition()
+//         {
+//             cout << "Ignition ON" << endl;
+//         }
+
+//         void PumpFuel()
+//         {
+//             cout << "Fuel in cylindres" << endl;
+//         }
+
+//         void FireCylindres()
+//         {
+//             cout << "Vroooom" << endl;
+//         }
+// };
+
+// class Car: private Motor
+// {
+//     public:
+//         void Move()
+//         {
+//             SwitchIgnition();
+//             PumpFuel();
+//             FireCylindres();
+//         }
+// };
+
+// int main()
+// {
+//     Car myDreamCar;
+//     myDreamCar.Move();
+
+//     return 0;
+// }
+
+// //Листинг 10.9 Класс SuperCar, производный от класса Car,
+// //происходящего от класса Motor, при защищенном наследовании
+// #include <iostream>
+// using namespace std;
+
+// class Motor
+// {
+//     public:
+//         void SwitchIgnition()
+//         {
+//             cout << "Ignition ON" << endl;
+//         }
+
+//         void PumpFuel()
+//         {
+//             cout << "Fuel in cylindres" << endl;
+//         }
+
+//         void FireCylindres()
+//         {
+//             cout << "Vroooom" << endl;
+//         }
+// };
+
+// class Car: protected Motor
+// {
+//     public:
+//         void Move()
+//         {
+//             SwitchIgnition();
+//             PumpFuel();
+//             FireCylindres();
+//         }
+// };
+
+// class SuperCar: protected Car
+// {
+//     public:
+//         void Move()
+//         {
+//             SwitchIgnition();   //имеет доступ к членам базовго благодаря
+//             PumpFuel();         //защищенному наследованию между Car и Motor
+//             FireCylindres();
+//             FireCylindres();
+//             FireCylindres();
+
+//             // Car::Move();
+//             // FireCylindres();
+//             // FireCylindres();
+//         }
+// };
+
+// int main()
+// {
+//     SuperCar myDreamCar;
+//     myDreamCar.Move();
+
+//     return 0;
+// }
+
+/*Листинг 10.10 Использование множественного наследования для моделирования утконоса
+являющегося млекопитающим, птицей и рептилией*/
+#include <iostream>
+using namespace std;
+
+class Mammal
+{
+    public:
+        void FeedBabyMilk()
+        {
+            cout << "Mammal: Baby says glug!" << endl;
+        }
 };
 
-class Utility
+class Reptile
 {
-    public: 
-    static void DisplayAge(const Human& Person)
-    {
-        cout << Person.Age << endl;
-    }
+    public:
+        void SpitVenom()
+        {
+            cout << "Reptile: Shoo enemy! Spits venom!" << endl;
+        }
+};
+
+class Bird
+{
+    public:
+        void LayEggs()
+        {
+            cout << "Bird: Laid my eggs, am lighter now!" << endl;
+        }
+};
+
+class Platypus: public Mammal, public Bird, public Reptile
+{
+    public:
+        void Swim()
+        {
+            cout << "Platypus: Voila, I can swim!" << endl; 
+        }
 };
 
 int main()
 {
-    Human FirstMan("Adam", 25);
-    cout << "Accessing privare memeber Age via friend class: ";
-    Utility::DisplayAge(FirstMan);
-    
+    Platypus realFreak;
+    realFreak.LayEggs();
+    realFreak.FeedBabyMilk();
+    realFreak.SpitVenom();
+    realFreak.Swim();
 
     return 0;
 }
