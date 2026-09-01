@@ -3591,54 +3591,373 @@
 //     return 0;
 // }
 
-/*Листинг 10.10 Использование множественного наследования для моделирования утконоса
-являющегося млекопитающим, птицей и рептилией*/
+// /*Листинг 10.10 Использование множественного наследования для моделирования утконоса
+// являющегося млекопитающим, птицей и рептилией*/
+// #include <iostream>
+// using namespace std;
+
+// class Mammal
+// {
+//     public:
+//         void FeedBabyMilk()
+//         {
+//             cout << "Mammal: Baby says glug!" << endl;
+//         }
+// };
+
+// class Reptile
+// {
+//     public:
+//         void SpitVenom()
+//         {
+//             cout << "Reptile: Shoo enemy! Spits venom!" << endl;
+//         }
+// };
+
+// class Bird
+// {
+//     public:
+//         void LayEggs()
+//         {
+//             cout << "Bird: Laid my eggs, am lighter now!" << endl;
+//         }
+// };
+
+// class Platypus: public Mammal, public Bird, public Reptile
+// {
+//     public:
+//         void Swim()
+//         {
+//             cout << "Platypus: Voila, I can swim!" << endl; 
+//         }
+// };
+
+// int main()
+// {
+//     Platypus realFreak;
+//     realFreak.LayEggs();
+//     realFreak.FeedBabyMilk();
+//     realFreak.SpitVenom();
+//     realFreak.Swim();
+
+//     return 0;
+// }
+
+
+// 1. Я хочу, чтобы некоторые члены базового класса были доступны для производного 
+// класса, но не вне иерархии классов. Какой модификатор доступа мне использовать? ответ: protected;
+// #include <iostream>
+// using namespace std;
+
+// class Name1
+// {
+//     protected:
+//         int num;
+//     public:
+//         Name1(int chislo = 2) : num(chislo){}
+
+//         void NUMS()
+//         {
+//             cout << num * num << endl;
+//         }
+// };
+
+// class Name2 : public Name1
+// {
+//     public:
+//         void lol()
+//         {
+//            cout << num * num * num << endl;
+//         }
+
+//         void lol2()
+//         {
+//             NUMS();
+//         }
+
+// };
+
+
+// int main()
+// {
+//    Name1 object1(20);
+//    Name2 object2;
+
+//    object1.NUMS();
+    
+//    object2.lol();
+//    object2.lol2();
+//    object2.NUMS();
+// }
+
+// //Листинг 11.1 Вызов методов при помощи экземпляра базового класса Fish, который принаделжит классу Tuna
+// #include <iostream>
+// using namespace std;
+
+// class Fish
+// {
+//     public:
+//         void Swim()
+//         {
+//             cout << "Fish swims!" << endl;
+//         }
+// };
+
+// class Tuna:public Fish
+// {
+//     public:
+//     //переопределение Fish::Swim
+//     void Swim()
+//     {
+//         cout << "Tuna swims!" << endl;
+//     }
+// };
+
+// void MakeFishSwim(Fish& InputFish)
+// {
+//     //вызов Fish::Swim
+//     InputFish.Swim();
+// }
+
+// int main()
+// {
+//     Tuna myDinner;
+
+//     //вызов Tuna::swim
+//     myDinner.Swim();
+
+//     //передача Tuna как Fish
+//     MakeFishSwim(myDinner);
+
+//     return 0;
+// }
+
+// /*Листинг 11.2 Результат объявления метода Fish::Swim() виртуальным*/
+// #include <iostream>
+// using namespace std;
+
+// class Fish
+// {
+//     public:
+//         virtual void Swim()
+//         {
+//             cout << "Fish swims!" << endl;
+//         }
+// };
+
+// class Tuna: public Fish
+// {
+//     public:
+//         //переопределение Fish::Swim
+//         void Swim()
+//         {
+//             cout << "Tuna swims!" << endl;
+//         }
+// };
+
+// class Carp:public Fish
+// {
+//     public:
+//         //переопределение Fish::Swim
+//         void Swim()
+//         {
+//             cout << "Carp swims!" << endl;
+//         }
+// };
+
+// void MakeFishSwim(Fish& InputFish)
+// {
+//     //вызов виртуального метода Swim()
+//     InputFish.Swim();
+// }
+
+// int main()
+// {
+//     Tuna myDinner;
+//     Carp myLunch;
+//     Fish myBreakfast;
+
+//     //передача Tuna как Fish
+//     MakeFishSwim(myDinner);
+
+//     //передача Carp как Fish
+//     MakeFishSwim(myLunch);
+
+//     MakeFishSwim(myBreakfast);
+
+//     return 0;
+// }
+
+// /*Листинг 11.3 Функция, вызывающая оператор delete для типа Base* */
+// #include <iostream>
+// using namespace std;
+
+// class Fish
+// {
+//     public:
+//         Fish()
+//         {
+//             cout << "Constructed Fish" << endl;
+//         }
+//         ~Fish()
+//         {
+//             cout << "Destroyed Fish" << endl;
+//         }
+// };
+
+// class Tuna:public Fish
+// {
+//     public:
+//         Tuna()
+//         {
+//             cout << "Constructed Tuna" << endl;
+//         }
+//         ~Tuna()
+//         {
+//             cout << "Destroyed Tuna" << endl;
+//         }
+// };
+
+// void DeleteFishMemory(Fish * pFish)
+// {
+//     delete pFish;
+// }
+
+// int main()
+// {
+//     cout << "Allocatin a Tuna on the free store: " << endl;
+//     Tuna * pTuna = new Tuna;
+//     cout << "Deleting the Tuna: " << endl;
+//     DeleteFishMemory(pTuna); 
+    
+//     cout << "Instantiatin a Tuna on the stack:" << endl;
+//     Tuna myDinner;
+//     cout << "Automatic destruction as it goes out of scope: " << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 11.4 Использование виртуальных деструкторов для гарантии вызова
+// деструкторов производных классов при удалении указателя типа Base* */
+// #include <iostream>
+// using namespace std;
+
+// class Fish
+// {
+//     public:
+//         Fish()
+//         {
+//             cout << "Constructed Fish" << endl;
+//         }
+//         virtual ~Fish() //виртуальный деструктор!
+//         {
+//             cout << "Destroyed Fish" << endl;
+//         }
+// };
+
+// class Tuna:public Fish
+// {
+//     public:
+//         Tuna()
+//         {
+//             cout << "Constructed Tuna" << endl;
+//         }
+//         ~Tuna()
+//         {
+//             cout << "Destroyed Tuna" << endl;
+//         }
+// };
+
+// void DeleteFishMemory(Fish * pFish)
+// {
+//     delete pFish;
+// }
+
+// int main()
+// {
+//     cout << "Allocatin a Tuna on the free store: " << endl;
+//     Tuna * pTuna = new Tuna;
+//     cout << "Deleting the Tuna: " << endl;
+//     DeleteFishMemory(pTuna); 
+    
+//     cout << "Instantiatin a Tuna on the stack:" << endl;
+//     Tuna myDinner;
+//     cout << "Automatic destruction as it goes out of scope: " << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 11.5 Демонстрация наличия скрытого указателя VFT при сравнении двух одинаковых классов
+// функция одного из которых объйявлена  виртуальной*/
+// #include <iostream>
+// using namespace std;
+
+// class SimpleClass
+// {
+//     int a, b;
+
+//     public:
+//         void FuncDoSomething(){}
+// };
+
+// class Base
+// {
+//     int a, b;
+
+//     public:
+//         virtual void FuncDoSomething(){}
+// };
+
+// int main()
+// {
+//     cout << "sizeof(SimpleClass) = " << sizeof(SimpleClass) << endl;
+//     cout << "sizeof(Base) = " << sizeof(Base) << endl;
+
+//     return 0;
+//  }
+
+//Листинг 11.6 Класс Fish как абстрактный базовый класс для классов Tuna и Сarp
 #include <iostream>
 using namespace std;
 
-class Mammal
+class Fish
 {
     public:
-        void FeedBabyMilk()
-        {
-            cout << "Mammal: Baby says glug!" << endl;
-        }
+        //определение чистой виртуальной функции Swim
+        virtual void Swim() = 0;
 };
 
-class Reptile
-{
-    public:
-        void SpitVenom()
-        {
-            cout << "Reptile: Shoo enemy! Spits venom!" << endl;
-        }
-};
-
-class Bird
-{
-    public:
-        void LayEggs()
-        {
-            cout << "Bird: Laid my eggs, am lighter now!" << endl;
-        }
-};
-
-class Platypus: public Mammal, public Bird, public Reptile
+class Tuna: public Fish
 {
     public:
         void Swim()
         {
-            cout << "Platypus: Voila, I can swim!" << endl; 
+            cout << "Tuna swims fast in the sea!" << endl;
         }
 };
 
+class Carp: public Fish
+{
+    void Swim()
+    {
+        cout << "Carp swims slow in the lake!" << endl;
+    }
+};
+
+void MakeFishSwim(Fish& inputFish)
+{
+    inputFish.Swim();
+}
+
 int main()
 {
-    Platypus realFreak;
-    realFreak.LayEggs();
-    realFreak.FeedBabyMilk();
-    realFreak.SpitVenom();
-    realFreak.Swim();
+    //Fish myFish //Ошибка, нельзя создать экземпляр абстрактного класса
+
+    Carp myLunch;
+    Tuna myDinner;
+
+    MakeFishSwim(myLunch);
+    MakeFishSwim(myDinner);
 
     return 0;
 }
