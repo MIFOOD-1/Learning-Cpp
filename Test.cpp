@@ -3916,48 +3916,221 @@
 //     return 0;
 //  }
 
-//Листинг 11.6 Класс Fish как абстрактный базовый класс для классов Tuna и Сarp
-#include <iostream>
-using namespace std;
+// //Листинг 11.6 Класс Fish как абстрактный базовый класс для классов Tuna и Сarp
+// #include <iostream>
+// using namespace std;
 
-class Fish
-{
-    public:
-        //определение чистой виртуальной функции Swim
-        virtual void Swim() = 0;
-};
+// class Fish
+// {
+//     public:
+//         //определение чистой виртуальной функции Swim
+//         virtual void Swim() = 0;
+// };
 
-class Tuna: public Fish
-{
-    public:
-        void Swim()
-        {
-            cout << "Tuna swims fast in the sea!" << endl;
-        }
-};
+// class Tuna: public Fish
+// {
+//     public:
+//         void Swim()
+//         {
+//             cout << "Tuna swims fast in the sea!" << endl;
+//         }
+// };
 
-class Carp: public Fish
-{
-    void Swim()
-    {
-        cout << "Carp swims slow in the lake!" << endl;
-    }
-};
+// class Carp: public Fish
+// {
+//     void Swim()
+//     {
+//         cout << "Carp swims slow in the lake!" << endl;
+//     }
+// };
 
-void MakeFishSwim(Fish& inputFish)
-{
-    inputFish.Swim();
-}
+// void MakeFishSwim(Fish& inputFish)
+// {
+//     inputFish.Swim();
+// }
 
-int main()
-{
-    //Fish myFish //Ошибка, нельзя создать экземпляр абстрактного класса
+// int main()
+// {
+//     //Fish myFish //Ошибка, нельзя создать экземпляр абстрактного класса
 
-    Carp myLunch;
-    Tuna myDinner;
+//     Carp myLunch;
+//     Tuna myDinner;
 
-    MakeFishSwim(myLunch);
-    MakeFishSwim(myDinner);
+//     MakeFishSwim(myLunch);
+//     MakeFishSwim(myDinner);
 
-    return 0;
-}
+//     return 0;
+// }
+
+// //Листинг 11.7 Проверка количества экхемляров базового
+// //класса Animal в одном экземпляре класса Platypus
+// #include <iostream>
+// using namespace std;
+
+// class Animal
+// {
+//     public:
+//         Animal()
+//         {
+//             cout << "Animal constructor" << endl;
+//         }
+
+//         //простая переменная
+//         int Age;
+// };
+
+// class Mammal: public Animal
+// {
+    
+// };
+
+// class Bird: public Animal
+// {
+
+// };
+
+// class Reptile: public Animal
+// {
+
+// };
+
+// class Platypus: public Mammal, public Bird, public Reptile
+// {
+//     public:
+//         Platypus()
+//         {
+//             cout << "platypus constructor" << endl;
+//         }
+// };
+
+// int main()
+// {
+//     Platypus duckBilleP;
+
+//     //Снимите комменатарий со следующей строеи и получите отказ компиляции.
+//     //Аge неоднозначен, поскольку есть три экземпляра базового класса Animal
+//     //duckBilledP.Age = 25;
+
+//     // duckBilleP.Mammal::Age = 25;
+//     // cout << duckBilleP.Mammal::Age << endl
+ 
+
+//     return 0;
+// }
+
+// /*Листинг 11.8 Как ключевое слово virtual в иерархии наследования позволяет
+// ограничить количество экземпляров базового класса Animal до одного*/
+// #include <iostream>
+// using namespace std;
+
+// class Animal
+// {
+//     public:
+//         Animal()
+//         {
+//             cout << "Animal constructor" << endl;
+//         }
+
+//         //простая переменная
+//         int Age;
+// };
+
+// class Mammal:public virtual Animal
+// {
+// };
+
+// class Bird: public virtual Animal
+// {
+// };
+
+// class Reptile: public virtual Animal
+// {
+// };
+
+// class Platypus: public Mammal, public Bird, public Reptile
+// {
+//     public:
+//         Platypus()
+//         {
+//             cout << "Platypus constructor" << endl;
+//         }
+// };
+
+// int main()
+// {
+//     Platypus duckBilledP;
+
+//     //нет ошибки компиляции, поскольку есть только один Animal::Age = 25;
+//     duckBilledP.Age = 25;
+
+//     return 0;
+// }
+
+// /*Листинг 11.9 Классы Tuna и Carp  с функцией Clone()
+// моделирующей виртуальный конструктор копий*/
+// #include <iostream>
+// using namespace std;
+
+// class Fish
+// {
+//     public:
+//         virtual Fish* Clone() = 0;
+//         virtual void Swim() = 0;
+// };
+
+// class Tuna: public Fish
+// {
+//     public:
+//         Fish * Clone()
+//         {
+//             return new Tuna (*this);
+//         }
+
+//         void Swim()
+//         {
+//             cout << "Tuna swims fast in the sea" << endl;
+//         }
+// };
+
+// class Carp: public Fish
+// {
+//     Fish* Clone()
+//     {
+//         return new Carp(*this);
+//     }
+
+//     void Swim()
+//     {
+//         cout << "Carp swims slow in the lake" << endl;
+//     }
+// };
+
+// int main()
+// {
+//     const int ARRAY_SIZE = 4;
+
+//     Fish* myFishes[ARRAY_SIZE] = {NULL};
+    
+//     myFishes[0] = new Tuna();
+//     myFishes[1] = new Carp();
+//     myFishes[2] = new Tuna();
+//     myFishes[3] = new Carp();
+
+//     Fish* myNewFishe[ARRAY_SIZE];
+    
+//     for(int Index = 0; Index < ARRAY_SIZE; ++Index)
+//         myNewFishe[Index] = myFishes[Index]->Clone();
+
+//     //вызов виртуального метода проверки
+//     for(int Index = 0; Index < ARRAY_SIZE; ++Index)
+//         myNewFishe[Index]->Swim();
+
+//     //Очистка памяти
+//     for(int Index = 0; Index < ARRAY_SIZE; ++Index)
+//     {
+//         delete myFishes[Index];
+//         delete myNewFishe[Index];
+//     }
+
+//     return 0;
+// }
