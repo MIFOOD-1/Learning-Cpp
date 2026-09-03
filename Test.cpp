@@ -4134,3 +4134,377 @@
 
 //     return 0;
 // }
+
+// /*Листинг 12.1 Календарный класс, содержащий день месяц и год, 
+// а также допсукающий инкремент и декремент*/
+// #include <iostream>
+// using namespace std;
+
+// class Date
+// {
+//     private:
+//     int Day;    //Диапазон: 1 - 30 (Давайте предположим, что у всех месяцев по 30 дней)
+
+//     int Month;
+//     int Year;
+
+// public:
+//     //конструктор инициализирующий объект днем, месяцем и годом
+//     Date (int InputDay, int InputMonth, int InputYear)
+//         : Day(InputDay), Month(InputMonth), Year(InputYear) {};
+
+//     //унарный оператора инкремента (префиксный)
+//     Date& operator ++ ()
+//     {
+//         ++Day;
+//         return * this; 
+//     }
+
+//     //унарный оретаора декремента (префиксный)
+//     Date& operator --()
+//     {
+//         --Day;
+//         return *this;
+//     }
+
+//     void DisplayDate()
+//     {
+//         cout << Day << " / " << Month << " / " << Year << endl;
+//     }
+// };
+
+// int main()
+// {
+//     //Создать экземпляр и инициализировать его
+//     //Датой 25 декабря 2011 года
+//     Date Holiday(25, 12, 2011);
+
+//     cout << "The date object is initialized to: ";
+//     Holiday.DisplayDate();
+
+//     //Применение префиксного оператора
+//     ++ Holiday;
+
+//     cout << "Date after prefix-increment is: ";
+
+//     //Отображение даты полсе инкремента
+//     Holiday.DisplayDate();
+
+//     -- Holiday;
+//     -- Holiday;
+
+//     cout << "Date after two prefix-decrement is: ";
+//     Holiday.DisplayDate();
+
+//     Holiday.operator++();
+//     Holiday.DisplayDate();
+    
+    
+
+//     return 0;
+// }
+
+// /*Листинг 12.2 Реализация оператора преобразования в const char* для класса Date*/
+// #include <iostream>
+// #include <sstream>
+// #include <string>
+// using namespace std;
+
+// class Date
+// {
+//     private:
+//         int Day; //Диапазон: 1 - 30(ДАвайте предположим что у всех месяцев по 30 дней)
+
+//         int Month;
+//         int Year;
+
+//         string DateInString;
+
+//     public:
+//         //Конструктор, инициализирующий объект днем, меяцем и годом
+//         Date(int InputDay, int InputMonth, int InputYear)
+//             : Day(InputDay), Month(InputMonth), Year(InputYear) {};
+
+//         operator const char*()
+//         {
+//             ostringstream formattedDate;
+//             formattedDate << Day << " / " << Month << " / " << Year;
+
+//             DateInString = formattedDate.str();
+//             return DateInString.c_str();
+//         }
+// };
+
+// int main()
+// {
+//     //Слздать экземпляр и инициализировать его
+//     //датой 25 декабря 2011 года
+//     Date Holiday(25, 12, 2011);
+
+//     cout << "Holiday is on: " << Holiday << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 12.3 Использование интеллектуального указателя unque_ptr
+// для управления динамечески распределяемой памятью экзмепляра класса Date*/
+// #include <iostream>
+// #include <memory> //включите это, чтобы использовать std::unique_ptr
+// using namespace std;
+
+// class Date
+// {
+//     private:
+//         int Day;
+//         int Month;
+//         int Year;
+
+//         string DateInString;
+
+//     public:
+//         //Конструкторк, инцициализирущий объект днем, месяцем и годом
+//         Date(int InputDay, int InputMonth, int InputYear)
+//             : Day(InputDay), Month(InputMonth), Year(InputYear){};
+
+//         void DisplayDate()
+//         {
+//             cout << Day << " / " << Month << " / " << Year << endl;
+//         }
+// };
+
+// int main()
+// {
+//     unique_ptr<int> pDynamicAllocInteger(new int);
+//     *pDynamicAllocInteger = 42;
+
+//     //Использование интллектуального указателя как типа int*
+//     cout << "Integer value is: " << *pDynamicAllocInteger << endl;
+
+//     unique_ptr<Date> pHoliday(new Date(25, 11, 2011));
+//     cout << "The new instance of date contains: ";
+
+//     //Использование pHoliday  точно как Date*
+//     pHoliday->DisplayDate();
+
+//     //при использовании unique_ptr в следующем нет необходимости:
+//     //delete pDynamicAllocInteger;
+//     //delete pHoliday;
+
+//     return 0;
+// }
+
+//вопрос 1
+// /*Листинг 12.4 Реализация операторов(*) и (->) в простом
+// классе интеллекутального указателя*/
+// #include <iostream>
+// using namespace std;
+
+// template <typename T>
+// class smart_pointer
+// {
+//     private:
+//         T* m_RawPointer;
+//     public:
+//         smart_pointer (T* pData) : m_RawPointer (pData) {}
+//             //конструктор
+//         ~smart_pointer() {delete m_RawPointer;} //деструктор
+
+//         T& operator* () const //оператор обращения к знчаению
+//         {
+//             return * (m_RawPointer);
+//         }
+
+//         T* operator-> () const //оператор обращения к члену класса
+//         {
+//             return m_RawPointer;
+//         }
+// };
+
+// class Date
+// {
+//     private:
+//         int Day, Month, Year;
+//         string DateInString;
+
+//     public:
+//         //Конструктор, инициализирующий лбъект днем, месяцем и годом
+//         Date(int InputDay, int InputMonth, int InputYear) : Day(InputDay), Month(InputMonth), Year(InputYear){};
+
+//         void DisplayDate()
+//         {
+//             cout << Day << " / " << Month << " / " << Year << endl;
+//         }
+// };
+
+// int main()
+// {
+//     smart_pointer<int> pDynamicInt(new int (42));
+//     cout << "Dynamically allocated integer value = " << *pDynamicInt << endl;
+
+//     smart_pointer<Date> pDate(new Date(25, 12, 2011));
+//     cout << "Date is = ";
+//     pDate->DisplayDate();
+
+//     return 0;
+// }
+
+// /*Листинг 12.5 Календаррнйы класс с бинарным оператором суммы*/
+// #include <iostream>
+// using namespace std;
+
+// class Date
+// {
+//     private:
+//         int Day, Month, Year;
+
+//     public:
+//         //Конструктор, инициализирующий объект днем, месяцем и годом
+//         Date(int InputDay, int InputMonth, int InputYear)
+//             :Day(InputDay), Month(InputMonth), Year(InputYear){};
+
+//         //Бинарный оператор суммы
+//         Date operator + (int DaysToAdd)
+//         {
+//             Date newDate(Day + DaysToAdd, Month, Year);
+
+//             return newDate;
+//         }
+
+//         //Бинарный оператор вычитания
+//         Date operator - (int DaysToSub)
+//         {
+//             return Date(Day - DaysToSub, Month, Year);
+//         }
+
+//         void DisplayDate()
+//         {
+//             cout << Day << " / " << Month << " / " << Year << endl;
+//         }
+// };
+
+// int main()
+// {
+//     //Создать экземпляр и инцицализировать его
+//     //датой 25 декабря 2011 года
+    
+//     Date Holiday(25, 12, 2011);
+
+//     cout << "Holiday on: ";
+//     Holiday.DisplayDate();
+
+//     Date PreviousHoliday(Holiday - 19);
+//     cout << "Previous holiday on: ";
+//     PreviousHoliday.DisplayDate();
+
+//     Date NextHoliday(Holiday + 6);
+//     cout << "Next holiday on: ";
+//     NextHoliday.DisplayDate();
+
+//     return 0;
+// }
+
+
+/*Листинг12 Alt 9.9 Определение конструктора копий, гарантирующего глубокое 
+копирование буферов в динамически распределяемой памяти*/
+//испольхование оператора (+) для строк
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+
+class MyString
+{
+    private:
+        MyString() {}
+        char * Buffer;
+    public:
+        //конструктор
+        MyString(const char * InitialInput)
+        {
+            cout << "Constructor: creating new MyString" << endl;
+            if(InitialInput != NULL)
+            {
+                Buffer = new char [strlen(InitialInput) + 1];
+                strcpy(Buffer, InitialInput);
+
+                //Отображение адреса области памяти локального буфера
+                cout << "Buffer points to: " << hex;
+                cout << (unsigned int *)Buffer << endl;
+            }
+            else
+                Buffer = NULL;
+        }
+
+   // Конструктор копий
+    MyString(const MyString &CopySource)
+    {
+        cout << "Copy constructor: copying from MyString" << endl;
+
+        if(CopySource.Buffer != NULL)
+        {
+            //гарантироать глубокое копирование, создав сначала собственный буфер
+            Buffer = new char [strlen(CopySource.Buffer) + 1];
+
+            //копирование из оригинала в локальный буфер
+            strcpy(Buffer, CopySource.Buffer);
+
+            //Отображение адреса области памяти локального буфера
+            cout << "Buffer points to: " << hex;
+            cout << (unsigned int *)Buffer << endl;
+        }
+        else
+            Buffer = NULL;
+    }
+
+
+    //Деструктор
+    ~MyString()
+    {
+        cout << "Invoking destructor, clearing up" << endl;
+        if(Buffer != NULL)
+            delete[] Buffer;
+    }
+
+    MyString operator+ (const MyString& AddThis)
+    {
+        MyString NewString;
+        if(AddThis.Buffer != NULL)
+        {
+            NewString.Buffer = new char[GetLenght () + strlen(AddThis.Buffer) + 1];
+            strcpy(NewString.Buffer, Buffer);
+            strcat(NewString.Buffer, AddThis.Buffer);
+        }
+        return NewString;
+    }
+    
+    
+    int GetLenght()
+    {
+        return strlen(Buffer);
+    }
+
+    const char * GetString()
+    {
+        return Buffer;
+    }
+};
+
+void UseMyString(MyString Input)
+{
+    cout << "String buffer in MyString is " << Input.GetLenght();
+    cout << " charaters long" << endl;
+
+    cout << "Buffer contains: " << Input.GetString() << endl;
+    return;
+}
+
+int main()
+{
+    MyString SayHello("Hello from String Class ");
+    MyString SayHello2(SayHello + SayHello);
+
+    //Передача SayHello по значению (с копированием)
+    UseMyString(SayHello2);
+
+    return 0;
+}
