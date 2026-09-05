@@ -4404,107 +4404,707 @@
 // }
 
 
-/*Листинг12 Alt 9.9 Определение конструктора копий, гарантирующего глубокое 
-копирование буферов в динамически распределяемой памяти*/
-//испольхование оператора (+) для строк
-#include <iostream>
-#include <cstring>
-using namespace std;
+// /*Листинг12 Alt 9.9 Определение конструктора копий, гарантирующего глубокое 
+// копирование буферов в динамически распределяемой памяти*/
+// //испольхование оператора (+) для строк
+// #include <iostream>
+// #include <cstring>
+// using namespace std;
 
 
-class MyString
-{
-    private:
-        MyString() {}
-        char * Buffer;
-    public:
-        //конструктор
-        MyString(const char * InitialInput)
-        {
-            cout << "Constructor: creating new MyString" << endl;
-            if(InitialInput != NULL)
-            {
-                Buffer = new char [strlen(InitialInput) + 1];
-                strcpy(Buffer, InitialInput);
+// class MyString
+// {
+//     private:
+//         MyString() {}
+//         char * Buffer;
+//     public:
+//         //конструктор
+//         MyString(const char * InitialInput)
+//         {
+//             cout << "Constructor: creating new MyString" << endl;
+//             if(InitialInput != NULL)
+//             {
+//                 Buffer = new char [strlen(InitialInput) + 1];
+//                 strcpy(Buffer, InitialInput);
 
-                //Отображение адреса области памяти локального буфера
-                cout << "Buffer points to: " << hex;
-                cout << (unsigned int *)Buffer << endl;
-            }
-            else
-                Buffer = NULL;
-        }
+//                 //Отображение адреса области памяти локального буфера
+//                 cout << "Buffer points to: " << hex;
+//                 cout << (unsigned int *)Buffer << endl;
+//             }
+//             else
+//                 Buffer = NULL;
+//         }
 
-   // Конструктор копий
-    MyString(const MyString &CopySource)
-    {
-        cout << "Copy constructor: copying from MyString" << endl;
+//    // Конструктор копий
+//     MyString(const MyString &CopySource)
+//     {
+//         cout << "Copy constructor: copying from MyString" << endl;
 
-        if(CopySource.Buffer != NULL)
-        {
-            //гарантироать глубокое копирование, создав сначала собственный буфер
-            Buffer = new char [strlen(CopySource.Buffer) + 1];
+//         if(CopySource.Buffer != NULL)
+//         {
+//             //гарантироать глубокое копирование, создав сначала собственный буфер
+//             Buffer = new char [strlen(CopySource.Buffer) + 1];
 
-            //копирование из оригинала в локальный буфер
-            strcpy(Buffer, CopySource.Buffer);
+//             //копирование из оригинала в локальный буфер
+//             strcpy(Buffer, CopySource.Buffer);
 
-            //Отображение адреса области памяти локального буфера
-            cout << "Buffer points to: " << hex;
-            cout << (unsigned int *)Buffer << endl;
-        }
-        else
-            Buffer = NULL;
-    }
+//             //Отображение адреса области памяти локального буфера
+//             cout << "Buffer points to: " << hex;
+//             cout << (unsigned int *)Buffer << endl;
+//         }
+//         else
+//             Buffer = NULL;
+//     }
 
 
-    //Деструктор
-    ~MyString()
-    {
-        cout << "Invoking destructor, clearing up" << endl;
-        if(Buffer != NULL)
-            delete[] Buffer;
-    }
+//     //Деструктор
+//     ~MyString()
+//     {
+//         cout << "Invoking destructor, clearing up" << endl;
+//         if(Buffer != NULL)
+//             delete[] Buffer;
+//     }
 
-    MyString operator+ (const MyString& AddThis)
-    {
-        MyString NewString;
-        if(AddThis.Buffer != NULL)
-        {
-            NewString.Buffer = new char[GetLenght () + strlen(AddThis.Buffer) + 1];
-            strcpy(NewString.Buffer, Buffer);
-            strcat(NewString.Buffer, AddThis.Buffer);
-        }
-        return NewString;
-    }
+//     MyString operator+ (const MyString& AddThis)
+//     {
+//         MyString NewString;
+//         if(AddThis.Buffer != NULL)
+//         {
+//             NewString.Buffer = new char[GetLenght () + strlen(AddThis.Buffer) + 1];
+//             strcpy(NewString.Buffer, Buffer);
+//             strcat(NewString.Buffer, AddThis.Buffer);
+//         }
+//         return NewString;
+//     }
     
     
-    int GetLenght()
-    {
-        return strlen(Buffer);
-    }
+//     int GetLenght()
+//     {
+//         return strlen(Buffer);
+//     }
 
-    const char * GetString()
-    {
-        return Buffer;
-    }
-};
+//     const char * GetString()
+//     {
+//         return Buffer;
+//     }
+// };
 
-void UseMyString(MyString Input)
-{
-    cout << "String buffer in MyString is " << Input.GetLenght();
-    cout << " charaters long" << endl;
+// void UseMyString(MyString Input)
+// {
+//     cout << "String buffer in MyString is " << Input.GetLenght();
+//     cout << " charaters long" << endl;
 
-    cout << "Buffer contains: " << Input.GetString() << endl;
-    return;
-}
+//     cout << "Buffer contains: " << Input.GetString() << endl;
+//     return;
+// }
 
-int main()
-{
-    MyString SayHello("Hello from String Class ");
-    MyString SayHello2(SayHello + SayHello);
+// int main()
+// {
+//     MyString SayHello("Hello from String Class ");
+//     MyString SayHello2(SayHello + SayHello);
 
-    //Передача SayHello по значению (с копированием)
-    UseMyString(SayHello2);
+//     //Передача SayHello по значению (с копированием)
+//     UseMyString(SayHello2);
 
-    return 0;
-}
+//     return 0;
+// }
+
+// /*Листинг 12.6 Определение операторов (+=) и (-=)
+// для добавления и вычитания введеных дней*/
+// #include <iostream>
+// using namespace std;
+
+// class Date
+// {
+//     private:
+//         int Day, Month, Year;
+
+//     public:
+
+//         //Конструктор инциилазирующий объейкт днем, месяцем и годом
+//         Date(int InputDay, int InputMonth, int InputYear)
+//             : Day(InputDay), Month(InputMonth), Year(InputYear){};
+
+//         //Бинрнаый оператор сложения с присовением
+//         void operator+=(int DaysToAdd)
+//         {
+//             Day += DaysToAdd;
+//         }
+
+//         //Binary subtraction assigment
+//         void operator-= (int DaysToSub)
+//         {
+//             Day -= DaysToSub;
+//         }
+
+//         void DisplayDate()
+//         {
+//             cout << Day << " / " << Month << " / " <<  Year << endl;
+//         }
+// };
+
+// int main()
+// {
+//     //Создатель экземпляр и инициализировать его
+//     //датой 25 декабря 2011 года
+//     Date Holiday(25, 12, 2011);
+
+//     cout << "Holiday is on: ";
+//     Holiday.DisplayDate();
+
+//     cout << "Holiday -= 19 gives: ";
+//     Holiday -= 19;
+//     Holiday.DisplayDate();
+
+//     cout << "Holiday += 25 gives: ";
+//     Holiday += 25;
+//     Holiday.DisplayDate();
+
+//     return 0;
+// }
+
+// //Листинг 12.7 Операторы == и !=
+// #include <iostream>
+// using namespace std;
+
+// class Date
+// {
+//     private:
+//         int Day, Month, Year;
+
+//     public:
+//         //Конструктор, инициализирующий объект днем, месяцем и годом
+//         Date(int InputDay, int InputMonth, int InputYear)
+//             : Day(InputDay), Month(InputMonth), Year(InputYear){};
+
+//         bool operator== (const Date& compareTo)
+//         {
+//             return ((Day == compareTo.Day) && (Month == compareTo.Month) && (Year == compareTo.Year));
+//         }
+
+//         bool operator!= (const Date& compareTo)
+//         {
+//             return !(this->operator==(compareTo));
+//         }
+
+//         void DisplayDate()
+//         {
+//             cout << Day << " / " << Month << " / " << Year << endl;
+//         }
+// };
+
+// int main()
+// {
+//     Date Holiday1(25, 12, 2011);
+//     Date Holiday2(31, 12, 2011);
+
+//     cout << "Holiday 1 is: ";
+//     Holiday1.DisplayDate();
+//     cout << "Holiday 2 is: ";
+//     Holiday2.DisplayDate();
+
+//     if(Holiday1 == Holiday2)
+//         cout << "Equality operator: The two are on the same day" << endl;
+
+//     else
+//         cout << "Equality operator: The two are on different days" << endl;
+
+//     if(Holiday1 != Holiday2)
+//         cout << "Inequality operator: The two arer on different days" << endl;
+    
+//     else
+//         cout << "Inequality operator: The two are on the same day" << endl;
+
+//     return 0;
+
+// }
+
+// /*Листинг 12.8 Реализация операторов <, <=, > and >=*/
+// #include <iostream>
+// using namespace std;
+
+// class Date
+// {
+//     private:
+//         int Day, Month, Year;
+//     public:
+//         //Конструктор, инициализирующий объект днем, месяцем и годом
+//         Date(int InputDay, int InputMonth, int InputYear)
+//             : Day(InputDay), Month(InputMonth), Year(InputYear) {};
+
+//         bool operator== (const Date& compareTo)
+//         {
+//             return ((Day == compareTo.Day) && (Month == compareTo.Month) && Year == compareTo.Year);
+//         }
+
+//         bool operator<(const Date& compareTo)
+//         {
+//             if(Year < compareTo.Year)
+//                 return true;
+//             else if(Month < compareTo.Month)
+//                 return true;
+//             else if(Day < compareTo.Day)
+//                 return true;
+//             else
+//                 return false;
+//         }
+        
+//         bool operator<=(const Date& compareTo)
+//         {
+//             if(this->operator==(compareTo))
+//                 return true;
+//             else
+//                 return this->operator<(compareTo);
+//         }
+
+//         bool operator >(const Date& compareTo)
+//         {
+//             return !(this->operator<=(compareTo));
+//         }
+
+//         bool operator>= (const Date& compareTo)
+//         {
+//             if(this->operator==(compareTo))
+//                 return true;
+//             else
+//                 return this->operator>(compareTo);
+//         }
+
+//         bool operator!= (const Date& compareTo)
+//         {
+//             return ! (this->operator==(compareTo));
+//         }
+
+//         void Display()
+//         {
+//             cout << Day << " / " << Month << " / " << Year << endl;
+//         }
+// };
+
+// int main()
+// {
+//     Date Holiday1(25, 12, 2011);
+//     Date Holiday2(31, 12, 2011);
+
+//     cout << "Holiday 1 is: ";
+//     Holiday1.Display();
+//     cout << "Holiday 2 is";
+//     Holiday2.Display();
+
+//     if(Holiday1 < Holiday2)
+//     cout << "operator<: Holiday1 happens first" << endl;
+
+//     if(Holiday2 > Holiday1)
+//     cout << "operator>: Holiday2 happens later" << endl;
+
+//     if(Holiday1 <= Holiday2)
+//     cout << "operator<=: Holiday happens on or before Holiday2" << endl;
+
+//     if(Holiday2 >= Holiday1)
+//         cout << "operator>=: Holiday2 happens on or after Holiday1" << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 12.9 Улучшнный класс MyString из листинга 9.9 с операторм присвоения копии*/
+// #include <iostream>
+// #include <cstring>
+// using namespace std;
+
+
+// class MyString
+// {
+//     private:
+//         MyString() {}
+//         char * Buffer;
+//     public:
+//         //конструктор
+//         MyString(const char * InitialInput)
+//         {
+//             cout << "Constructor: creating new MyString" << endl;
+//             if(InitialInput != NULL)
+//             {
+//                 Buffer = new char [strlen(InitialInput) + 1];
+//                 strcpy(Buffer, InitialInput);
+
+//                 //Отображение адреса области памяти локального буфера
+//                 // cout << "Buffer points to: " << hex;
+//                 // cout << (unsigned int *)Buffer << endl;
+//             }
+//             else
+//                 Buffer = NULL;
+//         }
+
+//    // Конструктор копий
+//     MyString(const MyString &CopySource)
+//     {
+//         cout << "Copy constructor: copying from MyString" << endl;
+
+//         if(CopySource.Buffer != NULL)
+//         {
+//             //гарантироать глубокое копирование, создав сначала собственный буфер
+//             Buffer = new char [strlen(CopySource.Buffer) + 1];
+
+//             //копирование из оригинала в локальный буфер
+//             strcpy(Buffer, CopySource.Buffer);
+
+//             //Отображение адреса области памяти локального буфера
+//             // cout << "Buffer points to: " << hex;
+//             // cout << (unsigned int *)Buffer << endl;
+//         }
+//         else
+//             Buffer = NULL;
+//     }
+
+//     //Оператор присвоения коии
+//     MyString& operator= (const MyString& CopySource)
+//     {
+//         if((this != &CopySource) && (CopySource.Buffer != NULL))
+//         {
+//             if(Buffer != NULL)
+//                 delete[] Buffer;
+            
+//             //гарантирует глубокую копию с предварительным
+//             //резервированрем собственного буфера
+//             Buffer = new char [strlen(CopySource.Buffer) + 1];
+
+//             //копирование оригинала в локальный буфер
+//             strcpy(Buffer, CopySource.Buffer);
+//         }
+//         return *this;
+//     }
+
+
+//     //Деструктор
+//     ~MyString()
+//     {
+//         if(Buffer != NULL)
+//             delete[] Buffer;
+//     }
+
+//     MyString operator+ (const MyString& AddThis)
+//     {
+//         MyString NewString;
+//         if(AddThis.Buffer != NULL)
+//         {
+//             NewString.Buffer = new char[GetLenght () + strlen(AddThis.Buffer) + 1];
+//             strcpy(NewString.Buffer, Buffer);
+//             strcat(NewString.Buffer, AddThis.Buffer);
+//         }
+//         return NewString;
+//     }
+    
+//     int GetLenght()
+//     {
+//         return strlen(Buffer);
+//     }
+
+//     operator const char*()
+//     {
+//         return Buffer;
+//     }
+// };
+
+
+// int main()
+// {
+//     MyString String1("Hello ");
+//     MyString String2(" World");
+
+//     cout << "Before assignment: " << endl;
+//     cout << String1 << String2 << endl;
+//     String2 = String1;
+
+//     cout << "After assigment String2 = String1: " << endl;
+//     cout << String1 << String2 << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 12.10 Реализация оператора индексирования([]) в классае MyString,
+// обесппечивающего произвольный доступ к символам в буфере MyString::Buffer*/
+// #include <iostream>
+// #include <cstring>
+// #include <string>
+// using namespace std;
+
+
+// class MyString
+// {
+//     private:
+//         char* Buffer;
+
+//         //закрытый стандартный конструктор
+//         MyString() {}
+
+//     public:
+//         //Конструктор 
+//         MyString(const char* InitialInput)
+//         {
+//             if(InitialInput != NULL)
+//             {
+//                 Buffer = new char [strlen(InitialInput) + 1];
+//                 strcpy(Buffer, InitialInput);
+//             }
+//             else
+//                 Buffer = NULL;
+//         }
+
+//         //Конструктор копий: вставить из листинга 9.9
+//         // Конструктор копий
+//         MyString(const MyString &CopySource)
+//         {
+//             cout << "Copy constructor: copying from MyString" << endl;
+
+//             if(CopySource.Buffer != NULL)
+//             {
+//                 //гарантироать глубокое копирование, создав сначала собственный буфер
+//                 Buffer = new char [strlen(CopySource.Buffer) + 1];
+
+//                 //копирование из оригинала в локальный буфер
+//                 strcpy(Buffer, CopySource.Buffer);
+
+//                 //Отображение адреса области памяти локального буфера
+//                 // cout << "Buffer points to: " << hex;
+//                  // cout << (unsigned int *)Buffer << endl;
+//             }
+//             else
+//                 Buffer = NULL;
+//         }
+
+//         //Оператора присвоения копии: вставить из листинга 12.9
+//         //Оператор присвоения коии
+//         MyString& operator= (const MyString& CopySource)
+//         {
+//             if((this != &CopySource) && (CopySource.Buffer != NULL))
+//             {
+//                 if(Buffer != NULL)
+//                     delete[] Buffer;
+            
+//                 //гарантирует глубокую копию с предварительным
+//                 //резервированрем собственного буфера
+//                 Buffer = new char [strlen(CopySource.Buffer) + 1];
+
+//                 //копирование оригинала в локальный буфер
+//                 strcpy(Buffer, CopySource.Buffer);
+//             }
+//             return *this;
+//         }
+
+//         const char& operator[](int Index) const
+//         {
+//             if(Index < GetLenght())
+//                 return Buffer[Index];
+//         }
+
+//         //Деструктор
+//         ~MyString()
+//         {
+//             if(Buffer != NULL)
+//                 delete[] Buffer;
+//         }
+
+//         int GetLenght() const
+//         {
+//             return strlen(Buffer);
+//         }
+
+//         operator const char* ()
+//         {
+//             return Buffer;
+//         }
+// };
+
+// int main()
+// {
+//     cout << "Type a statement: ";
+//     string strInput;
+//     getline(cin, strInput);
+
+//     MyString youSaid(strInput.c_str());
+
+//     cout << "Usong operator[] for displaying your input: " << endl;
+//     for(int Index = 0; Index < youSaid.GetLenght(); ++Index)
+//         cout << youSaid[Index] << " ";
+//     cout << endl;
+
+//     cout << "Enter index 0 - " << youSaid.GetLenght() - 1 << ": ";
+//     int InIndex = 0;
+//     cin >> InIndex;
+//     cout << "Input character at zero-based position: " << InIndex;
+//     cout << " is: " << youSaid[InIndex] << endl;
+
+//     return 0;
+// }
+
+// //Листинг 12.11 Объект функции, созданный с использованием оператора ()
+// #include <iostream>
+// #include <cstring>
+// using namespace std;
+
+// class CDisplay
+// {
+//     public:
+//         void operator()(string Input) const
+//         {
+//             cout << Input << endl;
+//         }
+// };
+
+// int main()
+// {
+//     CDisplay mDisplayFuncObject;
+
+//     //эквивалент
+//     //mDisplayFuncOnject.operator() ("Display this string!");
+//     mDisplayFuncObject("Display this sring!");
+
+//     return 0;
+// }
+
+
+//вопрос2
+// /*Листинш 12.12 Класс MyString с конструктором перемещения и операторм присваивания
+// при перемещении в дополнение к консруктору копий и оператору присвоения копии*/
+// #include <iostream>
+// #include <cstring>
+// using namespace std;
+
+// class MyString
+// {
+//     private:
+//         char * Buffer;
+
+//         //закрытый стандартный конструктор
+//         MyString(): Buffer(NULL)
+//         {
+//             cout << "Dedault constructor called" << endl;
+//         }
+
+//         public:
+//             //Деструктор
+//             ~MyString()
+//             {
+//                 if(Buffer != NULL)
+//                     delete[] Buffer;
+//             }
+
+//             int GetLenght()
+//             {
+//                 return strlen(Buffer);
+//             }
+
+//             operator const char* ()
+//             {
+//                 return Buffer;
+//             }
+
+//             MyString operator+ (const MyString& AddThis)
+//             {
+//                 cout << "operator+ called: " << endl;
+//                 MyString NewString;
+
+//                 if(AddThis.Buffer != NULL)
+//                 {
+//                     NewString.Buffer = new char[GetLenght() + strlen(AddThis.Buffer) + 1];
+//                     strcpy(NewString.Buffer, Buffer);
+//                     strcat(NewString.Buffer, AddThis.Buffer);
+//                 }
+//                 return NewString;
+//             }
+
+//             //Конструктор
+//             MyString(const char * InitialInput)
+//             {
+//                 cout << "Constructor called for: " << InitialInput << endl;
+//                 if(InitialInput != NULL)
+//                 {
+//                     Buffer = new char [strlen(InitialInput) + 1];
+//                     strcpy(Buffer, InitialInput);
+//                 }
+
+//                 else
+//                     Buffer = NULL;
+//             }
+
+//             //Конструктор копий
+//             MyString(const MyString& CopySource)
+//             {
+//                 cout << "Copy constructor to copy from: " << CopySource.Buffer << endl;
+//                 if(CopySource.Buffer != NULL)
+//                 {
+//                     //гаранитровать глубокое копирование, зарезрвировав
+//                     //предварительно собственный буфер
+//                     Buffer = new char [strlen(CopySource.Buffer) + 1];
+//                     //копировать из оригинала в локальный буфер
+//                     strcpy(Buffer, CopySource.Buffer);
+//                 }
+//                 else
+//                     Buffer = NULL;
+//             }
+
+//             //Оператор присвоения копии
+//             MyString& operator= (const MyString& CopySource)
+//             {
+//                 cout << "Copy assignment operator to copy from: " << CopySource.Buffer << endl;
+
+//                 if((this != &CopySource) && (CopySource.Buffer != NULL))
+//                 {
+//                     if(Buffer != NULL)
+//                         delete[] Buffer;
+
+//                     //гарантировать глубокое копирование, зарезервировав
+//                     //предварительно собстенный буфер
+//                     Buffer = new char [strlen(CopySource.Buffer) + 1];
+
+//                     //копировать из оригинала в локальный буфер
+//                     strcpy(Buffer, CopySource.Buffer);
+//                 }
+
+//                 return * this;
+//             }
+
+//             // Конструктор перемещения
+//             MyString(MyString&& MoveSource)
+//             {
+//                 cout << "Move constructor to move from: " << MoveSource.Buffer << endl;
+
+//                 if(MoveSource.Buffer != NULL)
+//                 {
+//                     Buffer = MoveSource.Buffer; //взять собстенность
+//                                                 //т.е "переместить"
+//                     MoveSource.Buffer = NULL;   //освободить источник
+//                                                 //перемещения
+//                 }
+//             }
+
+//             //Оператор присваивания при перемещении
+//             MyString& operator= (MyString&& MoveSource)
+//             {
+//                 cout << "Move assignment operator to move from: "
+//                     <<MoveSource.Buffer << endl;
+//                 if((MoveSource.Buffer != NULL) && (this != &MoveSource))
+//                 {
+//                     delete Buffer; //освободить собственный юуфер
+
+//                     Buffer = MoveSource.Buffer; //взять собственность
+//                                                 //т.е "переместить"
+//                     MoveSource.Buffer = NULL;   //освободить источник
+//                                                 //перемещения
+//                 }
+
+//                 return *this;
+//             }          
+// };
+
+// int main()
+// {
+//     MyString Hello("Hello ");
+//     MyString World("World");
+//     MyString CPP(" of C++");
+
+//     MyString sayHelloAgain("overwrite this");
+//     sayHelloAgain = Hello + World + CPP;
+
+//     return 0;
+// }
