@@ -29,5 +29,7 @@ int main()
 
     int lol = (int)data;
 
+    cout << lol;
+
     return 0;
 }
