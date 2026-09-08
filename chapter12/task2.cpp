@@ -39,10 +39,9 @@ class DynIntegers
 
         DynIntegers(const DynIntegers& Input_Class)
         {
-            size = Input_Class.size;
-
-            if(Input_Class.num != NULL)
+            if(Input_Class.num != NULL && Input_Class.size > 0)
             {
+                size = Input_Class.size;
                 num = new int[size];
                 
                 for(int i = 0; i < size; i++)
@@ -51,6 +50,7 @@ class DynIntegers
             else
             {
                 num = NULL;
+                size = 0;
             }
         }
 
@@ -69,18 +69,18 @@ class DynIntegers
             {num = NULL; size = 0;}
         }
 
-        DynIntegers& operator= (const DynIntegers& name) 
+        DynIntegers& operator= (const DynIntegers&  input_class)
         {
-            if(this != &name)
+            if(this != &input_class)
             {
-                if(name.num != NULL)
+                if(input_class.num != NULL)
                 {
                     delete[] num;
-                    num = new int[name.size];
-                    size = name.size;
+                    num = new int[input_class.size];
+                    size = input_class.size;
 
                     for(int i = 0; i < size; i++)
-                        num[i] = name.num[i];
+                        num[i] = input_class.num[i];
                 }
 
                 else
@@ -144,7 +144,6 @@ int main()
     num3.show();
 
 
-   
     
     num1 = num2;
     num1.show();
