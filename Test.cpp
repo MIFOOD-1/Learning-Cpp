@@ -5108,3 +5108,82 @@
 //     return 0;
 // }
 
+
+// /*Листинг 13.1 Использование динамического приведен ия типов для выяснения,
+//  является ли объект класса Fish объектом класса Tuna или Carp*/
+//  #include <iostream>
+//  using namespace std;
+
+//  class Fish
+//  {
+//     public:
+//         virtual void Swim()
+//         {
+//             cout << "Fish swims on water" << endl;
+//         }
+
+//         // Базовый класс всегда должен иметь вирутальный деструктор
+//         virtual ~Fish(){}
+//  };
+
+//  class Tuna: public Fish
+//  {
+//     public:
+//         void Swim()
+//         {
+//             cout << "Tuna swims real fast in the sea" << endl;
+//         }
+
+//         void BecomeDinner()
+//         {
+//             cout << "Tuna bcame dinner in Sushi" << endl;
+//         }
+//  };
+
+//  class Carp: public Fish
+//  {
+//     public:
+//         void Swim()
+//         {
+//             cout << "Carp swims real slow in the lake" << endl;
+//         }
+
+//         void Talk()
+//         {
+//             cout << "Carp talked crap" << endl;
+//         }
+//  };
+
+//  void DetectFishType(Fish * InputFish)
+//  {
+//     Tuna * pIsTuna = dynamic_cast <Tuna*>(InputFish);
+//     if(pIsTuna)
+//     {
+//         cout << "Detected Tuna. Making Tuna dinner: " << endl;
+//         pIsTuna->BecomeDinner(); //вызов Tuna::BecomeDinner
+//     }
+
+//     Carp* pIsCarp = dynamic_cast <Carp*>(InputFish);
+//     if(pIsCarp)
+//     {
+//         cout << "Detected Carp. Making carp talk: " << endl;
+//         pIsCarp->Talk(); //Вызов Carp::Talk
+//     }
+
+//     cout << "Verifing type using virtua Fish::Swim: " << endl;
+//     InputFish->Swim();  //вызов вирртуальной функции
+//  }
+
+//  int main()
+//  {
+//     Carp myLunch;
+//     Tuna myDinner;
+//     // Fish myFish;
+
+//     DetectFishType(&myDinner);
+//     cout << endl;
+//     DetectFishType(&myLunch);
+//     // DetectFishType(&myFish);
+
+//     cout << endl;
+//  }
