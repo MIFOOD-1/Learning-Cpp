@@ -5187,3 +5187,207 @@
 
 //     cout << endl;
 //  }
+
+// /*Листинг 14.1 Объявление и использование макроса, определяющего константы*/
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// #define ARRAY_LENGHT 25
+// #define PI 3.1416
+// #define MY_DOUBLE double
+// #define FAV_WHISKY "Jack Daniels"
+
+// int main()
+// {
+//     int MyNumbers[ARRAY_LENGHT] = {0};
+//     cout << "Array's length: " << sizeof(MyNumbers) / sizeof(int) << endl;
+
+//     cout << "Enter a radius: ";
+//     MY_DOUBLE Radius = 0;
+//     cin >> Radius;
+//     cout << "Area is: " << PI * Radius * Radius << endl;
+
+//     string FavoriteWhisky(FAV_WHISKY);
+//     cout << "My favorite drink is: " << FAV_WHISKY << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 14.2 Использование макрофункций, вычисляющих квадрат числа,
+// площадь круга, а также наибольшее и наименьшее из двух чисел*/
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// #define SQUARE(x) ((x) * (x))
+// #define PI 3.1416
+// #define AREA_CIRCLE(r) (PI * (r) * (r))
+// #define MAX(a, b) (((a) > (b)) ? (a) : (b))
+// #define MIN(a, b) (((a) < (b)) ? (a) : (b))
+
+// int main()
+// {
+//     cout << "Enter an integer: ";
+//     int Input1 = 0;
+//     cin >> Input1;
+
+//     cout << "SQUARE(" << Input1 << ") = " << SQUARE(Input1) << endl;
+//     cout << "Area of a circle with radius " << Input1 << " is: ";
+//     cout << AREA_CIRCLE(Input1) << endl;
+
+//     cout << "Enter another integer: ";
+//     int Input2 = 0;
+//     cin >> Input2;
+
+//     cout << "MIN(" << Input1 << ", " << Input2 << ") = ";
+//     cout << MIN(Input1, Input2) << endl;
+
+//     cout << "MAX("<< Input1 << ", " << Input2 << ") = ";
+//     cout << MAX(Input1, Input2) << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 14.3 Шаблон функции GetMax, позволяющей выявить наибольшее из двух чисел*/
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// template <typename Type>
+//     const Type& GetMaX(const Type& value1, const Type& value2)
+//     {
+//         if(value1 > value2)
+//             return value1;
+//         else
+//             return value2;
+//     }
+
+// template <typename Type>
+//     void DisplayComparison(const Type& value1, const Type& value2)
+//     {
+//         cout << "GetMax(" << value1 << ", " << value2 << ") = ";
+//         cout << GetMaX(value1, value2) << endl;
+//     }
+
+// int main()
+// {
+//     int Int1 = -101, Int2 = 2011;
+//     DisplayComparison(Int1, Int2);
+//     cout << Int1 << endl;
+
+//     double d1 = 3.14, d2 = 3.1416;
+//     DisplayComparison(d1, d2);
+
+//     string Name1("Jack"), Name2("John");
+//     DisplayComparison(Name1, Name2);
+
+
+//     return 0;
+// }
+
+// /*Листинг 14.4 Шаблон класса с двумя атрибутами*/
+
+// //Объявление типов по умолчанию для параметров.
+// //первый int, второй float
+// template <typename T1 = int, typename T2 = double>
+// class HoldsPair
+// {
+//     private:
+//         T1 Value1;
+//         T2 Value2;
+//     public:
+//         //Конструкторк, инициализирующий переменны-члены
+//         HoldsPair(const T1& value1, const T2& value2)
+//         {
+//             Value1 = value1;
+//             Value2 = value2;
+//         };
+
+//         //фУНКЦИИ доступа
+//         const T1 & GetFirstValue() const
+//         {
+//             return Value1;
+//         };
+
+//         const T2& GetSexondValue() const
+//         {
+//             return Value2;
+//         };
+// };
+
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     //Создание двух жкземпляров шаблона HoldsPair
+//     HoldsPair <> mIntFloatPair(300, 10.09);
+//     HoldsPair <short, char*> mShortStringPair(25, "Learn templates, love C++");
+
+//     //Вывод значений, содержашихся в первом объекте...
+//     cout << "The first object contains -" << endl;
+//     cout << "Value 1: " << mIntFloatPair.GetFirstValue() << endl;
+//     cout << "Value 2: " << mIntFloatPair.GetSexondValue() << endl;
+
+//     //Вывод значений, содержашихся во втором объекте...
+//     cout << "The second object contains -" << endl;
+//     cout << "Value 1: " << mShortStringPair.GetFirstValue() << endl;
+//     cout << "Value 2: " << mShortStringPair.GetSexondValue() << endl;
+
+//     return 0;
+// }
+
+//повторить
+// /*Листинг 14.5 Результат применения статических переменных 
+// в шаблоне класса и его экземплярах*/
+// #include <iostream>
+// using namespace std;
+
+// template <typename T>
+// class TestStatic
+// {
+//     public:
+//         static int StaticValue;
+// };
+
+// //инициализация статического члена
+// template<typename T> int TestStatic<T>::StaticValue;
+
+// int main()
+// {
+//     TestStatic<int> Int_Year;
+//     cout << "Setting StaticValue for Int_Year to 2011" << endl;
+//     Int_Year.StaticValue = 2011;
+//     TestStatic<int> Int_2;
+
+//     TestStatic<double> Double_1;
+//     TestStatic<double> Double_2;
+//     cout << "Setting StaticValue for Double_2 to 1011" << endl;
+//     Double_2.StaticValue = 1011;
+
+//     cout << "Int_2.StaticValue = " << Int_2.StaticValue << endl;
+//     cout << "Double_1.StaticValue = " << Double_1.StaticValue << endl;
+    
+//     return 0;
+// }
+
+// /*Листинг 14.6 Привередливый шаблон класса возражающий
+// против создания экхемпляра для типа int*/
+
+// template <typename T>
+// class EverythingButInt
+// {
+//     public:
+//         EverythingButInt()
+//         {
+//             static_assert(sizeof(T) != sizeof(int), "No int please!");
+//         }
+// };
+
+// int main()
+// {
+//     EverythingButInt<int> test; //создание экземпляра шаблона для тиа int
+
+//     return 0;
+// }
