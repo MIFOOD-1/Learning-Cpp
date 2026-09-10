@@ -14,8 +14,8 @@ int main()
     int x = 10;
     double y = 5;
 
-    cout << SPLIT(x);
-    cout << SPLIT(y);
+    cout << SPLIT(x) << endl;
+    cout << SPLIT(y) << endl;
 
     return 0;
 }
