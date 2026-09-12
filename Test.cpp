@@ -5543,58 +5543,199 @@
 //     return 0;
 // }
 
-/*16.4 Использование метода string::find() для поиска подстроки или символа*/
+// /*16.4 Использование метода string::find() для поиска подстроки или символа*/
+// #include <string>
+// #include <iostream>
+
+// int main()
+// {
+//     using namespace std;
+
+//     string strSample("Good day String! Today is beautiful!");
+//     cout << "The sample string is: " << endl;
+//     cout << strSample << endl << endl;
+
+//     //Найти в ней подстроку "day"...
+//     size_t charPos = strSample.find("day", 0);
+
+//     //Удостоверится, что подстрока найдена...
+//     if(charPos != string::npos)
+//         cout << "First instance of \"day\" was found position " << charPos;
+//     else
+//         cout << "Substring not found." << endl;
+
+//     cout << endl << endl;
+
+//     cout << "Locating all instances of substring \"day\"" << endl;
+//     size_t SubstringPos = strSample.find("day", 0);
+
+//     while(SubstringPos != string::npos)
+//     {
+//         cout << "\"day\" found at position " << SubstringPos << endl;
+
+//         //продолжить поиск вперед, от следующего символа
+//         size_t nSearcPosition = SubstringPos + 1;
+
+//         SubstringPos = strSample.find("day", nSearcPosition);
+//     }
+
+//     cout << endl;
+
+//     cout << "Locating all instances of character 'a'" << endl;
+//     const char charToSearch = 'a';
+//     charPos = strSample.find(charToSearch, 0);
+
+//     while(charPos != string::npos) 
+//     {
+//         cout << "'" << charToSearch << "' found";
+//         cout << " at position: " << charPos << endl;
+
+//         //продолжить поиск вперед, от следующего символа
+//         size_t charSearchPos = charPos+1;
+
+//         charPos = strSample.find(charToSearch, charSearchPos);
+//     }
+//     return 0;
+// }
+
+// /*Листинг 16.5 Использование функции string::erase() для усечения 
+// строки, начиная с позиции, заданной смещением или итератором*/
+// #include <string>
+// #include <algorithm>
+// #include <iostream>
+
+// int main()
+// {
+//     using namespace std;
+//     string strSample("Hello String! Wake up to a beatiful day!");
+//     cout << "The original sample string is: " << endl;
+//     cout << strSample << endl << endl;
+
+//     //Удалить из строки символы, заданные позицией и количеством
+//     cout << "Truncating the second sentence: " << endl;
+//     strSample.erase(13, 28);        //мы разве не удаляем индексы с 13 по 28, почему получается 'Hello String!' , а не 'Hello String! beatiful day!'
+//     cout << strSample << endl << endl;
+
+//     //Найти в строке символ 'S', используя алгоритм поиска STL
+//     string::iterator iCharS = find(strSample.begin(), strSample.end(), 'S'); //уточнить строку в чем разница с этой size_t SubstringPos = strSample.find("day", 0);
+
+//     //Если символ найдем, удалить его
+//     cout << "Erasing character 'S' from the sample string:" << endl;
+//     if(iCharS != strSample.end())
+//         strSample.erase(iCharS); //мои мысли, тут не совсем удаление символа, тут удаления адреса где находится символ, он не по символу итщет удаляет, а по местоположению
+
+//     cout << strSample << endl << endl;
+
+//     //Удалить диапазон символов, используя перегруженную
+//     //версию функции erase()
+//     cout << "Erasing a range between begin() and end(): " << endl;
+//     strSample.erase(strSample.begin(), strSample.end());
+
+//     //Проверить длину после операции erase() выше
+//     if(strSample.length() == 0)
+//         cout << "The string is empty" << endl;
+
+//     return 0;
+// }
+
+// /*16.6 Обращение строки с использованием алгоритма std::reverse()*/
+// #include <string>
+// #include <iostream>
+// #include <algorithm>
+
+// int main()
+// {
+//     using namespace std;
+    
+//     string strSample("Hello String! We will reverse you!");
+//     cout << "Thr original sample string is: " << endl;
+//     cout << strSample << endl << endl;
+
+//     reverse(strSample.begin(), strSample.end());
+
+//     cout << "After applying the std::revetse algorithm: " << endl;
+//     cout << strSample << endl;
+
+    
+//     return 0;
+// }
+
+// /*Листинг 16.7 Преобразование строки в верхний регистр
+// с использоавнием алгоритма std::transform()*/    -- не роботает с моим компилятором
+// #include <string>
+// #include <iostream>
+// #include <algorithm>
+// #include <cctype>
+
+// int main()
+// {
+//     using namespace std;
+
+//     cout << "Please enter a string for case-convertion:" << endl;
+//     cout << "> ";
+
+//     string strInput;
+//     getline(cin, strInput);
+//     cout << endl;
+
+//     transform(strInput.begin(), strInput.end(), strInput.begin(), toupper);
+
+//     cout << "The string converted to upper casi is: " << endl;
+//     cout << strInput << endl << endl;
+
+//     transform(strInput.begin(), strInput.end(), strInput.begin(), tolower);
+
+//     cout << "The string converted lower is: " << endl;
+//     cout << strInput << endl << endl;
+
+//     return 0;
+// }
+
+//Версия джпт
 #include <string>
 #include <iostream>
+#include <algorithm>
+#include <cctype>
 
 int main()
 {
     using namespace std;
 
-    string strSample("Good day String! Today is beautiful!");
-    cout << "The sample string is: " << endl;
-    cout << strSample << endl << endl;
+    cout << "Please enter a string for case-convertion:" << endl;
+    cout << "> ";
 
-    //Найти в ней подстроку "day"...
-    size_t charPos = strSample.find("day", 0);
-
-    //Удостоверится, что подстрока найдена...
-    if(charPos != string::npos)
-        cout << "First instance of \"day\" was found position " << charPos;
-    else
-        cout << "Substring not found." << endl;
-
-    cout << endl << endl;
-
-    cout << "Locating all instances of substring \"day\"" << endl;
-    size_t SubstringPos = strSample.find("day", 0);
-
-    while(SubstringPos != string::npos)
-    {
-        cout << "\"day\" found at position " << SubstringPos << endl;
-
-        //продолжить поиск вперед, от следующего символа
-        size_t nSearcPosition = SubstringPos + 1;
-
-        SubstringPos = strSample.find("day", nSearcPosition);
-    }
+    string strInput;
+    getline(cin, strInput);
 
     cout << endl;
 
-    cout << "Locating all instances of character 'a'" << endl;
-    const char charToSearch = 'a';
-    charPos = strSample.find(charToSearch, 0);
+    // Переводим строку в верхний регистр
+    transform(
+        strInput.begin(),
+        strInput.end(),
+        strInput.begin(),
+        [](char c)
+        {
+            return static_cast<char>(toupper(c));
+        }
+    );
 
-    while(charPos != string::npos)
-    {
-        cout << "'" << charToSearch << "' found";
-        cout << " at position: " << charPos << endl;
+    cout << "The string converted to upper case is: " << endl;
+    cout << strInput << endl << endl;
 
-        //продолжить поиск вперед, от следующего символа
-        size_t charSearchPos = charPos+1;
+    // Переводим строку в нижний регистр
+    transform(
+        strInput.begin(),
+        strInput.end(),
+        strInput.begin(),
+        [](char c)
+        {
+            return static_cast<char>(tolower(c));
+        }
+    );
 
-        charPos = strSample.find(charToSearch, charSearchPos);
-    }
+    cout << "The string converted to lower case is: " << endl;
+    cout << strInput << endl << endl;
+
     return 0;
 }
-
