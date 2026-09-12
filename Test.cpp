@@ -5338,7 +5338,7 @@
 //     return 0;
 // }
 
-//повторить
+
 // /*Листинг 14.5 Результат применения статических переменных 
 // в шаблоне класса и его экземплярах*/
 // #include <iostream>
@@ -5388,6 +5388,53 @@
 // int main()
 // {
 //     EverythingButInt<int> test; //создание экземпляра шаблона для тиа int
+
+//     return 0;
+// }
+
+// /*Листинг  15.1 Поиск элементов по его позиции в векторе*/
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+// using namespace std;
+
+// int main()
+// {
+//     //Динамический массив целых чисел
+//     vector <int> vecIntegerArray;
+
+//     //Вставить примеры целых чисел в массив
+//     vecIntegerArray.push_back(50);
+//     vecIntegerArray.push_back(2991);
+//     vecIntegerArray.push_back(23);
+//     vecIntegerArray.push_back(9999);
+    
+//     cout << "The contents of the vector are: " << endl;
+
+//     //Перебор вектора и чтение значений с помощью итератора
+//     vector <int> :: iterator iArrayWalker = vecIntegerArray.begin();//если бы мы просто сделали int * iArrayWalker не могли бы мы тоже самое делать не?
+
+//     while(iArrayWalker != vecIntegerArray.end())
+//     {
+//         //Вывод значения на экран
+//         cout << *iArrayWalker << endl;
+
+//         //Инкремент итератора для доступа к следуюущему элементу
+//         ++iArrayWalker;
+//     }
+
+//     //Поиск элемента скажем, 2991 в массиве с использованием алгоритма 'find'...
+
+//     vector <int>::iterator iElement = find(vecIntegerArray.begin(), vecIntegerArray.end(), 2991); //я как понимаю, он ищет значение и если не найдет то вернет то на чем останвовился в данном случае конец массива
+
+//     //проверить, найдено ли  значение
+//     if(iElement != vecIntegerArray.end())
+//     {
+//         //значение найдено... определить позицию в массиве:
+//         int Position = distance(vecIntegerArray.begin(), iElement); //тут типо сколько итераций потребуется пока не дойдем до этого адреса
+//         cout << "Value " << *iElement;
+//         cout << " found in the vector at position: " << Position << endl;
+//     }
 
 //     return 0;
 // }
