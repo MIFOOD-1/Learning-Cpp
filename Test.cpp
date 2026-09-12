@@ -5438,3 +5438,163 @@
 
 //     return 0;
 // }
+
+// /*Листинг 16.1 Способы создания экземпляров строк STL и их копирования*/
+// #include <string>
+// #include <iostream>
+
+// int main()
+// {
+//     using namespace std;                                //мои мысли, благодаря этой строке мы можем не писать std:: но для наглядности в стринге мы решили это делать как я понимаю
+//     const char * constCStyleString = "Hello String!";
+//     cout << "Constant string is: " << constCStyleString << endl;
+
+//     std::string strFromConst(constCStyleString); //конструктор
+//     cout << "strFromConst is: " << strFromConst << endl;
+
+//     std::string str2("Hello String!");
+//     std::string str2Copy(str2);                     //тут мои мысли я как понимаю, мы используем конструкт копий?
+//     cout << "str2Copy is: " << str2Copy << endl;
+
+//     //Инициализировать строку первыми 5 символвами другой строки
+//     std::string strPartialCopy(constCStyleString, 5);
+//     cout << "strParticalCopy is " << strPartialCopy << endl;
+
+//     //Инициализировать строку 10 символами 'a'
+//     std::string strRepeatChars(10, 'a');
+//     cout << "strRepeatChars is: " << strRepeatChars << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 16.2 Два способа обращения к символу строки STL: оператор({}) и итератор*/
+// #include <string>
+// #include <iostream>
+
+// int main()
+// {
+//     using namespace std;
+
+//     //Пример строки
+//     string strSTLString("Hello String!");
+
+//     //Доступ к одержимому строки с использованием
+//     //синтаксиса массива 
+//     cout << "Displaying the elements in the strin using array-syntax:" << endl;
+
+//     for(size_t nCharCounter = 0; nCharCounter < strSTLString.length(); ++nCharCounter) //мои мысли, я думаю для ncharcountera хватило бы вполне типа int, ведт ленджстринг как я понимаю возвращает количество символом в строке, кроме нулевого
+//     {
+//         cout << "Character [" << nCharCounter << "] is: ";
+//         cout << strSTLString[nCharCounter] << endl;
+//     }
+
+//     cout << endl;
+
+//     //Доступ к содержимому строки с использованием итератора
+//     cout << "Display the contents of the string using iterators: " << endl;
+
+//     int charOffset = 0;
+//     string::const_iterator iCharacterLocator;
+//     for(iCharacterLocator = strSTLString.begin(); iCharacterLocator != strSTLString.end(); ++iCharacterLocator)
+//     {
+//         cout << "Charater [" << charOffset++ << "] is: ";
+//         cout << *iCharacterLocator << endl;
+//     }
+
+//     cout << endl;
+
+//     //обращение к содержимому строки в стиле С
+//     cout << "Thr char* represntation if the string is: ";
+//     cout << strSTLString.c_str() << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 16.3 Конкатенация строк с использованием оператора
+// сложения с присвоением(+=) или метода append()*/
+
+// #include <iostream>
+// #include <string>
+
+// int main()
+// {
+//     using namespace std;
+
+//     string strSample1("Hello");
+//     string strSample2(" String!");
+
+//     //Конкатенация
+//     strSample1 += strSample2;
+//     cout << strSample1 << endl << endl;
+
+//     string strSample3 (" Fun is not needing to use pointers!");
+//     strSample1.append(strSample3);
+//     cout << strSample1 << endl << endl;
+
+//     const char * constCStyleString = " You however still can!";
+//     strSample1.append(constCStyleString);
+//     cout << strSample1 << endl;
+
+
+//     const char * constCStyleString1 = " AHAHAHAHAHA";
+//     strSample1 += constCStyleString1;
+//     cout << strSample1 << endl;
+
+//     return 0;
+// }
+
+/*16.4 Использование метода string::find() для поиска подстроки или символа*/
+#include <string>
+#include <iostream>
+
+int main()
+{
+    using namespace std;
+
+    string strSample("Good day String! Today is beautiful!");
+    cout << "The sample string is: " << endl;
+    cout << strSample << endl << endl;
+
+    //Найти в ней подстроку "day"...
+    size_t charPos = strSample.find("day", 0);
+
+    //Удостоверится, что подстрока найдена...
+    if(charPos != string::npos)
+        cout << "First instance of \"day\" was found position " << charPos;
+    else
+        cout << "Substring not found." << endl;
+
+    cout << endl << endl;
+
+    cout << "Locating all instances of substring \"day\"" << endl;
+    size_t SubstringPos = strSample.find("day", 0);
+
+    while(SubstringPos != string::npos)
+    {
+        cout << "\"day\" found at position " << SubstringPos << endl;
+
+        //продолжить поиск вперед, от следующего символа
+        size_t nSearcPosition = SubstringPos + 1;
+
+        SubstringPos = strSample.find("day", nSearcPosition);
+    }
+
+    cout << endl;
+
+    cout << "Locating all instances of character 'a'" << endl;
+    const char charToSearch = 'a';
+    charPos = strSample.find(charToSearch, 0);
+
+    while(charPos != string::npos)
+    {
+        cout << "'" << charToSearch << "' found";
+        cout << " at position: " << charPos << endl;
+
+        //продолжить поиск вперед, от следующего символа
+        size_t charSearchPos = charPos+1;
+
+        charPos = strSample.find(charToSearch, charSearchPos);
+    }
+    return 0;
+}
+
