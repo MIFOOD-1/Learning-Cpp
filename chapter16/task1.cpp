@@ -11,17 +11,11 @@ int main()
     string name;
     cin >> name;
 
-    size_t value = name.length();
-    size_t value2;
-    if(value != 0)
+    long long lol = name.length();
+    if(lol != 0)
     {
-        value2 = value / 2;
-    }
-  
-    if(value != 0)
-    {
-        string name2 = name;
-        name2.erase(value, value2);
+        
+        string name2(name, lol/2);
         reverse(name2.begin(), name2.end());
         cout << name2;
     }
