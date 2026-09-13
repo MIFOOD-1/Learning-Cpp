@@ -5691,51 +5691,51 @@
 //     return 0;
 // }
 
-//Версия джпт
-#include <string>
-#include <iostream>
-#include <algorithm>
-#include <cctype>
+// //Версия джпт
+// #include <string>
+// #include <iostream>
+// #include <algorithm>
+// #include <cctype>
 
-int main()
-{
-    using namespace std;
+// int main()
+// {
+//     using namespace std;
 
-    cout << "Please enter a string for case-convertion:" << endl;
-    cout << "> ";
+//     cout << "Please enter a string for case-convertion:" << endl;
+//     cout << "> ";
 
-    string strInput;
-    getline(cin, strInput);
+//     string strInput;
+//     getline(cin, strInput);
 
-    cout << endl;
+//     cout << endl;
 
-    // Переводим строку в верхний регистр
-    transform(
-        strInput.begin(),
-        strInput.end(),
-        strInput.begin(),
-        [](char c)
-        {
-            return static_cast<char>(toupper(c));
-        }
-    );
+//     // Переводим строку в верхний регистр
+//     transform(
+//         strInput.begin(),
+//         strInput.end(),
+//         strInput.begin(),
+//         [](char c)
+//         {
+//             return static_cast<char>(toupper(c));
+//         }
+//     );
 
-    cout << "The string converted to upper case is: " << endl;
-    cout << strInput << endl << endl;
+//     cout << "The string converted to upper case is: " << endl;
+//     cout << strInput << endl << endl;
 
-    // Переводим строку в нижний регистр
-    transform(
-        strInput.begin(),
-        strInput.end(),
-        strInput.begin(),
-        [](char c)
-        {
-            return static_cast<char>(tolower(c));
-        }
-    );
+//     // Переводим строку в нижний регистр
+//     transform(
+//         strInput.begin(),
+//         strInput.end(),
+//         strInput.begin(),
+//         [](char c)
+//         {
+//             return static_cast<char>(tolower(c));
+//         }
+//     );
 
-    cout << "The string converted to lower case is: " << endl;
-    cout << strInput << endl << endl;
+//     cout << "The string converted to lower case is: " << endl;
+//     cout << strInput << endl << endl;
 
-    return 0;
-}
+//     return 0;
+// }
