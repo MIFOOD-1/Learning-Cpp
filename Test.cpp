@@ -5741,3 +5741,281 @@
 // }
 
 
+// /*Литсинг 17.1 Различные формы создания экземпляров класса std::vector:
+// определение размера, исходных значений и копирование значения из другого вектора*/
+// #include <vector>
+
+// int main()
+// {
+//     std::vector<int> vecIntegers;
+
+//     //Создание экземпляра вектора с 10 элеменатми(впоследствии он может стать больше)
+//     std::vector <int> vecWithTenElemnts(10);
+
+//     //Создание экзмепляра вектора с 10 элементами, каждый из которых ицнициализирован значением 90
+//     std::vector <int> vecWithTenInitializedElemnts(10, 90);
+
+//     //Создание экземпляра одного вектора и инициалазация его содеожимым другого 
+//     std::vector<int> vecArrayCopy(vecWithTenInitializedElemnts);
+
+//     //Использование итераторов для создания экзмепляра вектора из 5 элементов другого
+//     std::vector<int> vesSomeElementsCopied(vecWithTenElemnts.cbegin(), vecWithTenElemnts.cbegin() + 5);
+
+//     return 0;
+// }
+
+// /*Листинг 17.2 Вставка элементов в вектор с использованием метода push.back()*/
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// int main()
+// {
+//     vector <int> vecIntegers;
+
+//     //Вставка целых чисел в вектор:
+//     vecIntegers.push_back(50);
+//     vecIntegers.push_back(1);
+//     vecIntegers.push_back(987);
+//     vecIntegers.push_back(1001);
+
+//     cout << "The vector contains ";
+//     cout << vecIntegers.size() << " Elements" << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 17.3 Использование функции vector::insert()
+// для вставки элементов в опреленную позицию*/
+// #include <vector>
+// #include <iostream>
+// using namespace std;
+
+// void DisplayVector(const vector<int>& vecInput)
+// {
+//     for(auto iElement = vecInput.cbegin(); iElement != vecInput.cend(); ++iElement)
+//         cout << *iElement << " ";
+
+//     cout << endl;
+// }
+
+// int main()
+// {
+//     //Сщздать экземпляр вектора с 4 элементами
+//     //инициализировать значением 90
+//     vector<int> vecIntegers(4, 90);
+
+//     cout << "The initial contents of the vector: ";
+//     DisplayVector(vecIntegers);
+
+//     //Вставить 25 в начало 
+//     vecIntegers.insert(vecIntegers.begin(), 25);
+
+//     //Вставить в конец 2 числа со значением 45
+//     vecIntegers.insert(vecIntegers.end(), 2, 45);
+
+//     cout << "Vector after inserting elements at begining and end: ";
+//     DisplayVector(vecIntegers);
+
+
+//     //Другой вектор, содержащий два элемента со значением 30
+//     vector<int>vecAnother(2, 30);
+
+//     //Вставить два элемента из другого контейнера в позицию [1]
+//     vecIntegers.insert(vecIntegers.begin() + 1, vecAnother.begin(), vecAnother.end());
+
+//     cout << "Vector after inserting contents from another vector: ";
+//     cout << "in the midle:" << endl;
+//     DisplayVector(vecIntegers);
+
+//     return 0;
+// }
+
+// /*Листинг 17.4 Доступ к элементам вектора с использованием семантики массива*/
+// #include <iostream>
+// #include <vector>
+
+// int main()
+// {
+//     using namespace std;
+//     vector<int> vecIntegerArray;
+
+//     //Вставитьь в вектор целые числа:
+//     vecIntegerArray.push_back(50);
+//     vecIntegerArray.push_back(1);
+//     vecIntegerArray.push_back(987);
+//     vecIntegerArray.push_back(1001);
+
+//     for(size_t Index = 0; Index < vecIntegerArray.size(); ++Index)
+//     {
+//         cout << "Element[" << Index << "] = ";
+//         cout << vecIntegerArray[Index] << endl;
+//     }
+
+//     //изменить 3-е число с 987 на 2011
+//     vecIntegerArray[2] = 2011;
+//     cout << "After replacement: " << endl;
+//     cout << "Element[2] = " << vecIntegerArray[2] << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 17.5 Доступ к элементам вектора с использованием семантики указателя(итераторов)*/
+// #include <iostream>
+// #include <vector>
+
+// int main()
+// {
+//     using namespace std;
+//     vector <int> vecInteger;
+
+//     //Вставить в вектор целые числа
+//     vecInteger.push_back(50);
+//     vecInteger.push_back(1);
+//     vecInteger.push_back(987);
+//     vecInteger.push_back(1001);
+
+//     //Доступ к объектам  в векторе с использованием итераторов:
+//     vector<int>:: iterator iElementLocator = vecInteger.begin();
+//     //итератор, объявленный с использованием ключевого
+//     //слова C++11 auto: auto iElementLocator = vecInteger.begin();
+
+//     while(iElementLocator != vecInteger.end())
+//     {
+//         size_t Index = distance(vecInteger.begin(), iElementLocator);
+
+//         cout << "Element at position ";
+//         cout << Index << " is: " << *iElementLocator << endl;
+
+//         //перейти к следующему элементу
+//         ++iElementLocator;
+//     }
+    
+//     return 0;
+// }
+
+// //Листинг 17.6 Использование метода pop_back() для удаления послежнего элемента
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// template<typename T>
+// void DisplayVector(const vector<T>& vecInput)
+// {
+//     for(auto iElement = vecInput.cbegin(); iElement != vecInput.cend(); ++iElement)
+//         cout << *iElement << " ";
+//     cout << endl;
+// }
+
+// int main()
+// {
+//     vector <int> vecInegers;
+
+//     //Вставить в вектор целые числа:
+//     vecInegers.push_back(50);
+//     vecInegers.push_back(1);
+//     vecInegers.push_back(987);
+//     vecInegers.push_back(1001);
+
+//     cout << "Vector contains " << vecInegers.size() << " elements: ";
+//     DisplayVector(vecInegers);
+
+//     //удалить один жлемент в конце
+//     vecInegers.pop_back();
+
+//     cout << "After a call to pop_back()" << endl;
+//     cout << "Vector contains " << vecInegers.size() << " elennts: ";
+//     DisplayVector(vecInegers);
+
+//     return 0;
+// }
+
+// /*Листинг 17.7 Демонстрация применения методов size() и capacity()*/
+// #include <iostream>
+// #include <vector>
+
+// int main()
+// {
+//     using namespace std;
+
+//     //Создание экземпляра вектора, способного изначально содержать 5 целых чисел
+//     vector <int> vecItnegers(5);
+
+//     cout << "Vector of integers was instantiated with " << endl;
+//     cout << "Size: " << vecItnegers.size();
+
+//     cout << " , Capacity: " << vecItnegers.capacity() << endl;
+
+//     //Вставка в вектор 6-го элемента
+//     vecItnegers.push_back(666);
+
+//     cout << "After inserting an additional element... " << endl;
+//     cout << "Size: " << vecItnegers.size();
+//     cout << ", Capacity: " << vecItnegers.capacity() << endl;
+
+//     //Вставка другого элемента
+//     vecItnegers.push_back(777);
+
+//     cout << "After inserting yet another element..." << endl;
+//     cout << "Size: " << vecItnegers.size();
+//     cout << " , Capacity: " << vecItnegers.capacity() << endl;
+
+//     return 0;
+// }
+
+/*Листинг 17.8 Создание экземпляра двухсторонней очереди STL, а также применение
+методов push_front() и pop_front() для вставки и извлечения элементов с начала*/
+#include <deque>
+#include <iostream>
+#include <algorithm>
+
+int main()
+{
+    using namespace std;
+
+    //Определение двухсторонней очереди целых чисел
+    deque <int> dqIntegers;
+
+    //Вставка целых чисел в конец массива
+    dqIntegers.push_back(3);
+    dqIntegers.push_back(4);
+    dqIntegers.push_back(5);
+
+    //Вставака целых чисел в начало массива
+    dqIntegers.push_front(2);
+    dqIntegers.push_front(1);
+    dqIntegers.push_front(0);
+
+    cout << "Thr contents of the deque after inserting elements ";
+    cout << "at the top and bottom are: " << endl;
+
+    //Отображение содержимого на экране
+    for(size_t nCount = 0; nCount < dqIntegers.size(); ++nCount)
+    {
+        cout << "Element [" << nCount << "] = ";
+        cout << dqIntegers[nCount] << endl;
+    }
+
+    cout << endl;
+
+    //Извлчение элемента с начала
+    dqIntegers.pop_front();
+
+    //Извлечение элемента с конца
+    dqIntegers.pop_back();
+
+    cout << "The contents of the deque after erasing an element ";
+    cout << "from the top and bottom are: " << endl;
+
+    //Отображает содержимое снова: на сей раз при помощи итераторов
+    //При компиляции на устаревшиъ комиляторов удалите ключевое слово auto и снимите комментарий со следуюущей строки
+    //deque<int>::iterator iElementLocator;
+    for(auto iElemenLocator = dqIntegers.begin(); iElemenLocator != dqIntegers.end(); ++iElemenLocator)
+    {
+        size_t Offset = distance(dqIntegers.begin(), iElemenLocator);
+
+        cout << "Element [" << Offset << "] = " << *iElemenLocator << endl;
+    }
+
+    return 0;
+}
