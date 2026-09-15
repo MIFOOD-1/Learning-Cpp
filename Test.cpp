@@ -5963,59 +5963,59 @@
 //     return 0;
 // }
 
-/*Листинг 17.8 Создание экземпляра двухсторонней очереди STL, а также применение
-методов push_front() и pop_front() для вставки и извлечения элементов с начала*/
-#include <deque>
-#include <iostream>
-#include <algorithm>
+// /*Листинг 17.8 Создание экземпляра двухсторонней очереди STL, а также применение
+// методов push_front() и pop_front() для вставки и извлечения элементов с начала*/
+// #include <deque>
+// #include <iostream>
+// #include <algorithm>
 
-int main()
-{
-    using namespace std;
+// int main()
+// {
+//     using namespace std;
 
-    //Определение двухсторонней очереди целых чисел
-    deque <int> dqIntegers;
+//     //Определение двухсторонней очереди целых чисел
+//     deque <int> dqIntegers;
 
-    //Вставка целых чисел в конец массива
-    dqIntegers.push_back(3);
-    dqIntegers.push_back(4);
-    dqIntegers.push_back(5);
+//     //Вставка целых чисел в конец массива
+//     dqIntegers.push_back(3);
+//     dqIntegers.push_back(4);
+//     dqIntegers.push_back(5);
 
-    //Вставака целых чисел в начало массива
-    dqIntegers.push_front(2);
-    dqIntegers.push_front(1);
-    dqIntegers.push_front(0);
+//     //Вставака целых чисел в начало массива
+//     dqIntegers.push_front(2);
+//     dqIntegers.push_front(1);
+//     dqIntegers.push_front(0);
 
-    cout << "Thr contents of the deque after inserting elements ";
-    cout << "at the top and bottom are: " << endl;
+//     cout << "Thr contents of the deque after inserting elements ";
+//     cout << "at the top and bottom are: " << endl;
 
-    //Отображение содержимого на экране
-    for(size_t nCount = 0; nCount < dqIntegers.size(); ++nCount)
-    {
-        cout << "Element [" << nCount << "] = ";
-        cout << dqIntegers[nCount] << endl;
-    }
+//     //Отображение содержимого на экране
+//     for(size_t nCount = 0; nCount < dqIntegers.size(); ++nCount)
+//     {
+//         cout << "Element [" << nCount << "] = ";
+//         cout << dqIntegers[nCount] << endl;
+//     }
 
-    cout << endl;
+//     cout << endl;
 
-    //Извлчение элемента с начала
-    dqIntegers.pop_front();
+//     //Извлчение элемента с начала
+//     dqIntegers.pop_front();
 
-    //Извлечение элемента с конца
-    dqIntegers.pop_back();
+//     //Извлечение элемента с конца
+//     dqIntegers.pop_back();
 
-    cout << "The contents of the deque after erasing an element ";
-    cout << "from the top and bottom are: " << endl;
+//     cout << "The contents of the deque after erasing an element ";
+//     cout << "from the top and bottom are: " << endl;
 
-    //Отображает содержимое снова: на сей раз при помощи итераторов
-    //При компиляции на устаревшиъ комиляторов удалите ключевое слово auto и снимите комментарий со следуюущей строки
-    //deque<int>::iterator iElementLocator;
-    for(auto iElemenLocator = dqIntegers.begin(); iElemenLocator != dqIntegers.end(); ++iElemenLocator)
-    {
-        size_t Offset = distance(dqIntegers.begin(), iElemenLocator);
+//     //Отображает содержимое снова: на сей раз при помощи итераторов
+//     //При компиляции на устаревшиъ комиляторов удалите ключевое слово auto и снимите комментарий со следуюущей строки
+//     //deque<int>::iterator iElementLocator;
+//     for(auto iElemenLocator = dqIntegers.begin(); iElemenLocator != dqIntegers.end(); ++iElemenLocator)
+//     {
+//         size_t Offset = distance(dqIntegers.begin(), iElemenLocator);
 
-        cout << "Element [" << Offset << "] = " << *iElemenLocator << endl;
-    }
+//         cout << "Element [" << Offset << "] = " << *iElemenLocator << endl;
+//     }
 
-    return 0;
-}
+//     return 0;
+// }
