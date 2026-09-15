@@ -6019,3 +6019,358 @@
 
 //     return 0;
 // }
+
+// /*Листинг 18.1 Различные формы создания экземпляров класса std::list:
+// определение количества элементов и их исходных значений*/
+// #include <list>
+// #include <vector>
+
+// int main()
+// {
+//     using namespace std;
+
+//     //создания экземпляра пустого списка
+//     list<int> listIntegers;
+
+//     //создание экземпляра списка с 10 целыми числами
+//     list<int> listWith10Inegers(10);
+
+//     //Создание экземпляра списка с 4 целыми числами,
+//     //инициализированными значениями 99
+//     list<int> listWith4IntegerEach99(4, 99);
+
+//     //создание точной копии  существующего списка
+//     list<int> listCopyAnother(listWith4IntegerEach99);
+
+//     //вектор для 10 целых чисел со значением 2011 каждый
+//     vector<int> vecInegers(10, 2011);
+
+//     //создание экземпляра сиска с использованием значений
+//     //из другого контейнера
+//     list<int> listContainsCopyOfAnother(vecInegers.cbegin(), vecInegers.cend());
+
+//     return 0;
+// }
+
+// /*Листинг 18.2 Вставка элементов в список с использованием методов push_front() и push_back()*/
+// #include <list>
+// #include <iostream>
+// using namespace std;
+
+// template <typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.cbegin(); iElement != Input.cend(); ++iElement)
+//         cout << *iElement << ' ';
+//     cout << endl;
+// }
+
+// int main()
+// {
+//     std::list <int> listIntegers;
+
+//     listIntegers.push_front(10);
+//     listIntegers.push_front(2011);
+//     listIntegers.push_back(-1);
+//     listIntegers.push_back(9999);
+
+//     DisplayContents(listIntegers);
+
+//     return 0;
+// }
+
+// /*Листинг 18.3 Различные способы вставки элементов в список*/
+// #include <list>
+// #include <iostream>
+// using namespace std;
+
+// template <typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.cbegin(); iElement != Input.cend(); ++iElement)
+//         cout << *iElement << ' ';
+//     cout << endl;
+// }
+
+// int main()
+// {
+//     list <int> listInegers1;
+
+//     //Вставака элементов в начало...
+//     listInegers1.insert(listInegers1.begin(), 2);
+//     listInegers1.insert(listInegers1.begin(), 1);
+
+//     //Вставака элементов в конец...
+//     listInegers1.insert(listInegers1.end(), 3);
+
+//     cout << "The contents of list 1 after insertingg elements:" << endl;
+//     DisplayContents(listInegers1);
+
+//     list<int>listInegers2;
+
+//     //вставка 4 элементов с одинаковым значением 0...
+//     listInegers2.insert(listInegers2.begin(), 4, 0);
+
+//     cout << "The contents of list 2 after inserting '";
+//     cout << listInegers2.size() << "' elements of a value:" << endl;
+//     DisplayContents(listInegers2);
+
+//     list<int> listInegers3;
+
+//     //Вставка элементов из другого списка в начало...
+//     listInegers3.insert(listInegers3.begin(), listInegers1.begin(), listInegers1.end());
+
+//     cout << "The contents of list 3 after inserting the contents of";
+//     cout << "list 1 at the beginning:" << endl;
+//     DisplayContents(listInegers3);
+
+//     //Вставка элементов из другого списка в конец...
+//     listInegers3.insert(listInegers3.end(), listInegers2.begin(), listInegers2.end());
+
+//     cout << "The contents of list 3 after inserting ";
+//     cout << "the contents of list 2 at the beginning:" << endl;
+//     DisplayContents(listInegers3);
+
+//     return 0;
+// }
+
+// /*Листинг 18.4 Удаление элементов из списка*/
+// #include <list>
+// #include <iostream>
+// using namespace std;
+
+// template <typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.cbegin(); iElement != Input.cend(); ++iElement)
+//         cout << *iElement << ' ';
+//     cout << endl;
+// }
+
+// int main()
+// {
+//     std::list <int> listIntegers;
+
+//     //Вставка элементов в начало и конец...
+//     listIntegers.push_back(4);
+//     listIntegers.push_back(3);
+//     listIntegers.push_back(5);
+
+//     //Сохранить итератор полученный при помощи функции insert()
+//     auto iValue2 = listIntegers.insert(listIntegers.begin(), 2);
+
+//     cout << "Initial contents of the list: " << endl;
+//     DisplayContents(listIntegers);
+
+//     listIntegers.erase(listIntegers.begin(), iValue2);
+//     cout << "Contents after erasing a range of elements: " << endl;
+//     DisplayContents(listIntegers);
+
+//     cout << "After erasing element '" << *iValue2 << "':" << endl;
+//     listIntegers.erase(iValue2);
+//     DisplayContents(listIntegers);
+
+//     listIntegers.erase(listIntegers.begin(), listIntegers.end());
+//     cout << "Number of elements after erasing range: ";
+//     cout << listIntegers.size() << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 18.5 Обращение элементов списка*/
+// #include <list>
+// #include <iostream>
+// using namespace std;
+
+// template <typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.cbegin(); iElement != Input.cend(); ++iElement)
+//         cout << *iElement << ' ';
+//     cout << endl;
+// }
+
+// int main()
+// {
+//     std::list <int> listIntegers;
+
+//     //Вставака элементов в начало и конец
+//     listIntegers.push_front(4);
+//     listIntegers.push_front(3);
+//     listIntegers.push_front(2);
+//     listIntegers.push_front(1);
+//     listIntegers.push_front(0);
+//     listIntegers.push_back(5);
+
+//     cout << "Initial contents of the list: " << endl;
+//     DisplayContents(listIntegers);
+
+//     listIntegers.reverse();
+
+//     cout << "Contents of the list after using reverse(): " << endl;
+//     DisplayContents(listIntegers);
+
+//     return 0;
+// }
+
+// /*Листинг 18.6 Сортировка целых чисел по возрастанию
+// и по убываеию с использованием метода list::sort()*/
+// #include <list>
+// #include <iostream>
+// using namespace std;
+
+// bool SortPredicate_Descending(const int & lsh, const int& rsh)
+// {
+//     //определение критериев для метода list::sort: возвратить true
+//     //для желательного порядка
+//     return (lsh > rsh);
+// }
+
+// template <typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.cbegin(); iElement != Input.cend(); ++iElement)
+//         cout << *iElement << ' ';
+//     cout << endl;
+// }
+
+// int main()
+// {
+//     list <int> listIntegers;
+//     //Вставка элементов в начало и конец
+//     listIntegers.push_front(444);
+//     listIntegers.push_front(2011);
+//     listIntegers.push_front(-1);
+//     listIntegers.push_front(0);
+//     listIntegers.push_back(-5);
+
+//     cout << "Initial contents of the list are - " << endl;
+//     DisplayContents(listIntegers);
+
+//     listIntegers.sort();
+
+//     cout << "Order of elements after sort(): " << endl;
+//     DisplayContents(listIntegers);
+
+//     listIntegers.sort(SortPredicate_Descending);
+//     cout << "Order of elements after sort() with a predicate:" << endl;
+    
+//     DisplayContents(listIntegers);
+
+//     return 0;
+// }
+
+// /*Листинг 18.7 Список объекто класса создание списка контактов*/
+// #include <string>
+// #include <iostream>
+// #include <list>
+// using namespace std;
+
+// template <typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.cbegin(); iElement != Input.cend(); ++iElement)
+//         cout << *iElement << endl;
+//     cout << endl;
+// }
+
+// struct ContactItem
+// {
+//     string strContactsName;
+//     string strPhoneNumber;
+//     string strDisplayRepresentation;
+
+//     //Конструктор и деструктор
+
+//     ContactItem(const string& strName, const string& strNumber)
+//     {
+//         strContactsName = strName;
+//         strPhoneNumber = strNumber;
+//         strDisplayRepresentation = (strContactsName + ": " + strPhoneNumber);
+//     }
+
+//     //Используется list::remove() для элемента списка контактов
+//     bool operator == (const ContactItem& itemToCompare) const
+//     {
+//         return (itemToCompare.strContactsName == this-> strContactsName);
+//     }
+
+//     //испоьзуется в list::sort() без параметров
+//     bool operator < (const ContactItem& itemToCompare) const
+//     {
+//         return(this->strContactsName < itemToCompare.strContactsName);
+//     }
+
+//     //Используеся в DisplayContents  через cout
+//     operator const char*() const
+//     {
+//         return strDisplayRepresentation.c_str();
+//     }
+// };
+
+// bool SortOnPhoneNumber(const ContactItem& item1, const ContactItem& item2)
+// {
+//     return(item1.strPhoneNumber < item2.strPhoneNumber);
+// }
+
+// int main()
+// {
+//     list <ContactItem> Contacts;
+//     Contacts.push_back(ContactItem("Jack Welsch", "+1 7889 879 879"));
+//     Contacts.push_back(ContactItem("Bill Gates", "+1 97 7897 8799 8"));
+//     Contacts.push_back(ContactItem("Angela Merkel", "+49 23456 5466"));
+//     Contacts.push_back(ContactItem("Vladimir Putin", "+7 6645 4564 797"));
+//     Contacts.push_back(ContactItem("Manmohan Singh", "+91 234 4564 789 "));
+//     Contacts.push_back(ContactItem("Barack Obama", "+1 745 641 314"));
+
+//     cout << "List in initial order: " << endl;
+//     DisplayContents(Contacts);
+
+//     Contacts.sort();
+//     cout << "After sorting in alphabetical order via operator<: " << endl;
+//     DisplayContents(Contacts);
+
+//     Contacts.sort(SortOnPhoneNumber);
+//     cout << "After sorting in order of phone numbers via predicate:" << endl;
+//     DisplayContents(Contacts);
+
+//     cout << "After erasing Putin from the list: ";
+//     Contacts.remove(ContactItem("Vladimir Putin", ""));
+//     DisplayContents(Contacts);
+
+//     return 0;
+// }
+
+/*Листинг 18.8 Простые опперации вставки и извлечения из односвязного списка*/
+#include <forward_list>
+#include <iostream>
+using namespace std;
+
+template <typename T>
+void DisplayContents(const T& Input)
+{
+    for(auto iElement = Input.cbegin(); iElement != Input.cend(); ++iElement)
+        cout << *iElement << " ";
+    cout << endl;
+}
+
+int main()
+{
+    forward_list<int> flistIntegers;
+    flistIntegers.push_front(0);
+    flistIntegers.push_front(2);
+    flistIntegers.push_front(2);
+    flistIntegers.push_front(4);
+    flistIntegers.push_front(3);
+    flistIntegers.push_front(1);
+
+    cout << "Contents of forward_list: " << endl;
+    DisplayContents(flistIntegers);
+
+    flistIntegers.remove(2);
+    flistIntegers.sort();
+    cout << "Contents after removing 2 and sorting: " << endl;
+    DisplayContents(flistIntegers);
+
+    return 0;
+}
