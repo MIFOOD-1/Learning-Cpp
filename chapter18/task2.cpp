@@ -16,6 +16,7 @@ void show_list(list <int> &inputValue)
 {
     for( auto iterator = inputValue.begin(); iterator != inputValue.end(); iterator++)
         cout << *iterator << " ";
+    cout << endl;
 }
 int main()
 {
@@ -36,8 +37,11 @@ int main()
 
 
     auto iterator = some_object.begin();
-    some_object.push_front(1);
-    cout << *iterator;
+    cout << "is iterator befor changed object: " << *iterator << endl;
+    some_object.push_front(20);
+
+    cout << "is iterator after changed object: " << *iterator << endl;
+
     show_list(some_object);
 
     return 0;
