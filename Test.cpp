@@ -6375,3 +6375,290 @@
 //     return 0;
 // }
 
+// /*Листинг 19.1 Различные способы создания экземпляра набора и мультимножества*/
+// #include <set>
+
+// //используется как параметр шаблона при создании экземпляра наобора / мультимножества
+// template <typename T>
+// struct SortDescending
+// {
+//     bool operator()(const T& lhs, const T& rhs) const
+//     {
+//         return (lhs > rhs);
+//     }
+// };
+
+// int main()
+// {
+//     using namespace std;
+
+//     //наобор или мультимножество целых чисел (использующие предикат сортировки)
+//     set <int> setIntegers1;
+//     multiset <int> msetIntegers1;
+
+//     //создание экзмепляра набора и мультимножества с заданным пользователем предикатом  сортировки
+//     set<int, SortDescending<int> > setIntegers2;
+//     multiset<int, SortDescending<int> > msetIntegers2;
+
+//     //создание набора из другого контейнера или его части
+//     set<int> setIntegers3(setIntegers1);
+//     multiset<int> msetIntegers3(setIntegers1.cbegin(), setIntegers1.cend());
+
+//     return 0;
+// }
+
+// /*Листинг 19.2 Вставка элементов в набор и мультимножество бибилиотеки STL*/
+// #include <set>
+// #include <iostream>
+// using namespace std;
+
+// template <typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.cbegin(); iElement != Input.cend(); ++iElement)
+//         cout << *iElement << ' ';
+//     cout << endl;
+// }
+
+// int main()
+// {
+//     set<int> setIntegers;
+    
+//     setIntegers.insert(60);
+//     setIntegers.insert(-1);
+//     setIntegers.insert(3000);
+//     cout << "Writing the contents of the set to the screen" << endl;
+//     DisplayContents(setIntegers);
+
+//     multiset<int> msetIntegers;
+//     msetIntegers.insert(setIntegers.begin(), setIntegers.end());
+//     msetIntegers.insert(3000);
+
+//     cout << "Writing the contents of the multiset to the screen" << endl;
+//     DisplayContents(msetIntegers);
+
+//     cout << "Number of instance of '3000' in the multiset are: '";
+//     cout << msetIntegers.count(3000) << "'" << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 19.3 Использование функции-члена find()*/
+// #include <set>
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     set<int> setIntegers;
+
+//     //Вставить роизвольные значения
+//     setIntegers.insert(43);
+//     setIntegers.insert(78);
+//     setIntegers.insert(-1);
+//     setIntegers.insert(124);
+
+//     //Вывод содержимого на экран
+//     for(auto iElement = setIntegers.cbegin(); iElement != setIntegers.cend(); iElement++)
+//         cout << *iElement << endl;
+
+//     //Попытатьс найти элемент
+//     auto iElementFound = setIntegers.find(-1);
+
+//     //проверить, если найдено...
+//     if(iElementFound != setIntegers.end())
+//         cout << "Element " << *iElementFound << " found!" << endl;
+//     else
+//         cout << "Element -1 not found in set!" << endl;
+
+//     //Попытаться найти другой элемент
+//     auto iAnotherFinde = setIntegers.find(12345);
+
+//      //проверить, если найдено...
+//     if(iAnotherFinde != setIntegers.end())
+//         cout << "Element " << *iAnotherFinde << " found!" << endl;
+//     else
+//         cout << "Element 12345 not found in set!" << endl;
+
+//     return 0;
+// }
+
+//// Листинг 19.4 Использование функции-члена erase() для мультимножества
+// #include <set>
+// #include <iostream>
+// using namespace std;
+
+// template <typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.cbegin(); iElement != Input.cend(); iElement++)
+//         cout << *iElement << " ";
+//     cout << endl;
+// }
+// typedef multiset <int> MSETINT;
+
+// int main()
+// {
+//     MSETINT msetIntegers;
+
+//     //Вставить произвольные значения
+//     msetIntegers.insert(43);
+//     msetIntegers.insert(78);
+//     msetIntegers.insert(78); //совпадение
+//     msetIntegers.insert(-1);
+//     msetIntegers.insert(124);
+
+//     cout << "mulriset contains " << msetIntegers.size() << " elements.";
+//     cout << " These are: " << endl;
+
+//     //Вывод содержимого мультимножества на экран
+//     DisplayContents(msetIntegers);
+
+//     cout << "Please enter a number to be erased from the set" << endl;
+//     int nNumberToErase = 0;
+//     cin >> nNumberToErase;
+
+//     cout << "Erasing " << msetIntegers.count(nNumberToErase);
+//     cout << " instasnces of value " << nNumberToErase << endl;
+
+//     //Попытаться найти элемент 
+//     msetIntegers.erase(nNumberToErase);
+
+//     cout << "multiset contains " << msetIntegers.size() << " elements.";
+//     cout << " The are: " << endl;
+//     DisplayContents(msetIntegers);
+
+//     return 0;
+// }
+
+// /*Листинг 19.5 Телефонный справочник, демонстрирующий
+// возможности класса set библиотеки STL*/
+// #include <set>
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// template <typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.cbegin(); iElement != Input.cend(); ++iElement)
+//         cout << *iElement << endl;
+//     cout << endl;
+// }
+
+// struct ContactItem
+// {
+//     string strContactsName;
+//     string strPhoneNumber;
+//     string strDisplayRepresentation;
+
+//     //Конструктор и деструктор
+//     ContactItem(const string& strName, const string& strNumber)
+//     {
+//         strContactsName = strName;
+//         strPhoneNumber = strNumber;
+//         strDisplayRepresentation = (strContactsName + ": " + strPhoneNumber);
+//     }
+//     // ContactItem(const string& strName, const string& strNumber) : strContactsName(strName), strPhoneNumber(strNumber), strDisplayRepresentation(strName + ": " + strNumber){}; // alt_variant 
+
+//     //используется в set::finde()
+//     bool operator ==  (const ContactItem& itemToCompare) const
+//     {
+//         return (itemToCompare.strContactsName == this->strContactsName);
+//     }
+
+//     //Используется как предикат сортировки
+//     bool operator < (const ContactItem& itemToCompare) const 
+//     {
+//         return (this->strContactsName < itemToCompare.strContactsName);
+//     }
+
+//     //Используется в DisplayContents для cout
+//     operator const char*() const
+//     {
+//         return strDisplayRepresentation.c_str();
+//     }
+// };
+
+// int main()
+// {
+//     set<ContactItem> setContacts;
+
+//     setContacts.insert(ContactItem("Jack Welsch", "+1 7889 879 879"));
+//     setContacts.insert(ContactItem("Bill Gates", "+1 97 7897 8799 8"));
+//     setContacts.insert(ContactItem("Angela Merkel", "+49 23456 5466"));
+//     setContacts.insert(ContactItem("Vldaimir Putin", "+7 6645 4564 797"));
+//     setContacts.insert(ContactItem("Manmohan Sing", "+91 234 4564 789"));
+//     setContacts.insert(ContactItem("Barack Obama", "+1 745 641 314"));
+
+//     DisplayContents(setContacts);
+
+//     cout << "Enter a person whose number you wish to deleate: ";
+//     string NameInput;
+//     getline(cin, NameInput);
+
+//     auto iContactFound = setContacts.find(ContactItem(NameInput, ""));
+
+//     if(iContactFound != setContacts.end())
+//     {
+//         //Удалить контакт, найденый в наборе
+//         setContacts.erase(iContactFound);
+//         cout << "Display contents after erasing: " << NameInput << endl;
+//         DisplayContents(setContacts);
+//     }
+//     else
+//         cout << "Contact not found" << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 19.6 Применение методов insert(), find(), size(), max_bucket_count(),
+// load_factor() и max_load_factor() класса std::unordered_set*/
+// #include <unordered_set>
+// #include <iostream>
+// using namespace std;
+
+// template<typename T>
+// void DisplayContents(const T& Input)
+// {
+//     cout << "Number of elements, size() = " <<Input.size() << endl;
+//     cout << "Max bucket count = " << Input.max_bucket_count() << endl;
+//     cout << "Load factor: " << Input.load_factor() << endl;
+//     cout << "Max load factor = " << Input.max_load_factor() << endl;
+//     cout << "Unordered set contains: " << endl;
+
+//     for(auto iElement = Input.cbegin(); iElement != Input.cend(); ++iElement)
+//         cout << *iElement << ' ';
+//     cout << endl;
+// }
+
+// int main()
+// {
+//     //Создание экземпляра контейнера unordered_set:
+//     unordered_set<int> usetInt;
+
+//     usetInt.insert(1000);
+//     usetInt.insert(-3);
+//     usetInt.insert(2011);
+//     usetInt.insert(300);
+//     usetInt.insert(-1000);
+//     usetInt.insert(989);
+//     usetInt.insert(-300);
+//     usetInt.insert(111);
+//     DisplayContents(usetInt);
+//     usetInt.insert(999);
+//     DisplayContents(usetInt);
+
+//     //find():
+//     cout << "Enter int you want to check for existence in set: ";
+//     int Key = 0;
+//     cin >> Key;
+//     auto iPairThousand = usetInt.find(Key);
+
+//     if(iPairThousand != usetInt.end())
+//         cout << *iPairThousand << " found in set" << endl;
+//     else
+//         cout << Key << " not available in set" << endl;
+    
+//     return 0;
+// }
