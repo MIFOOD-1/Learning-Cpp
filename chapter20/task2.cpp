@@ -33,7 +33,7 @@ template <typename T>
 void DisplayContents(const T& Input)
 {
     for(auto iElement = Input.cbegin(); iElement != Input.cend(); iElement++)
-        cout << "[" << iElement->first.strWord << "-" << iElement->first.blsFromLatin << "] -> " << iElement->second << endl;
+        cout << "[" << iElement->first.strWord << "-" << (iElement->first.blsFromLatin ? "true" : "false") << "] -> " << iElement->second << endl;
     cout << endl;
 }
 
