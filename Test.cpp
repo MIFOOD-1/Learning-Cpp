@@ -6662,3 +6662,358 @@
     
 //     return 0;
 // }
+
+// /*Листинг 20.1 Создание экземпляров объектов map и multimap,
+// соотносящих целочисленные ключи со строковыми значениями*/
+// #include <map>
+// #include <string>
+
+// template<typename KeyType>
+// struct ReverseSort
+// {
+//     bool operator()(const KeyType& key1, const KeyType& key2)
+//     {
+//         return (key1 > key2);
+//     }
+// };
+
+// int main()
+// {
+//     using namespace std;
+
+//     //карта и мультикарта ключей типа int со значениями типа string
+
+//     map<int, string> mapIntToString1;
+//     multimap<int, string> mmapIntToString1;
+
+//     //карта и мультикарта создаются как копия лругого контейнера
+//     map<int, string> mapIntToString2(mapIntToString1);
+//     multimap<int, string> mmapIntToString2(mmapIntToString1);
+
+//     //карта и мултикарта создаются как часть друго контейнера
+//     map<int, string> mapIntToString3(mapIntToString1.cbegin(), mapIntToString1.cend());
+
+//     multimap<int, string> mmapIntToString3(mmapIntToString1.cbegin(), mmapIntToString1.cend());
+
+//     //карта и мультикарта с предикатом сортировки в обратном порядке
+//     map<int, string, ReverseSort<int>> mapIntToString4(mapIntToString1.cbegin(), mapIntToString1.cend());
+
+//     multimap<int, string, ReverseSort<int>> mmapIntToString4(mapIntToString1.cbegin(), mapIntToString1.cend());
+
+//     return 0;
+// }
+
+// /*Листинг 20.2 Вставка элементов в карту и мультикарту с использованием перегруженного метода
+// insert() и семантики массива с применением оператора operator[]*/
+// #include <map>
+// #include <iostream>
+// #include <string>
+
+// using namespace std;
+
+// //Определение типа карты и мультикарты для удобочитаемости
+// typedef map<int, string> MAP_INT_STRING;
+// typedef multimap<int, string> MMAP_INT_STRING;
+
+// template <typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.cbegin(); iElement != Input.cend(); iElement++)
+//         cout << iElement->first << " -> " << iElement->second << endl;
+//     cout << endl;
+// }
+
+// int main()
+// {
+//     MAP_INT_STRING mapIntToString;
+
+//     //Вставка пары "ключ-зачение" в карту с использованием ключевого слова value_type
+//     mapIntToString.insert(MAP_INT_STRING::value_type(3, "Three"));
+
+//     //Вставка пары с использованием функции make_pair()
+//     mapIntToString.insert(make_pair(-1, "Minus One"));
+
+//     //Вставка обеъкта пары непосредственно
+//     mapIntToString.insert(pair<int, string>(1000, "One Thousand"));
+
+//     //Вставка пары "ключ-значение" с использованием синтаксиса массива
+//     mapIntToString[1000000] = "One Million";
+
+//     cout << "The map contains " << mapIntToString.size();
+//     cout << "key-value paris. They are: " << endl;
+//     DisplayContents(mapIntToString);
+
+//     //Создание экземпляра мультикарты, являющейся копией карты
+//     MMAP_INT_STRING mmapIntToString(mapIntToString.cbegin(), mapIntToString.cend());
+
+//     //Функция insert() работает так же, как у мультикарты
+//     //Мультикарта может хранить дубликаты. Вставка дубликата
+//     mmapIntToString.insert(make_pair(1000, "Thousand"));
+
+//     cout << endl << "The multimap contains " << mmapIntToString.size();
+//     cout << " key-value pairs. They are: " << endl;
+//     DisplayContents(mmapIntToString);
+
+//     //Мультикарта способна возвратить количество пар с тем же ключом 
+//     cout << "The number of pairs in the miltimap with 1000 as their key:" << mmapIntToString.count(1000) << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 20.3 Использование функции-члена find()
+// для поиска в карте пары "ключ-значение" */
+// #include <map>
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// template <typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.cbegin(); iElement != Input.cend(); iElement++)
+//         cout << iElement->first << " -> " << iElement->second << endl;
+//     cout << endl;
+// }
+
+// int main()
+// {
+//     map<int, string> mapIntToStrong;
+
+//     mapIntToStrong.insert(make_pair(3, "Three"));
+//     mapIntToStrong.insert(make_pair(45, "Forty Five"));
+//     mapIntToStrong.insert(make_pair(-1, "Minus One"));
+//     mapIntToStrong.insert(make_pair(1000, "Thousand"));
+
+//     cout << "The multimap contains " << mapIntToStrong.size();
+//     cout << " key-value pairs. They are: " << endl;
+
+//     //Вывод содержимого карты на экран
+//     DisplayContents(mapIntToStrong);
+
+//     cout << "Enter the key you wish to find: ";
+//     int Key = 0;
+//     cin >> Key;
+
+//     auto iPairFound = mapIntToStrong.find(Key);
+//     if(iPairFound != mapIntToStrong.end())
+//     {
+//         cout << "Key " << iPairFound->first << " points to Value: ";
+//         cout << iPairFound->second << endl;
+//     }
+//     else
+//         cout << "Ssory, pair with key " << Key << " not in map" << endl;
+    
+//     return 0;
+// }
+
+// /*Листинг 20.4 Удаление элементов из мультикарты*/
+// #include <map>
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// template <typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.cbegin(); iElement != Input.cend(); iElement++)
+//         cout << iElement->first << " -> " << iElement->second << endl;
+//     cout << endl;
+// }
+
+// int main()
+// {
+//     multimap<int, string> mmapIntToString;
+
+//     //Вставка пар "ключ значение" в мультикарту
+//     mmapIntToString.insert(make_pair(3, "Three"));
+//     mmapIntToString.insert(make_pair(45, "Forty Five"));
+//     mmapIntToString.insert(make_pair(-1, "Minus One"));
+//     mmapIntToString.insert(make_pair(1000, "Thousand"));
+
+//     //Вставка дубликатов в мультикарту
+//     mmapIntToString.insert(make_pair(-1, "Minus One"));
+//     mmapIntToString.insert(make_pair(1000, "Thousand"));
+
+
+//     cout << "The multimap contains " << mmapIntToString.size();
+//     cout << " key-value pairs. " << "The are: " << endl;
+//     DisplayContents(mmapIntToString);
+
+//     //Удаление элемента с ключом -1 из мультикарты
+//     auto NumPairsErased = mmapIntToString.erase(-1);
+//     cout << "Erased " << NumPairsErased << " pairs with -1 as key." << endl;
+
+//     //Удаление из мульткарты элемента по данному итератору
+//     auto iPairLocator = mmapIntToString.find(45);
+//     if(iPairLocator != mmapIntToString.end())
+//     {
+//         mmapIntToString.erase(iPairLocator);
+//         cout << "Erased a pair with 45 as key using an iterator" << endl;
+//     }
+
+//     //Удаление из мультикарт диапазонаа
+//     cout << "Erasing the range of pairs with 1000 as key. " << endl;
+//     mmapIntToString.erase(mmapIntToString.lower_bound(1000), mmapIntToString.upper_bound(1000));
+//     cout << "The multimap now contains " << mmapIntToString.size();
+//     cout << " key-value pair(s). " << "They are: " << endl;
+//     DisplayContents(mmapIntToString);
+
+//     return 0;
+// }
+
+
+// /*Листинг 20.5 Предоставление специального предиката
+// сортировки - телефонный справочник*/
+// #include <map>
+// #include <algorithm>
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// template <typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.cbegin(); iElement != Input.cend(); iElement++)
+//         cout << iElement->first << " -> " << iElement->second << endl;
+//     cout << endl;
+// }
+
+// struct PredIgnoreCase
+// {
+//     bool operator()(const string& str1, const string& str2) const
+//     {
+//         string str1NoCase(str1), str2NoCase(str2);
+
+//         std::transform(
+//             str1.begin(), str1.end(), str1NoCase.begin(),
+//             [](unsigned char c) {
+//                 return std::tolower(c);
+//             }
+//         );
+
+//         std::transform(
+//             str2.begin(), str2.end(), str2NoCase.begin(),
+//             [](unsigned char c) {
+//                 return std::tolower(c);
+//             }
+//         );
+
+//         return str1NoCase < str2NoCase;
+//     }
+// };
+
+// typedef map<string,string> DIRECTORY_WITHCASE;
+// typedef map<string,string, PredIgnoreCase> DIRECTORY_NOCASE;
+
+// int main()
+// {
+//     //не зависящий от регистра каталог: регистр строкового ключа
+//     //не имеет значения
+//     DIRECTORY_NOCASE dirCaseInsensitive;
+
+//     dirCaseInsensitive.insert(make_pair("John", "2345764"));
+//     dirCaseInsensitive.insert(make_pair("JOHN", "2345764"));
+//     dirCaseInsensitive.insert(make_pair("Sara", "42367236"));
+//     dirCaseInsensitive.insert(make_pair("Jack", "32435348"));
+
+//     cout << "Display contents of the case-insentive map:" << endl;
+//     DisplayContents(dirCaseInsensitive);
+
+//     //Зависящая от регистра карта: регистр строкового ключа влияет на вставку и поиск
+//     DIRECTORY_WITHCASE dirCaseSensitive(dirCaseInsensitive.begin(), dirCaseInsensitive.end());
+
+//     cout << "Display contents of the case-sensitive map:" << endl;
+//     DisplayContents(dirCaseSensitive);
+
+//     //Поиск по имени в двух картах и отображение результата
+//     cout << "Please enter a name to search: " << endl << "> ";
+//     string strNameInput;
+//     cin >> strNameInput;
+
+//     //поиск в карте...
+//     auto iPairInNoCaseDir = dirCaseInsensitive.find(strNameInput);
+//     if(iPairInNoCaseDir != dirCaseInsensitive.end())
+//     {
+//         cout << iPairInNoCaseDir->first << "'s number in the case-insensitive";
+//         cout << " directory is: " << iPairInNoCaseDir->second <<endl;
+//     }
+
+//     else
+//     {
+//         cout << strNameInput << "'s number not found ";
+//         cout << "in the case-insensitive directory" << endl;
+//     }
+    
+//     //поиск в заввисящий от регистра карте...
+//     auto iPairInCaseSensDir = dirCaseSensitive.find(strNameInput);
+//     if(iPairInCaseSensDir != dirCaseSensitive.end())
+//     {
+//         cout << iPairInCaseSensDir->first << "'s number in the case-sensitive";
+//         cout << " directory is: " <<  iPairInCaseSensDir->second << endl;
+//     }
+
+//     else
+//     {
+//         cout << strNameInput << "'s number not found ";
+//         cout << "in the case-sensitive directory" << endl;
+//     }
+
+//     return 0;
+// }
+
+
+/*Листинг 20.6 Создание экземпляра реализации хэш таблицы unordered_map,
+а также использование методов insert(), find(), size(), 
+max_bucket_count(), load_factor() and max_load_factor()*/
+#include <iostream>
+#include <string>
+#include <unordered_map>
+using namespace std;
+
+template<typename T1, typename T2>
+void DisplayUnorderedMap(unordered_map<T1, T2>& Input)
+{
+    cout << "Number of pairs, size(): " << Input.size() << endl;
+    cout << "Max bucket count = " << Input.max_bucket_count() << endl;
+    cout << "Load factor: " << Input.load_factor() << endl;
+    cout << "Max load factor = " << Input.max_load_factor() << endl;
+    cout << "Unordered Map contains: " << endl;
+
+    for(auto iElement = Input.cbegin(); iElement != Input.cend(); iElement++)
+        cout << iElement->first << " -> " <<iElement->second <<endl;
+}
+
+int main()
+{
+    unordered_map<int, string> umapIntToString;
+    umapIntToString.insert(make_pair(1, "One"));
+    umapIntToString.insert(make_pair(45, "Forty Five"));
+    umapIntToString.insert(make_pair(1001, "Thousand One"));
+    umapIntToString.insert(make_pair(-2, "Minus Two"));
+    umapIntToString.insert(make_pair(-1000, "Minus One Thousand"));
+    umapIntToString.insert(make_pair(100, "One Hundred"));
+    umapIntToString.insert(make_pair(12, "Twelwe"));
+    umapIntToString.insert(make_pair(-100, "Minuc One Hundred"));
+
+    DisplayUnorderedMap<int, string>(umapIntToString);
+
+    cout << "Inserting one more element" << endl;
+    umapIntToString.insert(make_pair(300, "Three Hundred"));
+    DisplayUnorderedMap<int, string>(umapIntToString);
+
+    cout << "Enter key to find for: ";
+    int Key = 0;
+    cin >> Key;
+
+    auto iElementFound = umapIntToString.find(Key);
+    if(iElementFound != umapIntToString.end())
+    {
+        cout << "Found! Key " << iElementFound->first << " points to value ";
+        cout << iElementFound->second << endl;
+    }
+
+    else
+        cout << "Key has no corresponding value in unordered map!" << endl;
+
+    return 0;
+}
