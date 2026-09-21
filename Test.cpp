@@ -6962,58 +6962,366 @@
 // }
 
 
-/*Листинг 20.6 Создание экземпляра реализации хэш таблицы unordered_map,
-а также использование методов insert(), find(), size(), 
-max_bucket_count(), load_factor() and max_load_factor()*/
-#include <iostream>
+// /*Листинг 20.6 Создание экземпляра реализации хэш таблицы unordered_map,
+// а также использование методов insert(), find(), size(), 
+// max_bucket_count(), load_factor() and max_load_factor()*/
+// #include <iostream>
+// #include <string>
+// #include <unordered_map>
+// using namespace std;
+
+// template<typename T1, typename T2>
+// void DisplayUnorderedMap(unordered_map<T1, T2>& Input)
+// {
+//     cout << "Number of pairs, size(): " << Input.size() << endl;
+//     cout << "Max bucket count = " << Input.max_bucket_count() << endl;
+//     cout << "Load factor: " << Input.load_factor() << endl;
+//     cout << "Max load factor = " << Input.max_load_factor() << endl;
+//     cout << "Unordered Map contains: " << endl;
+
+//     for(auto iElement = Input.cbegin(); iElement != Input.cend(); iElement++)
+//         cout << iElement->first << " -> " <<iElement->second <<endl;
+// }
+
+// int main()
+// {
+//     unordered_map<int, string> umapIntToString;
+//     umapIntToString.insert(make_pair(1, "One"));
+//     umapIntToString.insert(make_pair(45, "Forty Five"));
+//     umapIntToString.insert(make_pair(1001, "Thousand One"));
+//     umapIntToString.insert(make_pair(-2, "Minus Two"));
+//     umapIntToString.insert(make_pair(-1000, "Minus One Thousand"));
+//     umapIntToString.insert(make_pair(100, "One Hundred"));
+//     umapIntToString.insert(make_pair(12, "Twelwe"));
+//     umapIntToString.insert(make_pair(-100, "Minuc One Hundred"));
+
+//     DisplayUnorderedMap<int, string>(umapIntToString);
+
+//     cout << "Inserting one more element" << endl;
+//     umapIntToString.insert(make_pair(300, "Three Hundred"));
+//     DisplayUnorderedMap<int, string>(umapIntToString);
+
+//     cout << "Enter key to find for: ";
+//     int Key = 0;
+//     cin >> Key;
+
+//     auto iElementFound = umapIntToString.find(Key);
+//     if(iElementFound != umapIntToString.end())
+//     {
+//         cout << "Found! Key " << iElementFound->first << " points to value ";
+//         cout << iElementFound->second << endl;
+//     }
+
+//     else
+//         cout << "Key has no corresponding value in unordered map!" << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 21.1 Отображение содержимого коллекции на экране
+// с использованием унарной функции*/
+// #include <algorithm>
+// #include <iostream>
+// #include <vector>
+// #include <list>
+
+// using namespace std;
+
+// //Структура, ведущая себя как унарная функция
+// template<typename elementType>
+// struct DisplayElement
+// {
+//     void operator() (const elementType& element) const
+//     {
+//         cout << element << ' ';
+//     }
+// };
+
+// int main()
+// {
+//     vector<int> vecIntegers;
+
+//     for(int nCount = 0; nCount < 10; ++nCount)
+//         vecIntegers.push_back(nCount);
+
+//     list<char> listChars;
+
+//     for(char nChar = 'a'; nChar < 'k'; ++nChar)
+//     listChars.push_back(nChar);
+
+//     cout << "Display the vector of integers: " << endl;
+
+//     //Отобразить массив целых чисел
+//     for_each(vecIntegers.begin(), vecIntegers.end(), DisplayElement<int>());
+
+//     cout << endl << endl;
+//     cout << "Display the list of characters: " << endl;
+
+//     //Отобразить список символов
+//     for_each(listChars.begin(), listChars.end(), DisplayElement<char>()); 
+
+//     return 0;
+// }
+
+// //Листинг 21.2 Использование объекта функции для хранения состояния
+// #include <iostream>
+// #include <algorithm>
+// #include <vector>
+// using namespace std;
+
+// template<typename elementType>
+// struct DisplayElementKeepCount
+// {
+//     int Count;
+
+//     //Конструктор
+//     DisplayElementKeepCount() : Count(0) {}
+
+//     //Отобразить элемент, хранаящий количество!
+//     void operator()(const elementType& element)
+//     {
+//         ++Count;
+//         cout << element << ' ';
+//     }
+// };
+
+// int main()
+// {
+//     vector<int> vecIntegers;
+//     for(int nCount = 0; nCount < 10; ++nCount)
+//         vecIntegers.push_back(nCount);
+
+//     cout << "Displaying the vector of integers: " << endl;
+
+//     //Отобразить массив целых чисел
+//     DisplayElementKeepCount<int> Result;
+//     Result = for_each(vecIntegers.begin(), vecIntegers.end(), DisplayElementKeepCount<int>());
+//     //Result = for_each(vecIntegers.begin(), vecIntegers.end(), Result);
+
+
+
+
+//     cout << endl << endl;
+
+//     //Использование хранилища состояния ппри возвращении значения!
+//     cout << "'" << Result.Count << "' element were displayed!" << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 21.3 Унарный прдикат, определюящий явялется ли число кратным другому*/
+// //Структура как унарный предикат
+// template <typename numberType>
+// struct IsMultiple
+// {
+//     numberType Divisor;
+
+//     IsMultiple(const numberType& divisor)
+//     {
+//         Divisor = divisor;
+//     }
+
+//     bool operator()(const numberType& element) const
+//     {
+//         //проверить, кратен ли делить делимому
+//         return((element % Divisor) == 0);
+//     }
+// };
+
+// /*Листинг 24.4 Использование унарного предиката IsMultiple алгоритм std::find_if() для
+// поиска в векторе элемента, кратного введенному пользователем делителю*/
+// #include <algorithm>
+// #include <vector>
+// #include <iostream>
+// using namespace std;
+
+// //Сюда вставить структуру IsMultiple из листинга 21.3
+// template <typename numberType>
+// struct IsMultiple
+// {
+//     numberType Divisor;
+
+//     IsMultiple(const numberType& divisor)
+//     {
+//         Divisor = divisor;
+//     }
+
+//     bool operator()(const numberType& element) const
+//     {
+//         //проверить, кратен ли делить делимому
+//         return((element % Divisor) == 0);
+//     }
+// };
+
+// int main()
+// {
+//     vector <int> vecIntegers;
+//     cout << "The vector contans the following sample values: ";
+
+//     //Вставить примеры значений: 25 - 31
+//     for(int nCount = 25; nCount < 32; ++nCount)
+//     {
+//         vecIntegers.push_back(nCount);
+//         cout << nCount << ' ';
+//     }
+
+//     cout << endl << "Enter divisor (> 0): ";
+//     int Divisor = 2;
+//     cin >> Divisor;
+
+//     //Найти в коллецкии первый элемент, кратный 4
+//     auto iElement = find_if(vecIntegers.begin(), vecIntegers.end(), IsMultiple<int>(Divisor));
+
+//     if(iElement != vecIntegers.end())
+//     {
+//         cout << "First element in vector divisible by " << Divisor;
+//         cout << ": " << *iElement << endl;
+//     }
+// }
+
+// /*Листинг 21.5 Использование бинарной функции для умножения двух диапазонов*/
+// #include <vector>
+// #include <iostream>
+// #include <algorithm>
+
+// template <typename elementType>
+// class Multiply
+// {
+//     public:
+//     elementType operator() (const elementType& elem1, const elementType& elem2)
+//     {
+//         return (elem1 * elem2);
+//     }
+// };
+
+// int main()
+// {
+//     using namespace std;
+
+//     //Создание двух векторов целых чисел по 10 элементов каждый 
+//     vector <int> vecMultiplicand, vecMultiplier;
+
+//     //Вставить примеры значений от 0 до 9
+//     for(int nCount1 = 0; nCount1 < 10; ++nCount1)
+//         vecMultiplicand.push_back(nCount1);
+
+//     //Вставить примеры значений от 100 до 109
+//     for(int nCount2 = 100; nCount2 < 110; ++nCount2)
+//        vecMultiplier.push_back(nCount2);
+
+//     //Создать контейнер содержит результат умножения
+//     vector <int> vecResult;
+
+//     //Создать пространство для результата умножения
+//     vecResult.resize(10);
+
+//     transform(vecMultiplicand.begin(), //диапазон множителей
+//               vecMultiplicand.end(),   //конец диапазона
+//               vecMultiplier.begin(),   //значения множителей
+//               vecResult.begin(),        //диапазон, содержащий результат
+//               Multiply<int>());         //умножающая функция
+
+//     cout << "The contents of the first vector are: " << endl;
+//     for(size_t nIndex1 = 0; nIndex1 < vecMultiplicand.size(); ++nIndex1)
+//         cout << vecMultiplicand[nIndex1] << ' ';
+//     cout << endl;
+
+//     cout << "The contents of the second vector are: " << endl;
+//     for(size_t nIndex2 = 0; nIndex2 < vecMultiplier.size(); nIndex2++)
+//         cout << vecMultiplier[nIndex2] << ' ';
+//     cout << endl;
+
+//     cout << "The result of the multiplication is: " << endl;
+//     for(size_t nIndex = 0; nIndex < vecResult.size(); nIndex++)
+//         cout << vecResult[nIndex] << ' ';
+
+//     return 0;
+// }
+
+//*Листинг 21.6 Бинарный предикат для сортировки строк, независящей от регистра*/
+// #include <algorithm>
+// #include <string>
+// using namespace std;
+
+// class CompareStringNoCase
+// {
+//     public:
+//         bool operator() (const string& str1, const string& str2) const
+//         {
+//             string str1LowerCase;
+
+//             //Зарещерввировать пространство
+//             str1LowerCase.resize(str1.size());
+
+//             //Преорбразовать каждый символ в нижний регистр
+//             transform(str1.begin(), str1.end(), str1LowerCase.begin(),[](unsigned char ch) {return tolower(ch);});
+
+//             string str2LowerCase;
+//             str2LowerCase.resize(str2.size());
+//             transform(str2.begin(), str2.end(), str2LowerCase.begin(), [](unsigned char ch) {return tolower(ch);});
+
+//             return(str1LowerCase < str2LowerCase);
+//         }
+// };
+
+/*Листинг 21.7 Использование объекта функции класса CompareStringNoCase
+для независящей от регистра сортировки вектора строк*/
+//Здесь вставьте код класса CompareStringNoCase из листинга 21.6
+#include <algorithm>
 #include <string>
-#include <unordered_map>
+#include <vector>
+#include <iostream>
 using namespace std;
 
-template<typename T1, typename T2>
-void DisplayUnorderedMap(unordered_map<T1, T2>& Input)
+class CompareStringNoCase
 {
-    cout << "Number of pairs, size(): " << Input.size() << endl;
-    cout << "Max bucket count = " << Input.max_bucket_count() << endl;
-    cout << "Load factor: " << Input.load_factor() << endl;
-    cout << "Max load factor = " << Input.max_load_factor() << endl;
-    cout << "Unordered Map contains: " << endl;
+    public:
+        bool operator() (const string& str1, const string& str2) const
+        {
+            string str1LowerCase;
 
+            //Зарещерввировать пространство
+            str1LowerCase.resize(str1.size());
+
+            //Преорбразовать каждый символ в нижний регистр
+            transform(str1.begin(), str1.end(), str1LowerCase.begin(),[](unsigned char ch) {return tolower(ch);});
+
+            string str2LowerCase;
+            str2LowerCase.resize(str2.size());
+            transform(str2.begin(), str2.end(), str2LowerCase.begin(), [](unsigned char ch) {return tolower(ch);});
+
+            return(str1LowerCase < str2LowerCase);
+        }
+};
+
+template <typename T>
+void DisplayContents(const T& Input)
+{
     for(auto iElement = Input.cbegin(); iElement != Input.cend(); iElement++)
-        cout << iElement->first << " -> " <<iElement->second <<endl;
+        cout << *iElement << endl;
 }
 
 int main()
 {
-    unordered_map<int, string> umapIntToString;
-    umapIntToString.insert(make_pair(1, "One"));
-    umapIntToString.insert(make_pair(45, "Forty Five"));
-    umapIntToString.insert(make_pair(1001, "Thousand One"));
-    umapIntToString.insert(make_pair(-2, "Minus Two"));
-    umapIntToString.insert(make_pair(-1000, "Minus One Thousand"));
-    umapIntToString.insert(make_pair(100, "One Hundred"));
-    umapIntToString.insert(make_pair(12, "Twelwe"));
-    umapIntToString.insert(make_pair(-100, "Minuc One Hundred"));
+    //Оределить вектор строк для имен
+    vector <string> vecNames;
 
-    DisplayUnorderedMap<int, string>(umapIntToString);
+    //Вставить в вектор несколько примеров имен
+    vecNames.push_back("jim");
+    vecNames.push_back("Jack");
+    vecNames.push_back("Sam");
+    vecNames.push_back("Anna");
 
-    cout << "Inserting one more element" << endl;
-    umapIntToString.insert(make_pair(300, "Three Hundred"));
-    DisplayUnorderedMap<int, string>(umapIntToString);
+    cout << "The names in vector in order of insertion: " << endl;
+    DisplayContents(vecNames);
 
-    cout << "Enter key to find for: ";
-    int Key = 0;
-    cin >> Key;
+    cout << "Names after sorting using default std::less<>: " << endl;
+    sort(vecNames.begin(), vecNames.end());
+    DisplayContents(vecNames);
 
-    auto iElementFound = umapIntToString.find(Key);
-    if(iElementFound != umapIntToString.end())
-    {
-        cout << "Found! Key " << iElementFound->first << " points to value ";
-        cout << iElementFound->second << endl;
-    }
-
-    else
-        cout << "Key has no corresponding value in unordered map!" << endl;
+    cout << "Name after sorting using predicate that ignores case: " << endl;
+    sort(vecNames.begin(), vecNames.end(), CompareStringNoCase());
+    DisplayContents(vecNames);
 
     return 0;
 }
