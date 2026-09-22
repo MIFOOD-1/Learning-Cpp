@@ -7264,47 +7264,229 @@
 //         }
 // };
 
-/*Листинг 21.7 Использование объекта функции класса CompareStringNoCase
-для независящей от регистра сортировки вектора строк*/
-//Здесь вставьте код класса CompareStringNoCase из листинга 21.6
-#include <algorithm>
-#include <string>
-#include <vector>
+// /*Листинг 21.7 Использование объекта функции класса CompareStringNoCase
+// для независящей от регистра сортировки вектора строк*/
+// //Здесь вставьте код класса CompareStringNoCase из листинга 21.6
+// #include <algorithm>
+// #include <string>
+// #include <vector>
+// #include <iostream>
+// using namespace std;
+
+// class CompareStringNoCase
+// {
+//     public:
+//         bool operator() (const string& str1, const string& str2) const
+//         {
+//             string str1LowerCase;
+
+//             //Зарещерввировать пространство
+//             str1LowerCase.resize(str1.size());
+
+//             //Преорбразовать каждый символ в нижний регистр
+//             transform(str1.begin(), str1.end(), str1LowerCase.begin(),[](unsigned char ch) {return tolower(ch);});
+
+//             string str2LowerCase;
+//             str2LowerCase.resize(str2.size());
+//             transform(str2.begin(), str2.end(), str2LowerCase.begin(), [](unsigned char ch) {return tolower(ch);});
+
+//             return(str1LowerCase < str2LowerCase);
+//         }
+// };
+
+// template <typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.cbegin(); iElement != Input.cend(); iElement++)
+//         cout << *iElement << endl;
+// }
+
+// int main()
+// {
+//     //Оределить вектор строк для имен
+//     vector <string> vecNames;
+
+//     //Вставить в вектор несколько примеров имен
+//     vecNames.push_back("jim");
+//     vecNames.push_back("Jack");
+//     vecNames.push_back("Sam");
+//     vecNames.push_back("Anna");
+
+//     cout << "The names in vector in order of insertion: " << endl;
+//     DisplayContents(vecNames);
+
+//     cout << "Names after sorting using default std::less<>: " << endl;
+//     sort(vecNames.begin(), vecNames.end());
+//     DisplayContents(vecNames);
+
+//     cout << "Name after sorting using predicate that ignores case: " << endl;
+//     sort(vecNames.begin(), vecNames.end(), CompareStringNoCase());
+//     DisplayContents(vecNames);
+
+//     return 0;
+// }
+
+// /*Листинг 22.1 Отображение элементов контейнера при помощи алгоритма for_each(),
+// который вызывается лямбда-выражением, а не объектом функции*/
+// #include <algorithm>
+// #include <iostream>
+// #include <vector>
+// #include <list>
+
+// using namespace std;
+
+// int main()
+// {
+//     vector<int> vecIntegers;
+
+//     for(int nCount = 0; nCount < 10; ++nCount)
+//         vecIntegers.push_back(nCount);
+
+//     list<char> listChars;
+//     for(char nChar = 'a'; nChar < 'k'; ++nChar)
+//         listChars.push_back(nChar);
+
+//     cout << "Dusplaying vector of integers using lambda: " << endl;
+
+//     //Отобразить массив целых чисел
+//     for_each(vecIntegers.begin(), vecIntegers.end(), [](int& element) {cout << element << ' ';}); //лямбда
+
+//     cout << endl << endl;
+//     cout << "Disaplying list of characters using a lambda: " << endl;
+
+//     //Отобразить список символов
+//     for_each(listChars.begin(), listChars.end(), [](char& element){cout << element << ' ';}); //лямбда
+
+//     cout << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 22.2 Поиск четных чисел в коллекции с использованием лямбда-выражения
+// унарного предиката и алгоритма std::find_if()*/
+// #include <algorithm>
+// #include <vector>
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     vector<int> vecNums;
+//     vecNums.push_back(25);
+//     vecNums.push_back(101);
+//     vecNums.push_back(2011);
+//     vecNums.push_back(-50);
+
+//     auto iEvenNum = find_if(vecNums.cbegin(), vecNums.cend(), [](const int& Num){return ((Num % 2) == 0);});
+
+//     if(iEvenNum != vecNums.cend())
+//         cout << "Even number in collection is: " << *iEvenNum << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 22.3 Использование лямбда-выражений, харнящих
+// состояние для проверки кратности одного числа другому*/
+// #include <algorithm>
+// #include <vector>
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     vector<int> vecIntegers;
+//     cout << "The vector contains the following sample values: ";
+
+//     //Вставить примеры значений от 25 до 31
+//     for(int nCount = 25; nCount < 32; ++nCount)
+//     {
+//         vecIntegers.push_back(nCount);
+//         cout << nCount << ' ';
+//     }
+
+//     cout << endl << "Enter divisor (> 0) : ";
+//     int Divisor = 2;
+//     cin >> Divisor;
+
+//     //Найти первый элемент, кратный делителю
+//     vector<int>::iterator iElement;
+//     iElement = find_if(vecIntegers.begin(), vecIntegers.end(), [Divisor](int dividend){return (dividend % Divisor) == 0;});
+
+//     if(iElement != vecIntegers.end())
+//     {
+//         cout << "First element in vector divisible by " << Divisor;
+//         cout << ": " << *iElement << endl;
+//     }
+
+//     return 0;
+// }
+
+// /*Листинг 22.4 Лямбда-выражение как бинарная функция, перемножающая 
+// элементы двух контейнеров и сохраняющая результат в третьем*/
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+
+// int main()
+// {
+//     using namespace std;
+
+//     //Создание двух векторов целых чисел по 10 элементов каждый
+//     vector <int> vecMultiplicand, vecMultiplier;
+
+//     //Вставить примеры значений от 0 до 9
+//     for(int nCount1 = 0; nCount1 < 10; ++nCount1)
+//         vecMultiplicand.push_back(nCount1); 
+
+//     //Вставить примеры значений от 100 до 109
+//     for(int nCount2 = 100; nCount2 < 110; ++nCount2)
+//         vecMultiplier.push_back(nCount2); 
+
+//     //Третий контейнер содержит резльтат умножения
+//     vector<int> vecResult;
+
+//     //Создать пространтсво для результата умножения
+//     vecResult.resize(10);
+
+//     transform(vecMultiplicand.begin(), vecMultiplicand.end(), vecMultiplier.begin(), vecResult.begin(), [](int a, int b){return a * b;});
+
+//     cout << "The contents of the first vector are: " << endl;
+//     for(size_t nIndex1 = 0; nIndex1 < vecMultiplicand.size(); ++nIndex1)
+//         cout << vecMultiplicand[nIndex1] << ' ';
+//     cout << endl;
+
+//     cout << "The contents of the second vector are: " << endl;
+//     for(size_t nIndex2 = 0; nIndex2 < vecMultiplier.size(); ++nIndex2)
+//         cout << vecMultiplier[nIndex2] << ' ';
+//     cout << endl;
+
+//     cout << "The result of the multiplacation are: " << endl;
+//     for(size_t nIndex = 0; nIndex < vecResult.size(); ++nIndex)
+//         cout << vecResult[nIndex] << ' ';
+//     cout << endl;
+
+//     return 0;
+// }
+
+/*Листинг 22.5 Лямбда-выражение как бинарный предикат алгоритма 
+std::sort(), обеспечивающий независящую от ррегистра сортировку*/
 #include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
 using namespace std;
-
-class CompareStringNoCase
-{
-    public:
-        bool operator() (const string& str1, const string& str2) const
-        {
-            string str1LowerCase;
-
-            //Зарещерввировать пространство
-            str1LowerCase.resize(str1.size());
-
-            //Преорбразовать каждый символ в нижний регистр
-            transform(str1.begin(), str1.end(), str1LowerCase.begin(),[](unsigned char ch) {return tolower(ch);});
-
-            string str2LowerCase;
-            str2LowerCase.resize(str2.size());
-            transform(str2.begin(), str2.end(), str2LowerCase.begin(), [](unsigned char ch) {return tolower(ch);});
-
-            return(str1LowerCase < str2LowerCase);
-        }
-};
 
 template <typename T>
 void DisplayContents(const T& Input)
 {
-    for(auto iElement = Input.cbegin(); iElement != Input.cend(); iElement++)
+    for(auto iElement = Input.begin(); iElement != Input.end(); ++iElement)
         cout << *iElement << endl;
 }
 
 int main()
 {
-    //Оределить вектор строк для имен
-    vector <string> vecNames;
+    //Оределить вектор строк для содержания имен
+    vector<string> vecNames;
 
     //Вставить в вектор несколько примеров имен
     vecNames.push_back("jim");
@@ -7316,11 +7498,29 @@ int main()
     DisplayContents(vecNames);
 
     cout << "Names after sorting using default std::less<>: " << endl;
+
     sort(vecNames.begin(), vecNames.end());
     DisplayContents(vecNames);
 
-    cout << "Name after sorting using predicate that ignores case: " << endl;
-    sort(vecNames.begin(), vecNames.end(), CompareStringNoCase());
+    cout << "Names after sorting using predicate that ignores case:" << endl;
+    sort(vecNames.begin(), vecNames.end(), [](const string& str1, const string& str2)->bool
+        {
+            string str1LowerCase;
+
+            //Зарезервировать пространство
+            str1LowerCase.resize(str1.size());
+
+            //преобразлвать каждый символ в нижний регистр
+            transform(str1.begin(), str1.end(), str1LowerCase.begin(), [](char  input){return std::tolower(input);});
+
+            string str2LowerCase;
+            str2LowerCase.resize(str2.size());
+            transform(str2.begin(), str2.end(), str2LowerCase.begin(),[](char  input){return std::tolower(input);});;
+
+            return (str1LowerCase < str2LowerCase);
+        } //конец лямбды
+        ); //конец сортировки
+
     DisplayContents(vecNames);
 
     return 0;
