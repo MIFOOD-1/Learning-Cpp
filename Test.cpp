@@ -7468,15 +7468,585 @@
 //     return 0;
 // }
 
-/*Листинг 22.5 Лямбда-выражение как бинарный предикат алгоритма 
-std::sort(), обеспечивающий независящую от ррегистра сортировку*/
-#include <iostream>
-#include <string>
+// /*Листинг 22.5 Лямбда-выражение как бинарный предикат алгоритма 
+// std::sort(), обеспечивающий независящую от ррегистра сортировку*/
+// #include <iostream>
+// #include <string>
+// #include <algorithm>
+// #include <vector>
+// using namespace std;
+
+// template <typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.begin(); iElement != Input.end(); ++iElement)
+//         cout << *iElement << endl;
+// }
+
+// int main()
+// {
+//     //Оределить вектор строк для содержания имен
+//     vector<string> vecNames;
+
+//     //Вставить в вектор несколько примеров имен
+//     vecNames.push_back("jim");
+//     vecNames.push_back("Jack");
+//     vecNames.push_back("Sam");
+//     vecNames.push_back("Anna");
+
+//     cout << "The names in vector in order of insertion: " << endl;
+//     DisplayContents(vecNames);
+
+//     cout << "Names after sorting using default std::less<>: " << endl;
+
+//     sort(vecNames.begin(), vecNames.end());
+//     DisplayContents(vecNames);
+
+//     cout << "Names after sorting using predicate that ignores case:" << endl;
+//     sort(vecNames.begin(), vecNames.end(), [](const string& str1, const string& str2)->bool
+//         {
+//             string str1LowerCase;
+
+//             //Зарезервировать пространство
+//             str1LowerCase.resize(str1.size());
+
+//             //преобразлвать каждый символ в нижний регистр
+//             transform(str1.begin(), str1.end(), str1LowerCase.begin(), [](char  input){return std::tolower(input);});
+
+//             string str2LowerCase;
+//             str2LowerCase.resize(str2.size());
+//             transform(str2.begin(), str2.end(), str2LowerCase.begin(),[](char  input){return std::tolower(input);});;
+
+//             return (str1LowerCase < str2LowerCase);
+//         } //конец лямбды
+//         ); //конец сортировки
+
+//     DisplayContents(vecNames);
+
+//     return 0;
+// }
+
+// /*Листинг 23.1 Использование функции find() для поиска значения в векторе
+// и функции find_if() для поиска первого четного числа
+// по заданному унарному редикату в лямбда-выражении*/
+// #include <iostream>
+// #include <algorithm>
+// #include <vector>
+
+// int main()
+// {
+//     using namespace std;
+//     vector<int> vecIntegers;
+
+//     //Вставака примеров значений от -9 до 9
+//     for(int SampleValue = -9; SampleValue < 10; ++SampleValue)
+//         vecIntegers.push_back(SampleValue);
+
+//     cout << "Enter number to find in collection: ";
+//     int NumToFind = 0;
+//     cin >> NumToFind;
+
+//     auto iElementFound = find(vecIntegers.cbegin(), vecIntegers.cend(), NumToFind);
+
+//     //Проверить успех поиска
+//     if(iElementFound != vecIntegers.cend())
+//         cout << "Result: Value " << *iElementFound << " found!" << endl;
+//     else
+//         cout << "Result: No element contains value " << NumToFind << endl;
+
+//     cout << "Finding the first even number using find_if: " << endl;
+
+//     auto iEvenNumber = find_if(vecIntegers.cbegin(), vecIntegers.cend(), [](int element) {return (element % 2) == 0;});
+
+//     if(iEvenNumber != vecIntegers.end())
+//     {
+//         cout << "Number '" << *iEvenNumber << "' found at position ["; cout << distance(vecIntegers.cbegin(), iEvenNumber);
+//         cout << "]" << endl;
+//     }
+
+//     return 0;
+// }
+
+// /*Листинг 23.2 Применение функции std::count() для определения
+// количества элементов с указанным значением и функции count_if() для
+// определения количества элементов, удовлетворяющих условию*/
+// #include <algorithm>
+// #include <vector>
+// #include <iostream>
+
+// //Унарный предикат для функции *_if
+// template <typename elementType>
+// bool IsEven(const elementType& number)
+// {
+//     return ((number % 2) == 0); //true , если четное
+// }
+
+// int main()
+// {
+//     using namespace std;
+//     vector<int> vecIntegers;
+
+//     cout << "Populating a vector<int> with values from -9 to 9" << endl;
+//     for(int nNum = -9; nNum < 10; ++nNum)
+//         vecIntegers.push_back(nNum);
+
+//     //Использование алгоритма count  для определения количества '0'
+//     size_t nNumZeroes = count(vecIntegers.begin(), vecIntegers.end(), 0);
+//     cout << "Number of instances of '0': " << nNumZeroes << endl << endl;
+
+//     //Использование алгоритма count_if с унарным предикатом IsEven
+//     size_t nNumEvenElements = count_if(vecIntegers.begin(), vecIntegers.end(), IsEven<int>);
+
+//     cout << "Number of even elements: " << nNumEvenElements << endl;
+//     cout << "Number of odd elements: ";
+//     cout << vecIntegers.size() - nNumEvenElements << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 23.3 Поиск диапазона в коллекции с использованием
+// алгоритмов search() and search_n()*/
+// #include <iostream>
+// #include <algorithm>
+// #include <vector>
+// #include <list>
+
+// using namespace std;
+
+// template<typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.begin(); iElement != Input.end(); ++iElement)
+//         cout << *iElement << ' ';
+//     cout << endl;
+// }
+
+// int main()
+// {
+//     //Пример контейнера (вектор целых чисел, содержащий значени от -9 до 9)
+//     vector<int> vecIntegers;
+
+//     for(int nNum = -9; nNum < 10; ++nNum)
+//         vecIntegers.push_back(nNum);
+
+//     //Вставить в вектор еще несколько примеров значений
+//     vecIntegers.push_back(9);
+//     vecIntegers.push_back(9);
+
+//     //Еще один пример контейнера (список целых чисел от -4 до 4)
+//     list<int> listIntegers;
+//     for(int nNum = -4; nNum < 5; ++nNum)
+//         listIntegers.push_back(nNum);
+    
+//     cout << "The contents of the sample vector are: " << endl;
+//     DisplayContents(vecIntegers);
+
+//     cout << "The contents of the sample list are: " << endl;
+//     DisplayContents(listIntegers);
+
+//     cout << "search() for the contents of list in vector: " << endl;
+//     auto iRange = search(vecIntegers.begin(),       //Начало диапазона
+//                          vecIntegers.end(),         //конец диапазона для поиска
+//                          listIntegers.begin(),      //начало диапазона для поиска
+//                          listIntegers.end());       //конец диапазона для поиска
+
+//     //Проверка успеха поиска
+//     if(iRange != vecIntegers.end())
+//     {
+//         cout << "Sequence in list found in vector at positio: ";
+//         cout << distance (vecIntegers.begin(), iRange) << endl;
+//     }
+
+//     cout << "Seraching(9, 9, 9) int vector at position: " << endl;
+//     auto iPartialRange = search_n (vecIntegers.begin(),     
+//                                     vecIntegers.end(),
+//                                     3,                      //количество искомых эллеменов
+//                                     9);                     //Искоммый элемент
+
+
+//     if(iPartialRange != vecIntegers.end())
+//     {
+//         cout << "Sequence {9, 9, 9} found in vector at position: ";
+//         cout << distance(vecIntegers.begin(), iPartialRange) << endl;
+//     }
+
+//     return 0;
+// }
+
+
+// /*Листинг 23.4 Использование алгоримтов fill() and fill_n()
+// для установки исходных значений контейнера*/
+// #include <iostream>
+// #include <algorithm>
+// #include <vector>
+
+// int main()
+// {
+//     using namespace std;
+
+//     //Инициализировать пример вектора из 3 элементов
+//     vector<int> vecIntegers(3);
+
+//     //Заполнить все элементы контейнера значением 9
+//     fill(vecIntegers.begin(), vecIntegers.end(), 9);
+
+//     //Увеличить размер вектора до 6 элементов
+//     vecIntegers.resize(6);
+
+//     //Заполнить эти три элемента значением -9, начиная с позиции 3
+//     fill_n(vecIntegers.begin() + 3, 3, -9);
+
+//     cout << "Contents of the vector are: " << endl;
+//     for(size_t nIndex = 0; nIndex < vecIntegers.size(); ++nIndex)
+//     {
+//         cout << "Element [" << nIndex << "] = ";
+//         cout << vecIntegers[nIndex] << endl;
+//     }
+
+//     return 0;
+// }
+
+// /*Листинг 23.5 Использование алгоритмов generate() and generate_n()
+// для инициализации коллекции случайныими значениями*/
+// #include <algorithm>
+// #include <vector>
+// #include <list>
+// #include <iostream>
+
+// int main()
+// {
+//     using namespace std;
+
+//     vector<int> vecIntegers(10);
+//     generate(vecIntegers.begin(), vecIntegers.end(), rand);
+
+//     cout << "Elements in the vector of size " << vecIntegers.size();
+//     cout << " assigned by 'generate' are: " << endl << "{";
+//     for(size_t nCount = 0; nCount < vecIntegers.size(); ++nCount)
+//         cout << vecIntegers[nCount] << ' ';
+//     cout << "}" << endl << endl;
+
+//     list<int> listIntegers(10);
+
+//     generate_n(listIntegers.begin(), 5, rand);
+
+//     cout << "Elements in the list of size: " << listIntegers.size();
+//     cout << " assigned by 'generate' are: " << endl << "{";
+//     list<int>::const_iterator iElementLocator;
+//     for(iElementLocator = listIntegers.begin(); iElementLocator != listIntegers.end(); ++iElementLocator)
+//         cout << *iElementLocator << ' ';
+//     cout << "}" << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 26.6 Отображение содержимого последовательности 
+// с использованием алгоритма for_each()*/
+// #include <algorithm>
+// #include <iostream>
+// #include <vector> 
+// #include <string>
+// using namespace std;
+
+// //Тип объекта унарной функции, вызываеомй алгоритмом for_each
+// template <typename elementType>
+// struct DisplayElementKeepCount
+// {
+//     int Count;
+
+//     //Конструктор
+//     DisplayElementKeepCount(): Count(0) {}
+
+//     void operator() (const elementType& element)
+//     {
+//         ++Count;
+//         cout << element << ' ';
+//     }
+// };
+
+// int main()
+// {
+//     vector<int> vecIntegers;
+//     for(int nCount = 0; nCount < 10; ++nCount)
+//         vecIntegers.push_back(nCount);
+
+//     cout<< "Displaying the vector of integers: " << endl;
+
+//     //Отобразить массив целых чисел
+//     DisplayElementKeepCount<int> Functor = for_each(vecIntegers.begin(), vecIntegers.end(), DisplayElementKeepCount<int>());
+
+//     cout << endl;
+
+//     //Использование состояния, хранимого в возвращаеомом значении
+//     //алгоритма for_each!
+
+//     cout << "'" << Functor.Count << "' elements werr displayed" << endl;
+
+//     string Sample("for_each and strings!");
+//     cout << "String dispalyed using lambda: " << endl;
+
+//     int NumChars = 0;
+//     for_each(Sample.begin(), Sample.end(), [&NumChars](char c){cout << c << ' '; ++NumChars;});
+
+//     cout << endl;
+//     cout << "'" << NumChars << "' characters were displayed" << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 23.7 Использование алгоритма std::transform()
+// с унарными и бинарными функциями*/
+// #include <algorithm>
+// #include <string>
+// #include <vector>
+// #include <deque>
+// #include <iostream>
+// #include <functional>
+
+// int main()
+// {
+//     using namespace std;
+
+//     string Sample("THIS is a TEst string!");
+//     cout << "The sample string is: " << Sample << endl;
+
+//     string strLowerCaseCopy;
+//     strLowerCaseCopy.resize(Sample.size());
+
+//     transform(Sample.begin(), Sample.end(), strLowerCaseCopy.begin(), [](char c){return std::tolower(c);});
+
+//     cout << "Result of 'transform' on the string with 'tolower': " << endl;
+//     cout << "\"" << strLowerCaseCopy << "\"" << endl << endl;
+
+//     //Два примера векторов целых чисел...
+//     vector<int> vecIntegers1, vecIntegers2;
+//     for(int nNum = 0; nNum < 10; ++nNum)
+//     {
+//         vecIntegers1.push_back(nNum);
+//         vecIntegers2.push_back(10 - nNum);
+//     }
+
+//     //Диапазон значений
+//     deque<int> dqResultAddition(vecIntegers1.size());
+
+//     transform(vecIntegers1.begin(), vecIntegers1.end(), vecIntegers2.begin(), dqResultAddition.begin(), plus<int>());
+
+//     cout << "Result of 'transform' using binary function 'plus': " << endl;
+//     cout << endl << "Index Vector1 + Vector2 = Result(in Deque)" << endl;
+
+//     for(size_t nIndex = 0; nIndex < dqResultAddition.size(); ++nIndex)
+//     {
+//         cout << nIndex << " \t " << vecIntegers1[nIndex] << "\t+ ";
+//         cout << vecIntegers2[nIndex] << " \t = ";
+//         cout << dqResultAddition[nIndex] << endl;
+//     }
+//     return 0;
+// }
+
+// /*Листинг 23.8 Функции copy(), copy_if(), remove() and remove_if() для
+// копирования списка в вектор, а так же удаления четных и нулевых чисел*/
+// #include <algorithm>
+// #include <vector>
+// #include <list>
+// #include <iostream>
+
+// using namespace std;
+
+// template<typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.begin(); iElement != Input.end(); ++iElement)
+//         cout << *iElement << ' ';
+//     cout << "| Number of elements: " << Input.size() << endl;
+// }
+
+// int main()
+// {
+//     list<int> listIntegers;
+//     for(int nCount = 0; nCount < 10; ++nCount)
+//         listIntegers.push_back(nCount);
+
+//     cout << "Source(list) contains: " << endl;
+//     DisplayContents(listIntegers);
+
+//     //Инициализировать вектор так, чтобы он содержал вдвое больше элементов, чем список
+//     vector <int> vecIntegers(listIntegers.size() * 2);
+
+//     auto iLastPos = copy(listIntegers.begin(), listIntegers.end(), vecIntegers.begin());
+
+//     //Скопировать нечетные числа из списка в вектор
+//     copy_if(listIntegers.begin(), listIntegers.end(), iLastPos, [](int element){return ((element % 2) == 1);});
+
+//     cout << "Destination (vector) after copy and copy_if: " << endl;
+//     DisplayContents(vecIntegers);
+
+//     //Удалить все экземпляры '0' и изменить размер вектра, используя erase()
+//     auto iNewEnd = remove(vecIntegers.begin(), vecIntegers.end(), 0);
+//     vecIntegers.erase(iNewEnd, vecIntegers.end());
+
+//     //Удалить все неетные числа из вектора, используя remove_if
+//     iNewEnd = remove_if(vecIntegers.begin(), vecIntegers.end(), [](int element){return ((element % 2) == 1);});
+
+//     vecIntegers.erase(iNewEnd, vecIntegers.end());
+
+//     cout << "Destination (vector) after remove, remove_if, erase: " << endl;
+//     DisplayContents(vecIntegers);
+
+//     return 0;
+// }
+
+// /*Листинг 23.9 Использование функций replace() and replace_if()
+// для замены значений в определенном диапазоне*/
+// #include <iostream>
+// #include <algorithm>
+// #include <vector>
+// using namespace std;
+
+// template<typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.begin(); iElement != Input.end(); ++iElement)
+//         cout << *iElement << ' ';
+//     cout << "| Number of elements: " << Input.size() << endl;
+// }
+
+// int main()
+// {
+//     vector<int> vecInegers(6);
+
+//     //заполнить сначала элемента значением 8 а последние значением 5
+//     fill(vecInegers.begin(), vecInegers.begin() + 3, 8);
+
+//     fill_n(vecInegers.begin() + 3, 3, 5);
+
+//     //переупорядочить контейнерр
+//     random_shuffle(vecInegers.begin(), vecInegers.end());
+
+//     cout << "The initial contents ot the vector are: " << endl;
+//     DisplayContents(vecInegers);
+
+//     cout << endl << "Using 'std::replace' to replace value 5 by 8" << endl;
+//     replace(vecInegers.begin(), vecInegers.end(), 5, 8);
+
+//     cout << "Using ' std::replace_if' to replace even values by -1" << endl;
+//     replace_if(vecInegers.begin(), vecInegers.end(), [](int element){return((element % 2) == 0);}, -1);
+
+//     cout << endl << "Contents of the vector after replacements:" << endl;
+//     DisplayContents(vecInegers);
+
+//     return 0;
+// }
+
+// /*Листинг 23.10 Использование функций sort(), binary search() and unique()*/
+// #include <algorithm>
+// #include <vector>
+// #include <string>
+// #include <iostream>
+
+// using namespace std;
+
+// template<typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.begin(); iElement != Input.end(); ++iElement)
+//         cout << *iElement << endl;
+// }
+
+// int main()
+// {
+//     vector<string> vecNames;
+//     vecNames.push_back("John Doe");
+//     vecNames.push_back("Jack Nicholson");
+//     vecNames.push_back("Sean Penn");
+//     vecNames.push_back("Anna Hoover");
+
+//     //Вставака дубликатов в вектор
+//     vecNames.push_back("Jack Nicholson");
+
+//     cout << "The initial contents of the vector are: " << endl;
+//     DisplayContents(vecNames);
+
+//     cout << "the sorted vector contains names in the order: " << endl;
+//     sort(vecNames.begin(), vecNames.end());
+//     DisplayContents(vecNames);
+
+//     cout << "Searching for \"John Doe\" using 'binary_seach': " << endl;
+    
+//     bool bElementFound = binary_search(vecNames.begin(), vecNames.end(), "John Doe");
+
+//     if(bElementFound)
+//         cout << "Result: \"John Doe\" was found in the vector!" << endl;
+//     else
+//         cout << "Element not found " << endl;
+
+//     //Удаление смежных дубликатов
+//     auto iNewEnd = unique(vecNames.begin(), vecNames.end());
+//     cout << endl << "Do erase: " << endl;
+//     DisplayContents(vecNames);
+//     vecNames.erase(iNewEnd, vecNames.end());
+
+//     cout << "The contents of the vector after using 'unique':" << endl;
+
+//     DisplayContents(vecNames);
+
+//     return 0;
+// }
+
+// /*Листинг 23.11 Использование алгоритмов partition(), stable_partition()
+// для разделения диапазона целых чисел на четные и нечетные значения*/
+// #include <algorithm> 
+// #include <vector>
+// #include <iostream>
+// using namespace std;
+
+// bool IsEven(const int& nNumber)
+// {
+//     return ((nNumber % 2) == 0);
+// }
+
+// template<typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.begin(); iElement != Input.end(); ++iElement)
+//         cout << *iElement << ' ';
+//     cout << "| Number of elements: " << Input.size() << endl;
+// }
+
+// int main()
+// {
+//     vector <int> vecIntegers;
+//     for(int nNum = 0; nNum < 10; ++nNum)
+//         vecIntegers.push_back(nNum);
+
+//     cout << "The initial contents: " << endl;
+//     DisplayContents(vecIntegers);
+
+
+//     vector<int> vecCopy(vecIntegers);
+//     vector<int> vecCopy1(vecIntegers);
+
+
+
+//     cout << "The effect of using partition(): " << endl;
+//     partition(vecIntegers.begin(), vecIntegers.end(), IsEven);
+//     DisplayContents(vecIntegers);
+
+//     cout << "The effect of using stable_partition(): " << endl;
+//     stable_partition(vecCopy.begin(), vecCopy.end(), IsEven);
+//     DisplayContents(vecCopy);
+
+//     return 0;
+// }
+
+/*Листинг 23.12 Использование функций lower_bound() and upper_bound()
+для вставки в отсортированну коллекцию*/
 #include <algorithm>
-#include <vector>
+#include <list>
+#include <string>
+#include <iostream>
 using namespace std;
 
-template <typename T>
+template<typename T>
 void DisplayContents(const T& Input)
 {
     for(auto iElement = Input.begin(); iElement != Input.end(); ++iElement)
@@ -7485,43 +8055,36 @@ void DisplayContents(const T& Input)
 
 int main()
 {
-    //Оределить вектор строк для содержания имен
-    vector<string> vecNames;
+    list<string> listNames;
 
-    //Вставить в вектор несколько примеров имен
-    vecNames.push_back("jim");
-    vecNames.push_back("Jack");
-    vecNames.push_back("Sam");
-    vecNames.push_back("Anna");
+    //Вставить примеры значений
+    listNames.push_back("John Doe");
+    listNames.push_back("Brad Pitt");
+    listNames.push_back("Jack Nicholson");
+    listNames.push_back("Sean Penn");
+    listNames.push_back("Anna Hoover");
 
-    cout << "The names in vector in order of insertion: " << endl;
-    DisplayContents(vecNames);
+    cout << "The sorted contents of the list are: " << endl;
+    listNames.sort();
 
-    cout << "Names after sorting using default std::less<>: " << endl;
+    DisplayContents(listNames);
 
-    sort(vecNames.begin(), vecNames.end());
-    DisplayContents(vecNames);
+    cout << "The lowest index where \"Brad Pitt\" can be inserted is: ";
+    auto iMinInsertPos = lower_bound(listNames.begin(), listNames.end(), "Brad Pitt");
 
-    cout << "Names after sorting using predicate that ignores case:" << endl;
-    sort(vecNames.begin(), vecNames.end(), [](const string& str1, const string& str2)->bool
-        {
-            string str1LowerCase;
+    cout << distance (listNames.begin(), iMinInsertPos) << endl;
 
-            //Зарезервировать пространство
-            str1LowerCase.resize(str1.size());
+    cout << "The highest index where \"Brad Pitt\" can be inserted is: ";
+    auto iMaxInsertPos = upper_bound(listNames.begin(), listNames.end(), "Brad Pitt");
 
-            //преобразлвать каждый символ в нижний регистр
-            transform(str1.begin(), str1.end(), str1LowerCase.begin(), [](char  input){return std::tolower(input);});
+    cout << distance (listNames.begin(), iMaxInsertPos) << endl;
 
-            string str2LowerCase;
-            str2LowerCase.resize(str2.size());
-            transform(str2.begin(), str2.end(), str2LowerCase.begin(),[](char  input){return std::tolower(input);});;
+    cout << endl;
 
-            return (str1LowerCase < str2LowerCase);
-        } //конец лямбды
-        ); //конец сортировки
+    cout << "List after inserting Brad Pitt in sorted oreder: " << endl;
+    listNames.insert(iMaxInsertPos, "Brad Pitt");
 
-    DisplayContents(vecNames);
+    DisplayContents(listNames);
 
     return 0;
 }
