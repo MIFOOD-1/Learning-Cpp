@@ -8038,53 +8038,234 @@
 //     return 0;
 // }
 
-/*Листинг 23.12 Использование функций lower_bound() and upper_bound()
-для вставки в отсортированну коллекцию*/
-#include <algorithm>
-#include <list>
-#include <string>
-#include <iostream>
-using namespace std;
+// /*Листинг 23.12 Использование функций lower_bound() and upper_bound()
+// для вставки в отсортированну коллекцию*/
+// #include <algorithm>
+// #include <list>
+// #include <string>
+// #include <iostream>
+// using namespace std;
 
-template<typename T>
-void DisplayContents(const T& Input)
-{
-    for(auto iElement = Input.begin(); iElement != Input.end(); ++iElement)
-        cout << *iElement << endl;
-}
+// template<typename T>
+// void DisplayContents(const T& Input)
+// {
+//     for(auto iElement = Input.begin(); iElement != Input.end(); ++iElement)
+//         cout << *iElement << endl;
+// }
+
+// int main()
+// {
+//     list<string> listNames;
+
+//     //Вставить примеры значений
+//     listNames.push_back("John Doe");
+//     listNames.push_back("Brad Pitt");
+//     listNames.push_back("Jack Nicholson");
+//     listNames.push_back("Sean Penn");
+//     listNames.push_back("Anna Hoover");
+
+//     cout << "The sorted contents of the list are: " << endl;
+//     listNames.sort();
+
+//     DisplayContents(listNames);
+
+//     cout << "The lowest index where \"Brad Pitt\" can be inserted is: ";
+//     auto iMinInsertPos = lower_bound(listNames.begin(), listNames.end(), "Brad Pitt");
+
+//     cout << distance (listNames.begin(), iMinInsertPos) << endl;
+
+//     cout << "The highest index where \"Brad Pitt\" can be inserted is: ";
+//     auto iMaxInsertPos = upper_bound(listNames.begin(), listNames.end(), "Brad Pitt");
+
+//     cout << distance (listNames.begin(), iMaxInsertPos) << endl;
+
+//     cout << endl;
+
+//     cout << "List after inserting Brad Pitt in sorted oreder: " << endl;
+//     listNames.insert(iMaxInsertPos, "Brad Pitt");
+
+//     DisplayContents(listNames);
+
+//     return 0;
+// }
+
+// /*Листинг 24.1 Создание экземпляра стека бибилиоткеки STL*/
+// #include <stack>
+// #include <vector>
+
+// int main()
+// {
+//     using namespace std;
+
+//     //Стек целых чисел
+//     stack <int> stackInts;
+
+//     //Стек чисел типа double
+//     stack <double> stackDoubles;
+
+//     //Стек чисел типа double, содержащихся в векторе
+//     stack <double, vector<double>> stackDoubleInVector;
+
+//     //Инициализация стека копией другого
+//     stack <int> stakIntsCopy(stackInts);
+
+//     return 0;
+// }
+
+// /*Листинг 24.2 Работа со стеком целых чисел*/
+// #include <stack>
+// #include <iostream>
+
+// int main()
+// {
+//     using namespace std;
+//     stack<int> stackInts;
+
+//     //push: вставить значения в вершину стека
+//     cout << "Pushing {25, 10, -1, 5} on stack in that order:" << endl;
+//     stackInts.push(25);
+//     stackInts.push(10);
+//     stackInts.push(-1);
+//     stackInts.push(5);
+
+//     while(stackInts.size() != 0)
+//     {
+//         cout << "Popping tompost element: " << stackInts.top() << endl;
+//         stackInts.pop(); //pop: извелчь верхний элемент
+//     }
+//     if(stackInts.empty()) // true благодаря предыдущему pop()
+//         cout << "Popping all elements empies stack! " << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 24.3 Создание экземпляра очереди библиотеки STL*/
+// #include <queue>
+// #include <list>
+
+// int main()
+// {
+//     using namespace std;
+
+//     //Очередь целых чисел
+//     queue<int> qIntegers;
+
+//     //Очередь чисел типа double
+//     queue<double> qDoubles;
+
+//     //Очередь чисел типа double, содержащихся в списке
+//     queue<double, list<double>> qDoublesInList;
+
+//     //Очередь создана другой очередью
+//     queue<int> qCopy(qIntegers);
+
+//     return 0;
+// }
+
+// /*Листинг 24.4 Вставка, извлечение и просморт элементов очереди целых чисел*/
+// #include <queue>
+// #include <iostream>
+
+// int main()
+// {
+//     using namespace std;
+//     queue<int> qIntegers;
+
+//     cout << "Inserting {10, 5, -1, 20} into queue" << endl;
+//     qIntegers.push(10);
+//     qIntegers.push(5);
+//     qIntegers.push(-1);
+//     qIntegers.push(20);
+
+//     cout << "Queue contains " << qIntegers.size() << " elements" << endl;
+//     cout << "Element at front: " << qIntegers.front() << endl;
+//     cout << "ELement at back: " << qIntegers.back() << endl;
+
+//     while(qIntegers.size() != 0)
+//     {
+//         cout << "Deleting elelemnt: " << qIntegers.front() << endl;
+//         qIntegers.pop();        //извлечь элемент из начала
+//     }
+
+//     if(qIntegers.empty())
+//         cout << "The queue is now empty!" << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 24.5 Создание экзмепляра класса priority queue*/
+// #include <queue>
+
+// int main()
+// {
+//     using namespace std;
+
+//     //Приоритетная очередь целых чисел, отсортированных с использованием предиката std::less<>(по умолчанию)
+//     priority_queue<int> pqIntegers;
+
+//     //Приоритетная очередь чисел типа double
+//     priority_queue<double> pqDoubles;
+
+//     //Приортетная очередь целых чисел, отсортированных с использованием предиката std::greater<>
+//     priority_queue<int, deque <int>, greater<int>> pqIntegers_Inverse;
+
+//     //Приоритеная очередь создана как копия другой
+//     priority_queue<int>pqCopy(pqIntegers);
+
+//     return 0;
+// }
+
+// /*Литсинг 24.6 Работа с приоритетной очередью при помощи методов push(), top(), and pop()*/
+// #include <queue>
+// #include <iostream>
+
+// int main()
+// {
+//     using namespace std;
+
+//     priority_queue <int> pqIntegers;
+//     cout << "Inserting {10, 5, -1, 20} into the priority_queue" << endl;
+//     pqIntegers.push(10);
+//     pqIntegers.push(5);
+//     pqIntegers.push(-1);
+//     pqIntegers.push(20);
+
+//     cout << "Deleting the " << pqIntegers.size() << " elements" << endl;
+    
+//     while (!pqIntegers.empty())
+//     {
+//         cout << "Deleting tompost element: " << pqIntegers.top() << endl;
+//         pqIntegers.pop();
+//    }
+    
+//    return 0;
+// }
+
+/*Листинг 24.7 Создание экземпляра приоритетной очереди
+зранаящей наименьшее значение вверху*/
+#include <queue>
+#include <iostream>
 
 int main()
 {
-    list<string> listNames;
+    using namespace std;
 
-    //Вставить примеры значений
-    listNames.push_back("John Doe");
-    listNames.push_back("Brad Pitt");
-    listNames.push_back("Jack Nicholson");
-    listNames.push_back("Sean Penn");
-    listNames.push_back("Anna Hoover");
+    //Определение объекта priority_queue с предикатом greater<int>
+    priority_queue<int, vector<int>, greater<int>> pqIntegers;
 
-    cout << "The sorted contents of the list are: " << endl;
-    listNames.sort();
+    cout << "Inserting{10, 5, -1, 20} into priority queue" << endl;
 
-    DisplayContents(listNames);
+    pqIntegers.push(10);
+    pqIntegers.push(5);
+    pqIntegers.push(-1);
+    pqIntegers.push(20);
 
-    cout << "The lowest index where \"Brad Pitt\" can be inserted is: ";
-    auto iMinInsertPos = lower_bound(listNames.begin(), listNames.end(), "Brad Pitt");
-
-    cout << distance (listNames.begin(), iMinInsertPos) << endl;
-
-    cout << "The highest index where \"Brad Pitt\" can be inserted is: ";
-    auto iMaxInsertPos = upper_bound(listNames.begin(), listNames.end(), "Brad Pitt");
-
-    cout << distance (listNames.begin(), iMaxInsertPos) << endl;
-
-    cout << endl;
-
-    cout << "List after inserting Brad Pitt in sorted oreder: " << endl;
-    listNames.insert(iMaxInsertPos, "Brad Pitt");
-
-    DisplayContents(listNames);
+    cout << "Deleting " << pqIntegers.size() << " elements" << endl;
+    while(!pqIntegers.empty())
+    {
+        cout << "Deleting tompost element " << pqIntegers.top() << endl;
+        pqIntegers.pop();
+    }
 
     return 0;
 }
