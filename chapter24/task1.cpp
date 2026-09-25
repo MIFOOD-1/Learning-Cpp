@@ -22,13 +22,13 @@ int Age;
 bool IsFemale;
 CPerson(int AgeInput, bool InputFemale) : Age(AgeInput), IsFemale(InputFemale){};
 
-bool operator < (const CPerson &female) const
+bool operator < (const CPerson &other) const
 {
-    if(female.Age > 50 || female.IsFemale== true)
-        return true;
-    else 
-        return false;
-}
+    bool ThisPerson = Age > 50 || IsFemale== true;
+    bool OtherPerson = other.Age > 50 || other.IsFemale == true;
+
+    return ThisPerson < OtherPerson;
+};
 
 void Show() const
 {
