@@ -8241,31 +8241,136 @@
 //    return 0;
 // }
 
-/*Листинг 24.7 Создание экземпляра приоритетной очереди
-зранаящей наименьшее значение вверху*/
-#include <queue>
+// /*Листинг 24.7 Создание экземпляра приоритетной очереди
+// зранаящей наименьшее значение вверху*/
+// #include <queue>
+// #include <iostream>
+
+// int main()
+// {
+//     using namespace std;
+
+//     //Определение объекта priority_queue с предикатом greater<int>
+//     priority_queue<int, vector<int>, greater<int>> pqIntegers;
+
+//     cout << "Inserting{10, 5, -1, 20} into priority queue" << endl;
+
+//     pqIntegers.push(10);
+//     pqIntegers.push(5);
+//     pqIntegers.push(-1);
+//     pqIntegers.push(20);
+
+//     cout << "Deleting " << pqIntegers.size() << " elements" << endl;
+//     while(!pqIntegers.empty())
+//     {
+//         cout << "Deleting tompost element " << pqIntegers.top() << endl;
+//         pqIntegers.pop();
+//     }
+
+//     return 0;
+// }
+
+// /*Листинг 25.1 Создание экземпляра класса std::bitset*/
+// #include <bitset>
+// #include <iostream>
+// #include <string>
+
+// int main()
+// {
+//     using namespace std;
+
+//     //Создание объекта класса bitset
+//     bitset<4> fourBits; // 4 бита, инициаилизрованных 0000
+//     cout << "Initial contents of fourBits" << fourBits << endl;
+
+//     bitset<5> fiveBits("10101"); // 5 битов 10101
+//     cout << "Initial contents of fiveBits: " << fiveBits << endl;
+
+//     bitset<8> eightbits(255); //8 битов инициализрованых значением 255 типа long int
+//     cout << "Initial contents of eightBits: " << eightbits << endl;
+
+//     //Создание экзмепляра набора битов как копии другого
+//     bitset<8> eightbitsCopy(eightbits);
+
+//     return 0;
+// }
+
+// /*Листинг 25.2 Логические операции с набором битов*/
+// #include <iostream>
+// #include <string>
+// #include <bitset>
+
+// int main()
+// {
+//     using namespace std;
+//     bitset <8> inputBits;
+//     cout << "Enter a 8-bit sequence: ";
+
+//     cin >> inputBits;   //сохранить пользовательский ввод в наборе битов
+//     cout << "Number of 1s you supplied: " << inputBits.count() << endl;
+//     cout << "Number of 0s you supplied: ";
+//     cout << inputBits.size() - inputBits.count() << endl;
+
+//     bitset<8> inputFlipped(inputBits);  //копирование
+//     inputFlipped.flip();                //инверсия битов
+
+//     cout << "Flipped vesion is: " << inputFlipped << endl;
+//     cout << inputBits << " & " << inputFlipped << " = ";
+//     cout << (inputBits & inputFlipped) << endl;     //побитовое AND
+
+//     cout << inputBits << " | " << inputFlipped << " = ";
+//     cout << (inputBits | inputFlipped) << endl; //побитовое OR
+
+//     cout << inputBits << " ^ " << inputFlipped << " = ";
+//     cout << (inputBits ^ inputFlipped) << endl; //побитовое XOR
+
+//     return 0;
+// }
+
+// /*Листинг 25.3 Создание экземпляра класса vector<bool>*/
+// #include <vector>
+
+// int main()
+// {
+//     //Создать экзмепляр объекта используя стандартный конструктор
+//     std::vector<bool> vecBol1;
+
+//     //Инициализировать вектор из 10 элементов значения true
+//     std::vector<bool> vecBool2(10, true);
+
+//     //Создать экземпляр объекта как копию другого
+//     std::vector<bool> vecBol2Copy(vecBool2);
+
+//     return 0;
+// }
+
+/*Листинг 25.4 Использование класса vector<bool>*/
 #include <iostream>
+#include <vector>
+using namespace std;
 
 int main()
 {
-    using namespace std;
+    vector<bool> vecBoolFlags(3);       //создат экземпляр для 3 логических флагов
 
-    //Определение объекта priority_queue с предикатом greater<int>
-    priority_queue<int, vector<int>, greater<int>> pqIntegers;
+    vecBoolFlags[0] = true;
+    vecBoolFlags[1] = true;
+    vecBoolFlags[2] = false;
 
-    cout << "Inserting{10, 5, -1, 20} into priority queue" << endl;
+    vecBoolFlags.push_back(true); //вставить четвертый флаг в конец
 
-    pqIntegers.push(10);
-    pqIntegers.push(5);
-    pqIntegers.push(-1);
-    pqIntegers.push(20);
+    cout << "The contents of the vector are: " << endl;
+    for(size_t nIndex = 0; nIndex < vecBoolFlags.size(); ++nIndex)
+        cout << vecBoolFlags[nIndex] << ' ';
 
-    cout << "Deleting " << pqIntegers.size() << " elements" << endl;
-    while(!pqIntegers.empty())
-    {
-        cout << "Deleting tompost element " << pqIntegers.top() << endl;
-        pqIntegers.pop();
-    }
+    cout << endl;
+    vecBoolFlags.flip();
+
+    cout << "The contents of the vector are: " << endl;
+    for(size_t nIndex = 0; nIndex < vecBoolFlags.size(); ++nIndex)
+        cout << vecBoolFlags[nIndex] << ' ';
+    
+    cout << endl;
 
     return 0;
 }
