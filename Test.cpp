@@ -8344,33 +8344,160 @@
 //     return 0;
 // }
 
-/*Листинг 25.4 Использование класса vector<bool>*/
+// /*Листинг 25.4 Использование класса vector<bool>*/
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// int main()
+// {
+//     vector<bool> vecBoolFlags(3);       //создат экземпляр для 3 логических флагов
+
+//     vecBoolFlags[0] = true;
+//     vecBoolFlags[1] = true;
+//     vecBoolFlags[2] = false;
+
+//     vecBoolFlags.push_back(true); //вставить четвертый флаг в конец
+
+//     cout << "The contents of the vector are: " << endl;
+//     for(size_t nIndex = 0; nIndex < vecBoolFlags.size(); ++nIndex)
+//         cout << vecBoolFlags[nIndex] << ' ';
+
+//     cout << endl;
+//     vecBoolFlags.flip();
+
+//     cout << "The contents of the vector are: " << endl;
+//     for(size_t nIndex = 0; nIndex < vecBoolFlags.size(); ++nIndex)
+//         cout << vecBoolFlags[nIndex] << ' ';
+    
+//     cout << endl;
+
+//     return 0;
+// } 
+
+// //Листинг 26.1 Минимально необхоидмые компоненты класса интеллекутального указателя
+// template<typename T>
+// class smart_pointer
+// {
+//     private:
+//         T* m_pRawPoiner;
+//     public:
+//         smart_pointer(T* pData) : m_pRawPoiner(pData){} //конструктор
+//         ~smart_pointer(){delete pData;}; //деструктор
+
+//         //конструкто копий
+//         smart_pointer(const smart_pointer& anotherSP);
+//         //операторр присовения копии
+//         smart_pointer& operator= (const smart_pointer& anotherSP);
+
+//         T& operator* () const // опретаор образения к значению
+//         {
+//             return *(m_pRawPoiner);
+//         }
+
+//         T* operator->() const // оператор обращения к члену
+//         {
+//             return m_pRawPoiner;
+//         }
+// };
+
+// /*Листинг 26.2 Использование интеллектуального указателя глубокого 
+// копирования для передачи полиморынх объектов их базовым классам*/
+// template<typename T>
+// class deepcopy_smart_pointer
+// {
+//     private:
+//         T* m_pObject;
+//     public:
+//         //...другие функции
+
+//         //конструктор копий указателя глубокго копирования
+//         deepcopy_smart_pointer(const deepcopy_smart_pointer& source)
+//         {
+//             //Clone() виртуальная: гарантирует глубокое копирование
+//             //объекта производного класса
+//             m_pObject = source->Clone();
+//         }
+
+//         //Оператор присовения копии
+//         deepcopy_smart_pointer& operator= (const deepcopy_smart_pointer& source)
+//         {
+//             if(m_pObject)
+//                 delete m_pObject;
+
+//             m_pObject = source->Clone();
+//         }
+// };
+
+// /*Листинг 26.3 Типичный интеллекутальный указатель деструктивного копирования*/
+// template<typename T>
+// class destructivecopy_pointer
+// {
+//     private:
+//         T* pObject;
+//     public:
+//         destructivecopy_pointer(T* pInput):pObject(pInput){}
+//         ~destructivecopy_pointer(){delete pObject;}
+        
+//         //конструктор копий
+//         destructivecopy_pointer(destructivecopy_pointer& source)
+//         {
+//             //взять копию в собственность
+//             pObject = source.pObject;
+
+//             //удалиить первоистичник
+//             source.pObject = 0;
+//         }
+
+//         //Оператор присвоения копии
+//         destructivecopy_pointer& operator= (destructivecopy_pointer& rhs)
+//         {
+//             if(pObject != rhs.pObject)
+//             {
+//                 delete pObject;
+//                 pObject = rhs.pObject;
+//                 rhs.pObject = 0;
+//             }
+//         }
+//     };
+
+// int main()
+// {
+//     destructivecopy_pointer<int> pNumber(new int);
+//     destructivecopy_pointer<int> pCope = pNumber;
+
+//     //Number теперь недопустим
+//     return 0;
+// }
+
+/*Листинг 26.4 Использовние класса std::unique_ptr*/
 #include <iostream>
-#include <vector>
+#include <memory>       //Вклюситть для использования std::unique_ptr
 using namespace std;
+
+class Fish
+{
+    public:
+        Fish(){cout << "Fish: Constructed!" << endl;}
+        ~Fish(){cout << "Fish: Destructed!" << endl;}
+
+        void Swim() const {cout << "Fish swims in water" << endl;}
+};
+
+void MakeFishSwim(const unique_ptr<Fish>& inFish)
+{
+    inFish->Swim();
+}
 
 int main()
 {
-    vector<bool> vecBoolFlags(3);       //создат экземпляр для 3 логических флагов
+    unique_ptr<Fish> smartFish(new Fish);
 
-    vecBoolFlags[0] = true;
-    vecBoolFlags[1] = true;
-    vecBoolFlags[2] = false;
-
-    vecBoolFlags.push_back(true); //вставить четвертый флаг в конец
-
-    cout << "The contents of the vector are: " << endl;
-    for(size_t nIndex = 0; nIndex < vecBoolFlags.size(); ++nIndex)
-        cout << vecBoolFlags[nIndex] << ' ';
-
-    cout << endl;
-    vecBoolFlags.flip();
-
-    cout << "The contents of the vector are: " << endl;
-    for(size_t nIndex = 0; nIndex < vecBoolFlags.size(); ++nIndex)
-        cout << vecBoolFlags[nIndex] << ' ';
+    smartFish->Swim();
+    MakeFishSwim(smartFish);        //ок посколькоу makefishswim допусткает ссылку
     
-    cout << endl;
-
+    unique_ptr<Fish> copySmartFish;
+    //copySmartFish = smartFish;    //Ошибка operator= закрытый
+    
     return 0;
-} 
+}
