@@ -8470,34 +8470,181 @@
 //     return 0;
 // }
 
-/*Листинг 26.4 Использовние класса std::unique_ptr*/
-#include <iostream>
-#include <memory>       //Вклюситть для использования std::unique_ptr
-using namespace std;
+// /*Листинг 26.4 Использовние класса std::unique_ptr*/
+// #include <iostream>
+// #include <memory>       //Вклюситть для использования std::unique_ptr
+// using namespace std;
 
-class Fish
-{
-    public:
-        Fish(){cout << "Fish: Constructed!" << endl;}
-        ~Fish(){cout << "Fish: Destructed!" << endl;}
+// class Fish
+// {
+//     public:
+//         Fish(){cout << "Fish: Constructed!" << endl;}
+//         ~Fish(){cout << "Fish: Destructed!" << endl;}
 
-        void Swim() const {cout << "Fish swims in water" << endl;}
-};
+//         void Swim() const {cout << "Fish swims in water" << endl;}
+// };
 
-void MakeFishSwim(const unique_ptr<Fish>& inFish)
-{
-    inFish->Swim();
-}
+// void MakeFishSwim(const unique_ptr<Fish>& inFish)
+// {
+//     inFish->Swim();
+// }
 
-int main()
-{
-    unique_ptr<Fish> smartFish(new Fish);
+// int main()
+// {
+//     unique_ptr<Fish> smartFish(new Fish);
 
-    smartFish->Swim();
-    MakeFishSwim(smartFish);        //ок посколькоу makefishswim допусткает ссылку
+//     smartFish->Swim();
+//     MakeFishSwim(smartFish);        //ок посколькоу makefishswim допусткает ссылку
     
-    unique_ptr<Fish> copySmartFish;
-    //copySmartFish = smartFish;    //Ошибка operator= закрытый
+//     unique_ptr<Fish> copySmartFish;
+//     //copySmartFish = smartFish;    //Ошибка operator= закрытый
     
-    return 0;
-}
+//     return 0;
+// }
+
+// #include <iostream>
+// #include <string>
+
+// using namespace std;
+
+// class Animal
+// {
+// protected:
+//     string name;
+
+// public:
+//     Animal(const string& name)
+//         : name(name)
+//     {
+//     }
+
+//     virtual ~Animal() = default;
+
+//     virtual void Speak() const
+//     {
+//         cout << "Animal sound\n";
+//     }
+
+//     virtual Animal* Clone() const = 0;      
+// };
+
+
+// class Dog : public Animal
+// {
+// public:
+//     Dog(const string& name)
+//         : Animal(name){}
+
+//     void Speak() const override
+//     {
+//         cout << name << ": Woof!\n";    //override обязательно писать? мне казалось он и без этого понимает что мы берем вирутальную функцию и меняем ее
+//     }
+
+//     Animal* Clone() const override
+//     {
+//         return new Dog(*this);              
+//     }
+// };
+
+
+// class Cat : public Animal
+// {
+// public:
+//     Cat(const string& name)
+//         : Animal(name)
+//     {
+//     }
+
+//     void Speak() const override
+//     {
+//         cout << name << ": Meow!\n";
+//     }
+
+//     Animal* Clone() const override
+//     {
+//         return new Cat(*this);
+//     }
+// };
+
+
+// template<typename T>
+// class deepcopy_smart_pointer
+// {
+// private:
+//     T* m_pObject;
+
+// public:
+
+//     // Обычный конструктор
+//     deepcopy_smart_pointer(T* object)     
+//         : m_pObject(object){}
+
+//     // Конструктор копирования
+//     deepcopy_smart_pointer(const deepcopy_smart_pointer& source)
+//     {
+//         m_pObject = source->Clone();            //ну тут как я понимаю, мы вставляем класс указатель класса сорус на самого себя, ток если наш обхект указатель, ему же не обязательно в себя указатель принимать. 
+//     }
+
+//     // Деструктор
+//     ~deepcopy_smart_pointer()
+//     {
+//         delete m_pObject;
+//     }
+
+//     // Оператор присваивания
+//     deepcopy_smart_pointer& operator=
+//         (const deepcopy_smart_pointer& source)
+//     {
+//         if (this != &source)
+//         {
+//             delete m_pObject;
+//             m_pObject = source->Clone(); //а ну да согласен при присваивании он как раз так и делает удаляет старную инфу и берет новую
+//         }
+
+//         return *this;
+//     }
+
+//     // operator->
+//     T* operator->() const
+//     {
+//         return m_pObject;
+//     }
+
+//     // operator*
+//     T& operator*() const
+//     {
+//         return *m_pObject;
+//     }
+// };
+
+
+// int main()
+// {
+//     deepcopy_smart_pointer<Animal> dog(
+//         new Dog("Bob")
+//     );
+
+//     dog->Speak();
+
+
+//     // Глубокое копирование
+//     deepcopy_smart_pointer<Animal> dogCopy = dog;
+
+//     dogCopy->Speak();
+
+
+//     // Создадим кошку
+//     deepcopy_smart_pointer<Animal> cat(
+//         new Cat("Murka")
+//     );
+
+//     cat->Speak();
+
+
+//     // Присваивание
+//     cat = dog;
+
+//     cat->Speak();
+    
+//     return 0;
+// }
