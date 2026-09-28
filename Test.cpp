@@ -8648,3 +8648,156 @@
     
 //     return 0;
 // }
+
+
+// /*Листинг  27.1 Отображение целого числа в десятичном, восьмеричном и
+// шестнадцартеричном форматах с использованием объекта cout  и флагов <iomanip>*/
+// #include <iostream>
+// #include <iomanip>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Enter an integer: ";
+//     int  Input = 0;
+//     cin >> Input;
+
+//     cout << "Integer in octal: " << oct << Input << endl;
+//     cout << "Integer in hexademical: " << hex << Input << endl;
+
+//     cout << "Integer in hex using base notation: ";
+//     cout << setiosflags(ios_base::hex|ios_base::showbase|ios_base::uppercase);
+
+//     cout << Input << endl;
+
+//     cout << "Integer after resetting I/O flags: ";
+//     cout << resetiosflags(ios_base::hex|ios_base::showbase|ios_base::uppercase);
+
+//     cout << Input << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 27.2 Использование объекта cout для отображения числа Pi и площади
+// круга в экспоненциальном представлении и с фиксированной точкой*/
+// #include <iostream>
+// #include <iomanip>
+// using namespace std;
+
+// int main()
+// {
+//     const double Pi = (double)22.0 / 7;
+//     cout << "Pi = " << Pi << endl;
+//     cout << endl << "Setting precision to 7: " << endl;
+//     cout << setprecision(7);
+//     cout << "Pi = " << Pi << endl;
+//     cout << fixed << "Fixed Pi = " << Pi << endl;
+//     cout << scientific << "Scientific Pi = " << Pi << endl;
+
+//     cout << endl << "Setting preison to 10: " << endl;
+//     cout << setprecision(10);
+//     cout << "Pi = " << Pi << endl;
+//     cout << fixed << "Fixed Pi = " << Pi << endl;
+//     cout << scientific << "Scientific Pi = " << Pi << endl;
+
+//     cout << endl << "Enter a radius: ";
+//     double  Radius = 0.0;
+//     cin >> Radius;
+//     cout << "Area of circle: " << 2*Pi*Radius*Radius << endl;
+
+//     return 0;
+//  }
+
+// /*Листинг 27.3 Уставновка ширины поля и символов заполнения
+// с использованием манипуляторов setw() and setfill()*/
+// #include <iostream>
+// #include <iomanip>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Hey - default!" << endl;
+
+//     cout << setw(35);       //установка поля шириной 25 символов
+//     cout << "Hey - right aligned!" << endl;
+    
+//     cout << setw(35) << setfill('*');
+//     cout << "Hey - right aligned!" << endl;
+
+//     cout << "Hey - back to default!" << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 27.4 Использование объекта cin для чтения в переменную типа int,
+// в переменную типа double  в экспоненциальной форме и трех символов типа char*/
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Enter an integer: ";
+//     int InputInt = 0;
+//     cin >> InputInt;
+
+//     cout << "Enter the value of Pi: ";
+//     double Pi = 0.0;
+//     cin >> Pi;
+
+//     cout << "Enter three characters separated by space: " << endl;
+//     char Char1 = '\0', Char2 = '\0', Char3 = '\0';
+//     cin >> Char1 >> Char2 >> Char3;
+
+//     cout << "The recorded variavle values are: " << endl;
+//     cout << "InputInt: " << InputInt << endl;
+//     cout << "Pi: " << Pi << endl;
+//     cout << "The three characters: " << Char1 << Char2 << Char3 << endl; 
+
+//     return 0;
+// }
+
+// //Листинг 27.5 вставка в буфер стиля С без выхода за его границы 
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Enter a line: " << endl;
+//     char CStyleStr[10] = {0};
+//     cin.get(CStyleStr, 10);
+//     cout << "CStyleStr: " << CStyleStr << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 27.6 Вставка текста в строку std::string с использованием объекта cin*/
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Enter your name: ";
+//     string Name;
+//     cin >> Name;
+//     cout << "Hi " << Name << endl;
+
+//     return 0;
+// }
+
+// /*Листинг 27.7 Чтение введенной пользователем строки полностью с 
+// использованием функции getline() и объекта cin*/
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Enter your name: ";
+//     string Name;
+//     getline(cin, Name);
+//     cout << "Hi " << Name << endl;
+
+//     return 0;
+// }
