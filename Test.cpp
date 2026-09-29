@@ -8802,33 +8802,234 @@
 //     return 0;
 // }
 
-/*Листинг 27.11 Преобразование целочисленного значения в строковое
-и наоборот, с использованием класса std::stringstream*/
-#include <fstream>
-#include<sstream>
+// /*Листинг 27.11 Преобразование целочисленного значения в строковое
+// и наоборот, с использованием класса std::stringstream*/
+// #include <fstream>
+// #include<sstream>
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Enter an inteher: ";
+//     int Input = 0;
+//     cin >> Input;
+
+//     stringstream converterStream;
+//     converterStream << Input;
+//     string strInput;
+//     converterStream >> strInput;
+
+//      cout << "Integer Input = " << Input << endl;
+//      cout << "String gained from integer, strInput = " << strInput << endl;
+
+//      stringstream anotherStream;
+//      anotherStream << strInput;
+//      int Copy = 0;
+//      anotherStream >> Copy;
+
+//      cout << "Integer gained from string, Copy = " << Copy << endl;
+     
+//      return 0;
+// }
+
+// /*Листинг 28.1 Использование блоков try и catch для обеспечения
+// устойчивости к исключениям при резервировании памяти*/
+// #include <iostream>
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Enter number of integer you wish to reserve: ";
+//     try
+//     {
+//         int Input = 0;
+//         cin >> Input;
+
+//         //Запрос области памяти и ее последующие освобождение
+//         int * pReservedInts = new int[Input];
+//         delete[] pReservedInts;
+//     }
+//     catch(...)
+//     {
+//         cout << "Exception encountered. Got to end, ssory!" << endl;
+//     }
+
+//     return 0;
+// }
+
+// /*Листинг 28.2 Обработка исключения типа std::bad_alloc*/
+// #include <iostream>
+// #include <exception>            //включите для обработки исключеия bad_alloc
+// using namespace std;
+
+// int main()
+// {
+//     cout << "Enter number of integer you wish to reserve: ";
+//     try
+//     {
+//         int Input = 0;
+//         cin >> Input;
+
+//         //Запрос области памяти и ее последующие освобождение
+//         int * pReservedInts = new int[Input];
+//         delete[] pReservedInts;
+//     }
+//     catch(std::bad_alloc& exp)
+//     {
+//         cout << "Exception encountered: " << exp.what() << endl;
+//         cout << "Got to end, ssory!" << endl;
+//     }
+//     catch(...)
+//     {
+//         cout << "Exception encountered. Got to end, ssory!" << endl;
+//     }
+
+//     return 0;
+// }
+
+// /*Листинг 28.3 Передача специального исключения при попытке деления на нуль*/
+// #include <iostream>
+// using namespace std;
+
+// double Divide(double Dividend, double Divisior)
+// {
+//     if(Divisior == 0)
+//         throw "Dividing by 0 is a crime";
+
+//     return (Dividend / Divisior);
+// }
+
+// int main()
+// {
+//     cout << "Enter dividend: ";
+//     double Dividend = 0;
+//     cin >> Dividend;
+//     cout << "Enter divisior: ";
+//     double Divisior = 0;
+//     cin >> Divisior;
+    
+//     try
+//     {
+//         cout << "Resulr of division is: " << Divide(Dividend, Divisior);
+//     }
+//     catch(const char * exp)
+//     {
+//         cout << "Exception: " << exp << endl;
+//         cout << "Sorry, can't continue!" << endl;
+//     }
+
+//     return 0;
+// }
+
+// /*Листинг 28.4 Порядок уничтожения локальных объектов в случае исключения*/
+// #include <iostream>
+// using namespace std;
+
+// struct StructA
+// {
+//     StructA() {cout << "Constructed a struct A" << endl;}
+//     ~StructA() {cout << "Destroyed a struct A" << endl;}
+// };
+
+// struct StructB
+// {
+//     StructB() {cout << "Constructed a struct B" << endl;}
+//     ~StructB() {cout << "Destroyed a struct B" << endl;}
+// };
+
+// void FuncB()        //передача
+// {
+//     cout << "In Func B" << endl;
+//     StructA objA;
+//     StructB objB;
+//     cout << "About to throw up!" << endl;
+//     throw "Throwing for the heck of it";
+// }
+
+// void FuncA()
+// {
+//     try
+//     {
+//         cout << "In Func A" << endl;
+//         StructA objA;
+//         StructB objB;
+//         FuncB();
+//         cout << "FuncA: returnin to caller" << endl;
+//     }
+//     catch(const char * exp)
+//     {
+//         cout << "FuncA: Caught exception, it says: " << exp << endl;
+//         cout << "FuncA: Handled it here, will not throw to caller" << endl;
+//         // throw;        //снимите комменатрий для передачи в main()
+//     }
+// }
+
+// int main()
+// {
+//     cout << "main(): Started execution" << endl;
+//     try
+//     {
+//         FuncA();
+//     }
+//     catch(const char * exp)
+//     {
+//         cout << "Exception: " << exp << endl;
+//     }
+//     cout << "main(): exiting gracefully" << endl;
+    
+//     return 0;
+// }
+
+/*Листинг 28.5 Класс CustomException, происходящей от класса std::exception*/
 #include <iostream>
+#include <exception>
+#include <string>
 using namespace std;
+
+class CustomException: public std::exception
+{
+    string Reason;
+
+    public:
+        //Конструктор, необходимый Reason
+        CustomException(const char* why): Reason(why){}
+
+        //переопределение виртуальной функции для возвращения 'Reason'
+        virtual const char * what() const throw()
+        {
+            return Reason.c_str();
+        }
+};
+
+double Divide(double Dividend, double Divisor)
+{
+    if(Divisor == 0)
+        throw CustomException("CustomException: Dividing by 0 is a crime");
+
+    return (Dividend / Divisor);
+}
 
 int main()
 {
-    cout << "Enter an inteher: ";
-    int Input = 0;
-    cin >> Input;
+    cout << "Enter dividend: ";
+    double Dividend = 0;
+    cin >> Dividend;
+    cout << "Enter divisior: ";
+    double Divisor = 0;
+    cin >> Divisor;
 
-    stringstream converterStream;
-    converterStream << Input;
-    string strInput;
-    converterStream >> strInput;
+    try
+    {
+        cout << "Result of division is: " << Divide(Dividend, Divisor);
+    }
 
-     cout << "Integer Input = " << Input << endl;
-     cout << "String gained from integer, strInput = " << strInput << endl;
+    catch(exception& exp)   //обрабатывать CustomException, bad_alloc и т.д
+    {
+        cout << exp.what() << endl;
+        cout << "Sorry, can't continue!" << endl;
+    }
 
-     stringstream anotherStream;
-     anotherStream << strInput;
-     int Copy = 0;
-     anotherStream >> Copy;
-
-     cout << "Integer gained from string, Copy = " << Copy << endl;
-     
-     return 0;
+    return 0;
 }
+
