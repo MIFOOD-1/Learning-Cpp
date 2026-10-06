@@ -30,13 +30,26 @@ void MAXandMin(int * array, int size, int& Min, int& Max)
     }
 }
 
+void SumandAverage(int * array, int size)
+{
+    int sum, average;
+    sum = average = 0;
+    for(int i = 0; i < size; i++)
+        sum += array[i];
+    average = sum / size;
+    
+    cout << "array sum = " << sum << endl;
+    cout << "array average = " << average << endl;
+}
+
 int main()
 {
     int numbers[10] = {10, 2, 1, 3, 4, 10, 2, 13, 5, 6};
     int min, max;
 
     MAXandMin(numbers, 10, min, max);
-    cout << "Massiv min = " << min << "max = " << max;
+    cout << "min = " << min << endl << "max = " << max << endl;
+    SumandAverage(numbers, 10);
 
     return 0;
 }
