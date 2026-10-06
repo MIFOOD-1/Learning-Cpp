@@ -32,11 +32,12 @@ void MAXandMin(int * array, int size, int& Min, int& Max)
 
 void SumandAverage(int * array, int size)
 {
-    int sum, average;
-    sum = average = 0;
+    int sum = 0;
+    double average = 0;
+
     for(int i = 0; i < size; i++)
         sum += array[i];
-    average = sum / size;
+    average = (double)sum / size;
     
     cout << "array sum = " << sum << endl;
     cout << "array average = " << average << endl;
@@ -48,7 +49,7 @@ void po_ne_tiv(int * array, int size)
     positive = negative = 0;
     for(int i = 0; i < size; i++)
     {
-        if(array[i] % 2 == 0)
+        if(array[i] >= 0)
             ++positive;
         else
             ++negative;
@@ -60,7 +61,7 @@ void po_ne_tiv(int * array, int size)
 
 int main()
 {
-    int numbers[10] = {10, 2, 1, 3, 4, 10, 2, 13, 5, 6};
+    int numbers[10] = {10, 2, 1, -3, 4, -10, 2, 13, 5, 6};
     int min, max;
 
     cout << "Show array: ";
