@@ -14,7 +14,7 @@ using namespace std;
 
 void conversion(const double& Cels, double& Farengeith, double& Kelvin)
 {
-    Farengeith = Cels * 9/5 + 32;
+    Farengeith = Cels * (9.0 / 5.0) + 32;
     Kelvin = Cels + 273.15;
 }
 
@@ -26,17 +26,10 @@ int main()
     cout << "Input Cels gradus: ";
     cin >> Cels;
 
-    if(Cels != 0)
-    {
-        conversion(Cels, Farengeith, Kelvin);
-        cout << "C = " << Cels << " F = " << Farengeith << " K = " << Kelvin << endl;
-    }
-    else
-    {
-        cout << "Error" << endl;
-    }
-
-
+    conversion(Cels, Farengeith, Kelvin);
+    cout << "C = " << Cels << " F = " << Farengeith << " K = " << Kelvin << endl;
+    
+  
     return 0;
 }
 
