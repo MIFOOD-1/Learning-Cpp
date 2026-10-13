@@ -19,38 +19,48 @@ class Number
     public:
         Number(int num) : value(num){}
 
-    int operator+(const int& num)
+    int operator+(const int& num) const
     {
         return value + num;
     }
 
-    Number operator+(const Number& num)      //просто от меня хотелось поэксперементировать
+    Number operator+(const Number& num) const    //просто от меня хотелось поэксперементировать
     {
         Number anotherNum = *this;
         anotherNum += num.value;
         return anotherNum;
     }
 
-    int operator-(const int& num)
+    int operator-(const int& num) const
     {
         return value - num;
     }
 
-    bool operator==(const int& num)
+    bool operator==(const int& num) const
     {
         return value == num;
     }
 
-    Number& operator+=(const Number& other)
+    Number& operator+=(const Number& other) 
     {
         value += other.value;
         return *this;
     }
 
  
-    int show_value()
+    int show_value() const
     {
         return value;
+    }
+
+    Number operator-(const Number& other) const 
+    {
+        return Number(value - other.value);
+    }
+
+    bool operator==(const Number& other) const
+    {
+        return value == other.value;
     }
 
 };
