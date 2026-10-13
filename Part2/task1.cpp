@@ -28,7 +28,7 @@ class BankAccount
         double balance;
     
     public:
-    BankAccount(const string& Input_owner, const double& Input_balance): owner(Input_owner), balance(Input_balance){};
+    BankAccount(const string& Input_owner, const double& Input_balance): owner(Input_owner),  balance(Input_balance >= 0 ? Input_balance : 0){};
     
     void Deposit(const double& amount)
     {
