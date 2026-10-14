@@ -96,12 +96,12 @@ int main()
     cout << "string3(MyString(\"Not hello world\")): ";
     string3.Print();
 
-    MyString string3 = string1;                     //оператор присваивания
+    string3 = string1;                     //оператор присваивания
     cout << "MyString string3 = string1: ";
     string3.Print();
 
-    MyString string3 = MyString("No hello World!"); // оператор перемещения
-    cout << " MyString string3 = MyString(\"No hello World!\")";
+    string3 = MyString("No hello World!"); // оператор перемещения
+    cout << " MyString string3 = MyString(\"No hello World!\"): ";
     string3.Print();
     
     return 0;
