@@ -22,7 +22,10 @@ class MyString
         MyString(const char* InputString)     
         {
             if(InputString != NULL)
+            {
                 Buffer = new char [strlen(InputString) + 1];
+                strcpy(Buffer, InputString);
+            }
 
             else
                 Buffer = NULL;
@@ -69,7 +72,7 @@ class MyString
 
         void Print()
         {
-            cout << Buffer << endl;
+           cout << Buffer << endl;
         }
 
         ~MyString()
