@@ -84,11 +84,25 @@ class MyString
 
 int main()
 {
-    MyString string1("Hello world!");
-    MyString string2(string1);
+    MyString string1("Hello world!");           //деф конструктор
+    MyString string2(string1);                  //конструктор копирования
 
     cout << "string1(\"Hello world!\"): ";
     string1.Print();
     cout << "string1(string2): ";
     string2.Print();
+
+    MyString string3(MyString("Not hello world"));  //конструктор перемещения
+    cout << "string3(MyString(\"Not hello world\")): ";
+    string3.Print();
+
+    MyString string3 = string1;                     //оператор присваивания
+    cout << "MyString string3 = string1: ";
+    string3.Print();
+
+    MyString string3 = MyString("No hello World!"); // оператор перемещения
+    cout << " MyString string3 = MyString(\"No hello World!\")";
+    string3.Print();
+    
+    return 0;
 }
