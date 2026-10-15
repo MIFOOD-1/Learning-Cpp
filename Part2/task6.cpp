@@ -83,13 +83,13 @@ int main()
     const Rectangle object2(2, 2);
     Rectangle objectFalse(-1, 2);
 
-    cout << "Square object1: " << object1.Square() << "and value: ";
+    cout << "Square object1: " << object1.Square() << " and value: ";
     object1.show();
 
-    cout << "Square object2: " << object2.Square() << "and value: ";
+    cout << "Square object2: " << object2.Square() << " and value: ";
     object2.show();
 
-    cout << "Square objectFalse: " << objectFalse.Square() << "and value: ";
+    cout << "Square objectFalse: " << objectFalse.Square() << " and value: ";
     objectFalse.show();
 
     cout << "(object1 < object2) = " << (object1 < object2 ? "true" : "false") << endl;
