@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <utility>
 using namespace std;
 
 class MyString
@@ -43,41 +44,35 @@ class MyString
         {
             if(this != &otherString)
             {
-                delete[] Buffer;
-                Buffer = nullptr;
+                char* newBuffer = nullptr;
+            
                 if(otherString.Buffer)
                 {
-                    Buffer = new char [strlen(otherString.Buffer) + 1];
-                    strcpy(Buffer, otherString.Buffer);
+                    newBuffer = new char [strlen(otherString.Buffer) + 1];
+                    strcpy(newBuffer, otherString.Buffer);
                 }
+
+                delete[] Buffer;
+                Buffer = newBuffer;
             }
 
             return *this;
         }
 
-          MyString(MyString&& otherString)
-        {
-            if(otherString.Buffer != nullptr)
-            {
-                Buffer = otherString.Buffer;
-                otherString.Buffer = nullptr;
-            }
-            else
-                Buffer = nullptr;
-        }
-
+          MyString(MyString&& otherString) noexcept
+          : Buffer(otherString.Buffer)
+          {
+            otherString.Buffer = nullptr;
+          }
+        
         MyString& operator= (MyString&& otherString)
         {
             if(this != &otherString)
             {
                 delete[] Buffer;
-                Buffer = nullptr;
-
-                if(otherString.Buffer)
-                {
-                    Buffer = otherString.Buffer;
-                    otherString.Buffer = nullptr;
-                }
+                Buffer = otherString.Buffer;
+                otherString.Buffer = nullptr;
+                
             }
 
             return *this;
@@ -87,6 +82,9 @@ class MyString
         {
             if(Buffer)
                 cout << Buffer << endl;
+
+            else
+                cout << "[empty]" << endl;
         }
 
         ~MyString()
@@ -100,7 +98,7 @@ int main()
 {
     MyString string1("Hello");
     MyString string2(string1);
-    MyString string3(MyString("HEHE"));
+    MyString string3(std::move(string1));
     MyString string4(string1);
     string4 = string1;
 
