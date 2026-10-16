@@ -17,6 +17,12 @@ class Counter
     public:
         Counter(int number = 0): numbers(number){++count;}
 
+        Counter(Counter& other)
+        {
+            numbers = other.numbers;
+            ++count;
+        }
+
      Counter& operator++() 
     {
         ++numbers;
