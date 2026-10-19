@@ -32,9 +32,18 @@ int main()
 {
     IntReClassBase * pObjectBase = new IntReClassDerived;
     (*pObjectBase)(10.10);
-
     IntReClassDerived * pObjectDerived = static_cast<IntReClassDerived *> (pObjectBase);
     pObjectDerived->printInt();
+
+    cout << endl << endl;
+
+    IntReClassDerived * pDerived = new IntReClassDerived;
+    (*pDerived)(5.5);
+    pDerived->printInt();
+    IntReClassBase * pBase = static_cast<IntReClassBase*> (pDerived);
+
+    delete pBase;
+    delete pObjectDerived;
 
     return 0;
 }
