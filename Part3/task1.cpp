@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <memory>
 using namespace std;
 
 class Shape
@@ -54,26 +55,16 @@ class Rectangle: public Shape
 
 int main()
 {
-    vector<Shape*> objectShape;
-    objectShape.push_back(new Circle(10.5, 3.14));
-    objectShape.push_back(new Circle(12.5, 3.14));
-    objectShape.push_back(new Rectangle(10, 3));
-    objectShape.push_back(new Rectangle(10, 4));
+    vector<unique_ptr<Shape>> objectShape;
+    objectShape.push_back(make_unique<Circle>(10.5, 3.14));
+    objectShape.push_back(make_unique<Circle>(12.5, 3.14));
+    objectShape.push_back(make_unique<Rectangle>(10, 3));
+    objectShape.push_back(make_unique<Rectangle>(10, 4));
 
-    vector<Shape*>::iterator Name = objectShape.begin();
-
-    while(Name != objectShape.end())
+    for (const auto& shape : objectShape)
     {
-        cout << (*Name)->Area() << endl;
-        ++Name;
-    }
-
-    for (Shape* shape : objectShape)
-    {
-        delete shape;
-    }
-
-    objectShape.clear();  
+        cout << shape->Area() << endl;
+    }   
 
     return 0;
 }
