@@ -41,6 +41,15 @@ int main()
     cout << "Simvols: " << countSimvols << endl;
 
     transform(name.begin(), name.end(), name.begin(), [](char inputname)->char {return tolower(inputname);});
-    cout << name;
+    cout << name << endl;
+
+    string reverseName = name;
+    reverse(reverseName.begin(), reverseName.end());
+    cout <<"testing palindrom: " << (name == reverseName ? "yes is it palindrom"  : "no it is not polindom") << endl;
+
+    char simvol;
+    cout << "Send simvol: ";
+    cin >> simvol;
+    cout << "Count simvol " << simvol << ": " << count(name.begin(), name.end(), simvol);
     return 0;
 }
