@@ -20,16 +20,20 @@ int main()
     auto element = name.begin();
     int countWords, countSimvols;
     countWords = countSimvols = 0;
-    for(;element != name.end(); ++element, ++countSimvols)
+    for(bool proverka = true; element != name.end(); ++element, ++countSimvols)
     {
-        bool proverka;
-        if(((*element) >= 'a' && (*element) <= 'z') || ((*element) >= 'A' && (*element) <= 'Z'))
-            proverka = true;
-        else
+        if(proverka && (((*element) >= 'a' && (*element) <= 'z') || ((*element) >= 'A' && (*element) <= 'Z')))
+        {
             proverka = false;
-
-        if(!proverka && *(element - 1)  != ' ')
             ++countWords;
+        }
+        else
+        {
+            if(*element == ' ')
+            proverka = true;
+        }
+
+        
     }
 
     cout << "Words: " << countWords << endl;
