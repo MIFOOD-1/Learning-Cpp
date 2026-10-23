@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <cctype>
 using namespace std;
 
 int main()
@@ -39,6 +40,7 @@ int main()
     cout << "Words: " << countWords << endl;
     cout << "Simvols: " << countSimvols << endl;
 
-
+    transform(name.begin(), name.end(), name.begin(), [](char inputname)->char {return tolower(inputname);});
+    cout << name;
     return 0;
 }
