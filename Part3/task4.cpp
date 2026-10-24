@@ -33,18 +33,35 @@ class TextAnalyzer
         int CountWord(const string& inputWord) const
         {
             string temp = text;
+            string word = inputWord;
             transform(temp.begin(), temp.end(), temp.begin(), [](char text){return tolower(text);});
+            transform(word.begin(), word.end(), word.begin(), [](char word){return tolower(word);});
 
-            int index = 0;
 
-            for(auto element = temp.begin(); element != temp.end(); ++element)
+            int countWords = 0;
+            size_t position = temp.find(word);
+
+            while (position != string::npos)
             {
-               auto save =  temp.find(inputWord);
-               if(save != temp.end())
-                ++index;
+                ++countWords;
+                position = temp.find(word, position + word.length());
             }
 
-            return index;
+
+            return countWords;
+        }
+
+        void Replace(const string& oldText, const string& newText)
+        {
+            size_t position = 0;
+            string temp = text;
+
+            while((position = temp.find(oldText, position)) != string::npos)
+            {
+                temp.replace(position, oldText.length(), newText);
+                position+= newText.length();
+            }
+            text = temp;
         }
 
         const string GetText() const
@@ -58,6 +75,9 @@ int main()
     TextAnalyzer name;
     name.SetText("Hello world! World it is cool");
     cout << "Amount word 'world': " << name.CountWord("world") << endl;
+    cout << name.GetText() << endl;
+
+    name.Replace("world", "Ilon");
     cout << name.GetText();
 
     return 0;
