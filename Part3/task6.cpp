@@ -27,13 +27,24 @@ int main()
     cout << name.back() << endl;
 
     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
     for(auto iterator = name.begin(); iterator != name.end(); ++iterator)
     {
         cout << *iterator << endl;
     }
 
-    name.sort();
-    name.unique();
+    for(auto iterator = name.begin(); iterator != name.end(); ++iterator)
+    {
+        auto next = iterator;
+        ++next;
+        while(next != name.end())
+        {
+            if(*iterator == *next)
+                next = name.erase(next);
+            else
+                ++next;
+        }
+    }
 
     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 
