@@ -49,7 +49,7 @@ int main()
 
 
     cout << "concurrence: ";
-        for(auto iterator : all)
+        for(auto iterator : concurrence)
             cout << iterator << " ";
     cout << endl;
         
