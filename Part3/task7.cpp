@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <set>
+#include <algorithm>
 using namespace std;
 
 int main()
@@ -22,7 +23,9 @@ int main()
 
 
  
-    name.erase("Hello");
+    auto iterator = find(name.begin(), name.end(), "Hello");
+    if(iterator != name.end())
+        name.erase(iterator);
 
     
     for(auto element = name.begin(); element != name.end(); ++element)
