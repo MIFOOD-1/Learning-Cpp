@@ -11,6 +11,7 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <algorithm>
 using namespace std;
 
 template <typename T>
@@ -34,6 +35,8 @@ int main()
     name.insert(make_pair("Ichigo", "+7 910 456 23 23"));
     name.insert(make_pair("Choso", "+1 722 456 43 23"));
     name.insert(make_pair("Rukia", "+7 453 922 23 23"));
+    name.insert(make_pair("RUKIA", "+9 123 123 22 22"));
+
 
     for(auto element = name.begin(); element != name.end(); ++element)
         cout << element->first << ": " << element->second << endl;
