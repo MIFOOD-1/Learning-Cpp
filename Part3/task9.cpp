@@ -20,9 +20,15 @@ int main()
     phoneBook.insert(make_pair("Choso", "+1 722 456 43 23"));
     phoneBook.insert(make_pair("Rukia", "+7 453 922 23 23"));
 
-    auto iterator = phoneBook.find("Ichigo");
+    auto iterator = phoneBook.find("Choso");
     cout << "Iterator = " << iterator->first << " " << iterator->second << endl;
     
-    
+    iterator->second.erase();
+    iterator->second = "+1 222 222 23 23";
 
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    for(auto element = phoneBook.begin(); element != phoneBook.end(); ++element)
+        cout << element->first << ": " << element->second << endl;
+    
+    return 0;
 }
