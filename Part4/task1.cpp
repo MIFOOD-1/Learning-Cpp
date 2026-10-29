@@ -39,11 +39,13 @@ int main()
     name.push_back(9);
     name.push_back(10);
     
-    Functor point = for_each(name.begin(), name.begin() + 7, Functor<int>());
-    cout << "pont after first for_each" << point.Counter << endl;
+    Functor<int> point = for_each(name.begin(), name.begin() + 7, Functor<int>());
+    cout << "pont after first for_each " << point.Counter << endl;
+
+    cout << endl;
 
     point = for_each(name.begin(), name.end(), point);
-    cout << "pont after person for_each" << point.Counter << endl;
+    cout << "pont after person for_each " << point.Counter << endl;
 
     return 0;
 }
