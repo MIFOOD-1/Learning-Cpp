@@ -32,11 +32,14 @@ int main()
 
     IsGreater Functor;
 
-    for(auto Element = Number.begin(); Element != Number.end(); ++Element)
+    for(auto Element = Number.begin(); Element != Number.end();)
     {
         Element = find_if(Element, Number.end(), Functor);
         if(Element != Number.end())
+        {
             cout << *Element << " ";
+            ++Element;
+        }
     }
 
     return 0;
